@@ -1,7 +1,5 @@
 {
-  "smtp": {
-    "host": "127.0.0.1",
-    "port": 25,
-    "sender": "Firefox Accounts <accounts@firefox.com>"
-  }
+  "sender": "Firefox Accounts <accounts@firefox.com>",
+  "smtp_host": "127.0.0.1",
+  "smtp_port": 25
 }
