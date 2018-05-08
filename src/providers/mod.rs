@@ -57,18 +57,18 @@ impl Display for ProviderError
   }
 }
 
-pub struct Providers
+pub struct Providers<'s>
 {
-  settings: Settings,
+  default_provider: &'s str,
   providers: HashMap<String, Box<Provider>>,
 }
 
-impl Providers
+impl<'s> Providers<'s>
 {
-  pub fn new() -> Providers
+  pub fn new(settings: &'s Settings) -> Providers
   {
     let mut instance = Providers {
-      settings: Settings::new().expect("config error"),
+      default_provider: &settings.provider,
       providers: HashMap::new(),
     };
     instance
@@ -76,7 +76,7 @@ impl Providers
       .insert(String::from("mock"), Box::new(Mock));
     instance
       .providers
-      .insert(String::from("ses"), Box::new(Ses::new(&instance.settings)));
+      .insert(String::from("ses"), Box::new(Ses::new(settings)));
     instance
   }
 
@@ -93,7 +93,7 @@ impl Providers
     let resolved_provider_id = if let Some(id) = provider_id {
       id
     } else {
-      &self.settings.provider
+      self.default_provider
     };
 
     match self.providers.get(resolved_provider_id) {
@@ -109,4 +109,4 @@ impl Providers
   }
 }
 
-unsafe impl Sync for Providers {}
+unsafe impl<'s> Sync for Providers<'s> {}

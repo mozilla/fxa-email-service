@@ -12,12 +12,36 @@ use deserialize;
 mod test;
 
 #[derive(Debug, Deserialize)]
+pub struct AuthDb
+{
+  #[serde(deserialize_with = "deserialize::base_uri")]
+  pub baseuri: String,
+}
+
+#[derive(Debug, Deserialize)]
 pub struct AwsKeys
 {
   #[serde(deserialize_with = "deserialize::aws_access")]
   pub access: String,
   #[serde(deserialize_with = "deserialize::aws_secret")]
   pub secret: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct BounceLimit
+{
+  #[serde(deserialize_with = "deserialize::period")]
+  pub period: u64,
+  pub limit: u8,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct BounceLimits
+{
+  pub enabled: bool,
+  pub complaint: Vec<BounceLimit>,
+  pub hard: Vec<BounceLimit>,
+  pub soft: Vec<BounceLimit>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -41,6 +65,8 @@ pub struct Smtp
 #[derive(Debug, Deserialize)]
 pub struct Settings
 {
+  pub authdb: AuthDb,
+  pub bouncelimits: BounceLimits,
   #[serde(deserialize_with = "deserialize::provider")]
   pub provider: String,
   #[serde(deserialize_with = "deserialize::sender")]
