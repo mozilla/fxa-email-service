@@ -37,7 +37,7 @@ fn check_no_bounces()
   }
 }
 
-fn create_settings (bounce_limits: Json) -> Settings
+fn create_settings(bounce_limits: Json) -> Settings
 {
   let mut settings = Settings::default();
   settings.bouncelimits = serde_json::from_value(bounce_limits).expect("JSON error");

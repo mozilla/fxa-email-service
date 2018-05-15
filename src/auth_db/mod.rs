@@ -3,8 +3,7 @@
 // file, you can obtain one at https://mozilla.org/MPL/2.0/.
 
 use std::{
-  error::Error,
-  fmt::{self, Display, Formatter},
+  error::Error, fmt::{self, Display, Formatter},
 };
 
 use hex;

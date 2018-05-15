@@ -6,8 +6,8 @@ use std::convert::TryFrom;
 
 use serde::de::{Deserialize, Deserializer, Error, Unexpected};
 
-use validate;
 use period::Period;
+use validate;
 
 pub fn aws_region<'d, D>(deserializer: D) -> Result<String, D::Error>
 where

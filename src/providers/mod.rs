@@ -3,10 +3,7 @@
 // file, you can obtain one at https://mozilla.org/MPL/2.0/.
 
 use std::{
-  boxed::Box,
-  collections::HashMap,
-  error::Error,
-  fmt::{self, Display, Formatter},
+  boxed::Box, collections::HashMap, error::Error, fmt::{self, Display, Formatter},
 };
 
 use self::{mock::MockProvider as Mock, ses::SesProvider as Ses};

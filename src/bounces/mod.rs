@@ -3,10 +3,7 @@
 // file, you can obtain one at https://mozilla.org/MPL/2.0/.
 
 use std::{
-  collections::HashMap,
-  error::Error,
-  fmt::{self, Display, Formatter},
-  time::SystemTime,
+  collections::HashMap, error::Error, fmt::{self, Display, Formatter}, time::SystemTime,
 };
 
 use rocket::{http::Status, response::Failure};

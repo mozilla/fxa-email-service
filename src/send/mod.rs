@@ -5,12 +5,7 @@
 use std::{borrow::Cow, collections::HashMap};
 
 use rocket::{
-  data::{self, FromData},
-  http::Status,
-  response::Failure,
-  Data,
-  Outcome,
-  Request,
+  data::{self, FromData}, http::Status, response::Failure, Data, Outcome, Request,
 };
 use rocket_contrib::{Json, Value};
 use validator::{self, Validate, ValidationError};

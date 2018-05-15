@@ -3,9 +3,7 @@
 // file, you can obtain one at https://mozilla.org/MPL/2.0/.
 
 use std::{
-  convert::{From, TryFrom},
-  error::Error,
-  fmt::{self, Display, Formatter},
+  convert::{From, TryFrom}, error::Error, fmt::{self, Display, Formatter},
 };
 
 use regex::Regex;
@@ -24,15 +22,14 @@ const MONTH: u64 = DAY * 30;
 const YEAR: u64 = DAY * 365;
 
 lazy_static! {
-  static ref PERIOD_FORMAT: Regex = Regex::new(
-    "^(?:([0-9]+) )?(second|minute|hour|day|week|month|year)s?$"
-  ).unwrap();
+  static ref PERIOD_FORMAT: Regex =
+    Regex::new("^(?:([0-9]+) )?(second|minute|hour|day|week|month|year)s?$").unwrap();
 }
 
 #[derive(Debug)]
 pub struct PeriodError
 {
-  pub value: String
+  pub value: String,
 }
 
 impl Error for PeriodError
@@ -71,7 +68,7 @@ impl<'v> TryFrom<&'v str> for Period
     fn fail(value: &str) -> Result<Period, PeriodError>
     {
       Err(PeriodError {
-        value: value.to_string()
+        value: value.to_string(),
       })
     }
 
