@@ -4,6 +4,8 @@
 
 #![feature(assoc_unix_epoch)]
 #![feature(plugin)]
+#![feature(try_from)]
+#![feature(type_ascription)]
 #![plugin(rocket_codegen)]
 
 extern crate config;
@@ -29,6 +31,7 @@ extern crate validator_derive;
 mod auth_db;
 mod bounces;
 mod deserialize;
+mod period;
 mod providers;
 mod send;
 mod settings;
