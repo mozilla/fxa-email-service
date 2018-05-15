@@ -11,14 +11,14 @@ use deserialize;
 #[cfg(test)]
 mod test;
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Default, Deserialize)]
 pub struct AuthDb
 {
   #[serde(deserialize_with = "deserialize::base_uri")]
   pub baseuri: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Default, Deserialize)]
 pub struct AwsKeys
 {
   #[serde(deserialize_with = "deserialize::aws_access")]
@@ -27,7 +27,7 @@ pub struct AwsKeys
   pub secret: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Default, Deserialize)]
 pub struct BounceLimit
 {
   #[serde(deserialize_with = "deserialize::period")]
@@ -35,7 +35,7 @@ pub struct BounceLimit
   pub limit: u8,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Default, Deserialize)]
 pub struct BounceLimits
 {
   pub enabled: bool,
@@ -44,7 +44,7 @@ pub struct BounceLimits
   pub soft: Vec<BounceLimit>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Default, Deserialize)]
 pub struct Ses
 {
   #[serde(deserialize_with = "deserialize::aws_region")]
@@ -52,7 +52,7 @@ pub struct Ses
   pub keys: Option<AwsKeys>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Default, Deserialize)]
 pub struct Smtp
 {
   #[serde(deserialize_with = "deserialize::host")]
@@ -62,7 +62,7 @@ pub struct Smtp
   pub password: Option<String>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Default, Deserialize)]
 pub struct Settings
 {
   pub authdb: AuthDb,
