@@ -8,7 +8,7 @@ use std::{
 };
 
 use hex;
-use reqwest::{Client, Error as RequestError, StatusCode, Url, UrlError};
+use reqwest::{Client as RequestClient, Error as RequestError, StatusCode, Url, UrlError};
 
 use settings::Settings;
 
@@ -107,7 +107,7 @@ pub trait Db
 pub struct DbClient
 {
   urls: DbUrls,
-  client: Client,
+  request_client: RequestClient,
 }
 
 impl DbClient
@@ -116,7 +116,7 @@ impl DbClient
   {
     DbClient {
       urls: DbUrls::new(settings),
-      client: Client::new(),
+      request_client: RequestClient::new(),
     }
   }
 }
@@ -126,7 +126,7 @@ impl Db for DbClient
   fn get_email_bounces(&self, address: &str) -> Result<Vec<BounceRecord>, DbError>
   {
     let mut response = self
-      .client
+      .request_client
       .get(self.urls.get_email_bounces(address)?)
       .send()?;
     match response.status() {
