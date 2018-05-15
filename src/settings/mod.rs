@@ -30,7 +30,7 @@ pub struct AwsKeys
 #[derive(Debug, Default, Deserialize)]
 pub struct BounceLimit
 {
-  #[serde(deserialize_with = "deserialize::period")]
+  #[serde(deserialize_with = "deserialize::duration")]
   pub period: u64,
   pub limit: u8,
 }

@@ -6,7 +6,7 @@ use std::convert::TryFrom;
 
 use serde::de::{Deserialize, Deserializer, Error, Unexpected};
 
-use period::Period;
+use duration::Duration;
 use validate;
 
 pub fn aws_region<'d, D>(deserializer: D) -> Result<String, D::Error>
@@ -44,14 +44,14 @@ where
   deserialize(deserializer, validate::host, "host name or IP address")
 }
 
-pub fn period<'d, D>(deserializer: D) -> Result<u64, D::Error>
+pub fn duration<'d, D>(deserializer: D) -> Result<u64, D::Error>
 where
   D: Deserializer<'d>,
 {
   let value: String = Deserialize::deserialize(deserializer)?;
-  Period::try_from(value.as_str())
+  Duration::try_from(value.as_str())
     .map(From::from)
-    .map_err(|_| D::Error::invalid_value(Unexpected::Str(&value), &"time period"))
+    .map_err(|_| D::Error::invalid_value(Unexpected::Str(&value), &"duration"))
 }
 
 pub fn provider<'d, D>(deserializer: D) -> Result<String, D::Error>

@@ -31,7 +31,7 @@ extern crate validator_derive;
 mod auth_db;
 mod bounces;
 mod deserialize;
-mod period;
+mod duration;
 mod providers;
 mod send;
 mod settings;
