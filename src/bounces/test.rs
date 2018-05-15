@@ -6,6 +6,11 @@ use super::*;
 use auth_db::{Db, DbError};
 use settings::Settings;
 
+const SECOND: u64 = 1000;
+const MINUTE: u64 = SECOND * 60;
+const HOUR: u64 = MINUTE * 60;
+const DAY: u64 = HOUR * 24;
+
 pub struct DbMockNoBounce;
 
 impl Db for DbMockNoBounce
@@ -16,15 +21,15 @@ impl Db for DbMockNoBounce
     Ok(vec![
       BounceRecord {
         bounce_type: BounceType::Hard,
-        created_at: now - 86400001,
+        created_at: now - DAY - 1,
       },
       BounceRecord {
         bounce_type: BounceType::Soft,
-        created_at: now - 300001,
+        created_at: now - MINUTE * 5 - 1,
       },
       BounceRecord {
         bounce_type: BounceType::Complaint,
-        created_at: now - 86400001,
+        created_at: now - DAY - 1,
       },
     ])
   }
@@ -58,7 +63,7 @@ impl Db for DbMockBounceHard
     let now = now_as_milliseconds();
     Ok(vec![BounceRecord {
       bounce_type: BounceType::Hard,
-      created_at: now - 86398000,
+      created_at: now - DAY + SECOND * 2,
     }])
   }
 }
@@ -95,7 +100,7 @@ impl Db for DbMockBounceSoft
     let now = now_as_milliseconds();
     Ok(vec![BounceRecord {
       bounce_type: BounceType::Soft,
-      created_at: now - 298000,
+      created_at: now - MINUTE * 5 + SECOND * 2,
     }])
   }
 }
@@ -132,7 +137,7 @@ impl Db for DbMockComplaint
     let now = now_as_milliseconds();
     Ok(vec![BounceRecord {
       bounce_type: BounceType::Complaint,
-      created_at: now - 86398000,
+      created_at: now - DAY + SECOND * 2,
     }])
   }
 }
