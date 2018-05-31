@@ -78,11 +78,9 @@ fn env_vars_take_precedence() {
             };
             let sender_address = format!("1{}", &settings.sender.address);
             let sender_name = format!("{}1", &settings.sender.name);
-            let sendgrid_key = if let Some(ref sendgrid) = settings.sendgrid {
-                format!("{}1", &sendgrid.key)
-            } else {
-                String::from("sendgrid")
-            };
+            let sendgrid_api_key = String::from(
+                "000000000000000000000000000000000000000000000000000000000000000000000",
+            );
             let ses_region = if settings.ses.region == "us-east-1" {
                 "eu-west-1"
             } else {
@@ -120,7 +118,7 @@ fn env_vars_take_precedence() {
             env::set_var("FXA_EMAIL_PROVIDER", &provider);
             env::set_var("FXA_EMAIL_SENDER_ADDRESS", &sender_address);
             env::set_var("FXA_EMAIL_SENDER_NAME", &sender_name);
-            env::set_var("FXA_EMAIL_SENDGRID_KEY", &sendgrid_key);
+            env::set_var("FXA_EMAIL_SENDGRID_KEY", &sendgrid_api_key);
             env::set_var("FXA_EMAIL_SES_REGION", &ses_region);
             env::set_var("FXA_EMAIL_SES_KEYS_ACCESS", &ses_keys.access);
             env::set_var("FXA_EMAIL_SES_KEYS_SECRET", &ses_keys.secret);
@@ -141,7 +139,7 @@ fn env_vars_take_precedence() {
                     assert_eq!(env_settings.smtp.port, smtp_port);
 
                     if let Some(env_sendgrid) = env_settings.sendgrid {
-                        assert_eq!(env_sendgrid.key, sendgrid_key);
+                        assert_eq!(env_sendgrid.key, sendgrid_api_key);
                     } else {
                         assert!(false, "settings.sendgrid was not set");
                     }
@@ -234,7 +232,7 @@ fn invalid_sender_name() {
 }
 
 #[test]
-fn invalid_sendgrid_key() {
+fn invalid_sendgrid_api_key() {
     let _clean_env = CleanEnvironment::new(vec!["FXA_EMAIL_SENDGRID_KEY"]);
     env::set_var("FXA_EMAIL_SENDGRID_KEY", "foo bar");
 
