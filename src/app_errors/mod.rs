@@ -3,11 +3,15 @@
 // file, you can obtain one at https://mozilla.org/MPL/2.0/.
 
 use std::collections::HashMap;
+use std::result;
 
+use failure::{Error};
 use rocket_contrib::Json;
 
 #[cfg(test)]
 mod test;
+
+pub type Result<T> = result::Result<T, Error>;
 
 #[error(400)]
 pub fn bad_request() -> Json<ApplicationError> {

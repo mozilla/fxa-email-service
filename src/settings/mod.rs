@@ -92,11 +92,12 @@ pub struct Settings {
     pub authdb: AuthDb,
     pub aws: Aws,
     pub bouncelimits: BounceLimits,
+    pub jsonlogging: Option<bool>,
     #[serde(deserialize_with = "deserialize::provider")]
     pub provider: String,
     pub sender: Sender,
     pub sendgrid: Option<Sendgrid>,
-    pub smtp: Smtp,
+    pub smtp: Smtp
 }
 
 impl Settings {
