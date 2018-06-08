@@ -211,7 +211,7 @@ impl DbUrls {
     }
 }
 
-pub trait Db {
+pub trait Db: Sync {
     fn get_bounces(&self, address: &str) -> Result<Vec<BounceRecord>, DbError>;
 
     fn create_bounce(
@@ -275,3 +275,5 @@ impl Db for DbClient {
 }
 
 unsafe impl Sync for DbClient {}
+
+unsafe impl Send for DbClient {}

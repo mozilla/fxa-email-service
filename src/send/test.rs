@@ -8,9 +8,19 @@ use rocket::{
 use serde_json;
 
 use app_errors::{self, ApplicationError};
+use auth_db::DbClient;
+use bounces::Bounces;
+use providers::Providers;
+use settings::Settings;
 
 fn setup() -> Client {
+    let settings = Settings::new().unwrap();
+    let db = DbClient::new(&settings);
+    let bounces = Bounces::new(&settings, db);
+    let providers = Providers::new(&settings);
     let server = rocket::ignite()
+        .manage(bounces)
+        .manage(providers)
         .mount("/", routes![super::handler])
         .catch(errors![
             app_errors::bad_request,

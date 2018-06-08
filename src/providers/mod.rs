@@ -49,14 +49,14 @@ impl Display for ProviderError {
     }
 }
 
-pub struct Providers<'s> {
-    default_provider: &'s str,
-    providers: HashMap<String, Box<Provider + 's>>,
+pub struct Providers {
+    default_provider: String,
+    providers: HashMap<String, Box<Provider>>,
 }
 
-impl<'s> Providers<'s> {
-    pub fn new(settings: &'s Settings) -> Providers {
-        let mut providers: HashMap<String, Box<Provider + 's>> = HashMap::new();
+impl Providers {
+    pub fn new(settings: &Settings) -> Providers {
+        let mut providers: HashMap<String, Box<Provider>> = HashMap::new();
 
         providers.insert(String::from("mock"), Box::new(Mock));
         providers.insert(String::from("ses"), Box::new(Ses::new(settings)));
@@ -69,7 +69,7 @@ impl<'s> Providers<'s> {
         }
 
         Providers {
-            default_provider: &settings.provider,
+            default_provider: settings.provider.to_owned(),
             providers,
         }
     }
@@ -83,7 +83,7 @@ impl<'s> Providers<'s> {
         body_html: Option<&str>,
         provider_id: Option<&str>,
     ) -> Result<String, ProviderError> {
-        let resolved_provider_id = provider_id.unwrap_or(self.default_provider);
+        let resolved_provider_id = provider_id.unwrap_or(&self.default_provider);
 
         self.providers
             .get(resolved_provider_id)
@@ -96,4 +96,6 @@ impl<'s> Providers<'s> {
     }
 }
 
-unsafe impl<'s> Sync for Providers<'s> {}
+unsafe impl Sync for Providers {}
+
+unsafe impl Send for Providers {}
