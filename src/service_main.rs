@@ -35,17 +35,16 @@ extern crate slog_mozlog_json;
 extern crate slog_term;
 extern crate mozsvc_common;
 
-
 mod app_errors;
 mod auth_db;
 mod bounces;
 mod deserialize;
 mod duration;
+mod logging;
 mod providers;
 mod send;
 mod settings;
 mod validate;
-mod logging;
 
 fn main() {
     let logger = logging::init_logging(&settings::Settings::new().unwrap()).unwrap(); 
@@ -61,17 +60,17 @@ fn main() {
             app_errors::internal_server_error
         ])
         .attach(rocket::fairing::AdHoc::on_request(|request, _| {
-            let log = logging::RequestLogger::with_request(request).unwrap();
+            let log = logging::MozlogLogger::with_request(request).unwrap();
             slog_info!(log, "{}", "Request started.");
         }))
         .attach(rocket::fairing::AdHoc::on_response(|request, response| {
-            let log = logging::RequestLogger::with_request(request).unwrap();
+            let log = logging::MozlogLogger::with_request(request).unwrap();
             if response.status().code == 200 {
                 slog_info!(log, "{}", "Request finished succesfully."; 
-                    "status" => response.status().code, "message" => response.status().reason);
+                    "status_code" => response.status().code, "status_msg" => response.status().reason);
             } else {
                 slog_error!(log, "{}", "Request errored."; 
-                    "status" => response.status().code, "message" => response.status().reason);
+                    "status_code" => response.status().code, "status_msg" => response.status().reason);
             }
         }))
         .launch();

@@ -19,7 +19,7 @@
       { "period": "5 minutes", "limit": 0 }
     ]
   },
-  "jsonlogging": "false",
+  "jsonlogging": "true",
   "provider": "ses",
   "sender": {
     "address": "accounts@firefox.com",
