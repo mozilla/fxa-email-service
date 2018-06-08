@@ -3,10 +3,9 @@
 // file, you can obtain one at https://mozilla.org/MPL/2.0/.
 
 use rocket::{
-    data::{self, FromData}, http::Status, response::Failure, Data, Outcome, Request,
+    data::{self, FromData}, http::Status, response::Failure, Data, Outcome, Request
 };
 use rocket_contrib::{Json, Value};
-
 use auth_db::DbClient;
 use bounces::Bounces;
 use deserialize;

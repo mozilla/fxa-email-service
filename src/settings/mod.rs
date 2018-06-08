@@ -5,6 +5,7 @@
 use std::env;
 
 use config::{Config, ConfigError, Environment, File};
+use logging;
 
 use deserialize;
 
@@ -87,16 +88,17 @@ pub struct SqsUrls {
     pub notification: String,
 }
 
-#[derive(Debug, Default, Deserialize)]
+#[derive(Default, Deserialize)]
 pub struct Settings {
     pub authdb: AuthDb,
     pub aws: Aws,
     pub bouncelimits: BounceLimits,
+    pub jsonlogging: Option<bool>,
     #[serde(deserialize_with = "deserialize::provider")]
     pub provider: String,
     pub sender: Sender,
     pub sendgrid: Option<Sendgrid>,
-    pub smtp: Smtp,
+    pub smtp: Smtp
 }
 
 impl Settings {
@@ -131,8 +133,8 @@ impl Settings {
 
         match config.try_into::<Settings>() {
             Ok(settings) => {
-                // TODO: replace this with proper logging when we have it
-                println!("config: {:?}", settings);
+                let logger = logging::init_logging(&settings).unwrap();
+                slog_info!(logger, "{}", "Finished configuration."; "settings" => &settings);
                 Ok(settings)
             }
             Err(error) => Err(error),
