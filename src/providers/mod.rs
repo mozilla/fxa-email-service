@@ -3,7 +3,10 @@
 // file, you can obtain one at https://mozilla.org/MPL/2.0/.
 
 use std::{
-    boxed::Box, collections::HashMap, error::Error, fmt::{self, Display, Formatter},
+    boxed::Box,
+    collections::HashMap,
+    error::Error,
+    fmt::{self, Display, Formatter},
 };
 
 use self::{
@@ -69,7 +72,7 @@ impl Providers {
         }
 
         Providers {
-            default_provider: settings.provider.to_owned(),
+            default_provider: settings.provider.clone(),
             providers,
         }
     }

@@ -3,7 +3,9 @@
 // file, you can obtain one at https://mozilla.org/MPL/2.0/.
 
 use rocket::{
-    self, http::{ContentType, Status}, local::Client,
+    self,
+    http::{ContentType, Status},
+    local::Client,
 };
 use serde_json;
 

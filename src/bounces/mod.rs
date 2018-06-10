@@ -3,7 +3,10 @@
 // file, you can obtain one at https://mozilla.org/MPL/2.0/.
 
 use std::{
-    collections::HashMap, error::Error, fmt::{self, Display, Formatter}, time::SystemTime,
+    collections::HashMap,
+    error::Error,
+    fmt::{self, Display, Formatter},
+    time::SystemTime,
 };
 
 use rocket::{http::Status, response::Failure};
@@ -118,11 +121,7 @@ where
     }
 }
 
-unsafe impl<D> Sync for Bounces<D>
-where
-    D: Db,
-{
-}
+unsafe impl<D> Sync for Bounces<D> where D: Db {}
 
 fn is_bounce_violation(count: u8, created_at: u64, now: u64, limits: &Vec<BounceLimit>) -> bool {
     for limit in limits.iter() {

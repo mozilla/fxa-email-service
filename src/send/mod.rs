@@ -3,7 +3,10 @@
 // file, you can obtain one at https://mozilla.org/MPL/2.0/.
 
 use rocket::{
-    data::{self, FromData}, http::Status, response::Failure, Data, Outcome, Request, State,
+    data::{self, FromData},
+    http::Status,
+    response::Failure,
+    Data, Outcome, Request, State,
 };
 use rocket_contrib::{Json, Value};
 
