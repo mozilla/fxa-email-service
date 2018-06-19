@@ -10,6 +10,7 @@
 
 extern crate chrono;
 extern crate config;
+#[macro_use]
 extern crate failure;
 extern crate futures;
 extern crate hex;
@@ -34,8 +35,7 @@ extern crate serde;
 extern crate serde_derive;
 extern crate serde_json;
 extern crate serde_test;
-extern crate sha2;
-#[macro_use(slog_b, slog_info, slog_kv, slog_log, slog_o, slog_record, slog_record_static)]
+#[macro_use(slog_b, slog_error, slog_info, slog_kv, slog_log, slog_o, slog_record, slog_record_static)]
 extern crate slog;
 extern crate slog_async;
 extern crate slog_mozlog_json;
@@ -46,6 +46,7 @@ pub mod auth_db;
 pub mod bounces;
 pub mod deserialize;
 pub mod duration;
+pub mod error;
 pub mod logging;
 pub mod message_data;
 pub mod providers;
