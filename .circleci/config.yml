@@ -9,12 +9,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image: docker:18.03.0-ce
+      - image: circleci/rust
     working_directory: /dockerflow
     steps:
-      - run:
-          name: Install Docker build dependencies
-          command: apk add --no-cache openssh-client git
       - checkout
       - setup_remote_docker
 
@@ -47,8 +44,6 @@ jobs:
             if [ -n "${CIRCLE_TAG}" ]; then
               DOCKER_TAG="$CIRCLE_TAG"
             fi
-
-            echo $DOCKER_TAG
 
             if [ -n "${DOCKER_TAG}" ]; then
               echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
