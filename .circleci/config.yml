@@ -34,10 +34,6 @@ jobs:
           command: docker build -f Dockerfile -t fxa-email-service:build .
 
       - run:
-          name: Run Tests
-          command: docker run fxa-email-service:build cargo test
-
-      - run:
           name: Deploy to Dockerhub
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
