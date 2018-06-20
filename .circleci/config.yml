@@ -9,9 +9,12 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/rust
+      - image: docker:18.03.0-ce
     working_directory: /dockerflow
     steps:
+      - run:
+          name: Install Docker build dependencies
+          command: apk add --no-cache openssh-client git bash
       - checkout
       - setup_remote_docker
 
@@ -32,6 +35,7 @@ jobs:
 
       - run:
           name: Deploy to Dockerhub
+          shell: /bin/bash
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               DOCKER_TAG="latest"
