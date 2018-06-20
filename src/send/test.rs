@@ -9,10 +9,11 @@ use rocket::{
 };
 use serde_json;
 
-use app_errors::{self, ApplicationError};
+use app_errors;
 use auth_db::DbClient;
 use bounces::Bounces;
 use message_data::MessageData;
+use error::{HandlerErrorKind};
 use providers::Providers;
 use settings::Settings;
 

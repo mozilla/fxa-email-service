@@ -16,6 +16,7 @@ use deserialize;
 use message_data::MessageData;
 use providers::Providers;
 use validate;
+use error::{HandlerError, HandlerErrorKind};
 
 #[cfg(test)]
 mod test;
@@ -38,9 +39,9 @@ struct Email {
 }
 
 impl FromData for Email {
-    type Error = ();
+    type Error = HandlerError;
 
-    fn from_data(request: &Request, data: Data) -> data::Outcome<Self, Self::Error> {
+    fn from_data(request: &Request, data: Data) -> data::Outcome<Self, HandlerError> {
         let result = Json::<Email>::from_data(request, data);
         match result {
             Outcome::Success(json) => {
@@ -75,8 +76,11 @@ fn validate(email: &Email) -> bool {
     true
 }
 
-fn fail() -> data::Outcome<Email, ()> {
-    Outcome::Failure((Status::BadRequest, ()))
+fn fail() -> data::Outcome<Email, HandlerError> {
+    Outcome::Failure((
+        Status::BadRequest, 
+        HandlerErrorKind::InvalidEmailAddress.into()
+    ))
 }
 
 #[post("/send", format = "application/json", data = "<email>")]

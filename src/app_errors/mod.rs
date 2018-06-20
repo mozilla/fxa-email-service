@@ -2,65 +2,38 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, you can obtain one at https://mozilla.org/MPL/2.0/.
 
-use std::collections::HashMap;
 
-use rocket_contrib::Json;
+use error::{HandlerErrorKind, HandlerResult};
 
-#[cfg(test)]
-mod test;
+// #[cfg(test)]
+// mod test;
 
 #[error(400)]
-pub fn bad_request() -> Json<ApplicationError> {
-    Json(ApplicationError::new(400, "Bad Request"))
+pub fn bad_request() -> HandlerResult<()> {
+    Err(HandlerErrorKind::BadRequest)?
 }
 
 #[error(404)]
-pub fn not_found() -> Json<ApplicationError> {
-    Json(ApplicationError::new(404, "Not Found"))
+pub fn not_found() -> HandlerResult<()> {
+    Err(HandlerErrorKind::NotFound)?
 }
 
 #[error(405)]
-pub fn method_not_allowed() -> Json<ApplicationError> {
-    Json(ApplicationError::new(405, "Method Not Allowed"))
+pub fn method_not_allowed() -> HandlerResult<()> {
+    Err(HandlerErrorKind::MethodNotAllowed)?
 }
 
 #[error(422)]
-pub fn unprocessable_entity() -> Json<ApplicationError> {
-    Json(ApplicationError::new(422, "Unprocessable Entity"))
+pub fn unprocessable_entity() -> HandlerResult<()> {
+    Err(HandlerErrorKind::UnprocessableEntity)?
 }
 
 #[error(429)]
-pub fn too_many_requests() -> Json<ApplicationError> {
-    Json(ApplicationError::new(429, "Too Many Requests"))
+pub fn too_many_requests() -> HandlerResult<()> {
+    Err(HandlerErrorKind::TooManyRequests)?
 }
 
 #[error(500)]
-pub fn internal_server_error() -> Json<ApplicationError> {
-    Json(ApplicationError::new(500, "Internal Server Error"))
-}
-
-#[derive(Debug, Deserialize, PartialEq, Serialize)]
-pub struct ApplicationError {
-    pub status: u16,
-    pub error: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub errno: Option<u8>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub message: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub data: Option<HashMap<String, String>>,
-}
-
-impl ApplicationError {
-    pub fn new(status: u16, error: &str) -> ApplicationError {
-        // TODO: Set errno, message and data when rocket#596 is resolved
-        //       (https://github.com/SergioBenitez/Rocket/issues/596)
-        ApplicationError {
-            status,
-            error: error.to_string(),
-            errno: None,
-            message: None,
-            data: None,
-        }
-    }
+pub fn internal_server_error() -> HandlerResult<()> {
+    Err(HandlerErrorKind::InternalServerError)?
 }
