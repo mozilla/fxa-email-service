@@ -39,12 +39,17 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               DOCKER_TAG="latest"
             fi
+
             if [[ "${CIRCLE_BRANCH}" == feature* ]] || [[ "${CIRCLE_BRANCH}" == dockerpush* ]]; then
               DOCKER_TAG="${CIRCLE_BRANCH}"
             fi
+
             if [ -n "${CIRCLE_TAG}" ]; then
               DOCKER_TAG="$CIRCLE_TAG"
             fi
+
+            echo $DOCKER_TAG
+
             if [ -n "${DOCKER_TAG}" ]; then
               echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
               echo ${DOCKERHUB_REPO}:${DOCKER_TAG}
