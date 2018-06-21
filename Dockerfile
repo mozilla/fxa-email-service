@@ -11,9 +11,9 @@ RUN \
     rustup default ${RUST_TOOLCHAIN} && \
     cargo --version && \
     rustc --version && \
-    mkdir -m 755 bin && \
+    # mkdir -m 755 bin && \  TODO: Do we move config to the binary or binary to the config??????
     cargo build --release && \
-    cp /app/target/release/service /app/bin
+    cp /app/target/release/service /app
 
 
 FROM debian:stretch-slim
@@ -26,9 +26,9 @@ RUN \
     apt-get -qq install -y default-libmysqlclient-dev libssl-dev && \
     rm -rf /var/lib/apt/lists
 
-COPY --from=builder /app/bin /app/bin
+COPY --from=builder /app /app
 
 WORKDIR /app
 USER app
 
-CMD ["/app/bin/service"]
+CMD ["/app/service"]
