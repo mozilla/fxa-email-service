@@ -11,9 +11,12 @@ RUN \
     rustup default ${RUST_TOOLCHAIN} && \
     cargo --version && \
     rustc --version && \
-    # mkdir -m 755 bin && \  TODO: Do we move config to the binary or binary to the config??????
+    mkdir -m 755 bin && \
+    mkdir -m 755 bin/config && \
     cargo build --release && \
-    cp /app/target/release/service /app
+    cp -R /app/config/* /app/bin/config && \
+    cp /app/target/release/fxa-email-service /app/bin && \
+    cp /app/target/release/fxa-email-queues /app/bin
 
 
 FROM debian:stretch-slim
@@ -27,9 +30,9 @@ RUN \
     update-ca-certificates && \
     rm -rf /var/lib/apt/lists
 
-COPY --from=builder /app /app
+COPY --from=builder /app/bin /app/bin
 
-WORKDIR /app
+WORKDIR /app/bin
 USER app
 
-CMD ["/app/service"]
+CMD ["/app/bin/fxa-email-service"]
