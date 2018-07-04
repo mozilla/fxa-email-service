@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `Settings` struct in crate `fxa_email_service`."><meta name="keywords" content="rust, rustlang, rust-lang, Settings"><title>fxa_email_service::settings::Settings - Rust</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script></head><body class="rustdoc struct"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><p class='location'>Struct Settings</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#fields">Fields</a><div class="sidebar-links"><a href="#structfield.authdb">authdb</a><a href="#structfield.aws">aws</a><a href="#structfield.bouncelimits">bouncelimits</a><a href="#structfield.hmackey">hmackey</a><a href="#structfield.logging">logging</a><a href="#structfield.provider">provider</a><a href="#structfield.redis">redis</a><a href="#structfield.sender">sender</a><a href="#structfield.sendgrid">sendgrid</a></div><a class="sidebar-title" href="#methods">Methods</a><div class="sidebar-links"><a href="#method.new">new</a></div><a class="sidebar-title" href="#implementations">Trait Implementations</a><div class="sidebar-links"><a href="#impl-Value">Value</a><a href="#impl-Debug">Debug</a><a href="#impl-Default">Default</a></div><a class="sidebar-title" href="#synthetic-implementations">Auto Trait Implementations</a><div class="sidebar-links"><a href="#impl-Send">Send</a><a href="#impl-Sync">Sync</a></div></div><p class='location'><a href='../index.html'>fxa_email_service</a>::<wbr><a href='index.html'>settings</a></p><script>window.sidebarCurrent = {name: 'Settings', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><input class="search-input" name="search" autocomplete="off" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>fxa_email_service</a>::<wbr><a href='index.html'>settings</a>::<wbr><a class="struct" href=''>Settings</a></span><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../../src/fxa_email_service/settings/mod.rs.html#166-214' title='goto source code'>[src]</a></span></h1><div class="docblock type-decl"><pre class='rust struct'>pub struct Settings {
+    pub authdb: <a class="struct" href="../../fxa_email_service/settings/struct.AuthDb.html" title="struct fxa_email_service::settings::AuthDb">AuthDb</a>,
+    pub aws: <a class="struct" href="../../fxa_email_service/settings/struct.Aws.html" title="struct fxa_email_service::settings::Aws">Aws</a>,
+    pub bouncelimits: <a class="struct" href="../../fxa_email_service/settings/struct.BounceLimits.html" title="struct fxa_email_service::settings::BounceLimits">BounceLimits</a>,
+    pub hmackey: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>,
+    pub logging: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>,
+    pub provider: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>,
+    pub redis: <a class="struct" href="../../fxa_email_service/settings/struct.Redis.html" title="struct fxa_email_service::settings::Redis">Redis</a>,
+    pub sender: <a class="struct" href="../../fxa_email_service/settings/struct.Sender.html" title="struct fxa_email_service::settings::Sender">Sender</a>,
+    pub sendgrid: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../../fxa_email_service/settings/struct.Sendgrid.html" title="struct fxa_email_service::settings::Sendgrid">Sendgrid</a>&gt;,
+}</pre></div><div class='docblock'><p>The root settings object.</p>
+</div><h2 id='fields' class='fields small-section-header'>
+                       Fields<a href='#fields' class='anchor'></a></h2><span id="structfield.authdb" class="structfield small-section-header">
+                           <a href="#structfield.authdb" class="anchor field"></a>
+                           <span id="authdb.v" class='invisible'>
+                           <code>authdb: <a class="struct" href="../../fxa_email_service/settings/struct.AuthDb.html" title="struct fxa_email_service::settings::AuthDb">AuthDb</a></code>
+                           </span></span><div class='docblock'><p>Settings related to <code>fxa-auth-db-mysql</code>,
+which is used to store
+bounce, complaint and delivery notifications.</p>
+</div><span id="structfield.aws" class="structfield small-section-header">
+                           <a href="#structfield.aws" class="anchor field"></a>
+                           <span id="aws.v" class='invisible'>
+                           <code>aws: <a class="struct" href="../../fxa_email_service/settings/struct.Aws.html" title="struct fxa_email_service::settings::Aws">Aws</a></code>
+                           </span></span><div class='docblock'><p>Settings for AWS,
+including region, access keys
+and URLs for SQS queues.</p>
+</div><span id="structfield.bouncelimits" class="structfield small-section-header">
+                           <a href="#structfield.bouncelimits" class="anchor field"></a>
+                           <span id="bouncelimits.v" class='invisible'>
+                           <code>bouncelimits: <a class="struct" href="../../fxa_email_service/settings/struct.BounceLimits.html" title="struct fxa_email_service::settings::BounceLimits">BounceLimits</a></code>
+                           </span></span><div class='docblock'><p>Controls the thresholds and behaviour
+for bounce and complaint reports.
+If bounce limits are enabled,
+emails sent to offending addresses
+will fail with a <code>429</code> error.</p>
+</div><span id="structfield.hmackey" class="structfield small-section-header">
+                           <a href="#structfield.hmackey" class="anchor field"></a>
+                           <span id="hmackey.v" class='invisible'>
+                           <code>hmackey: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a></code>
+                           </span></span><div class='docblock'><p>The HMAC key to use internally
+for hashing message ids.
+This is sensitive data
+and will not be logged.</p>
+</div><span id="structfield.logging" class="structfield small-section-header">
+                           <a href="#structfield.logging" class="anchor field"></a>
+                           <span id="logging.v" class='invisible'>
+                           <code>logging: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a></code>
+                           </span></span><div class='docblock'><p>The logging format to use,
+can be <code>&quot;mozlog&quot;</code>, <code>&quot;pretty&quot;</code> or <code>&quot;null&quot;</code>.</p>
+</div><span id="structfield.provider" class="structfield small-section-header">
+                           <a href="#structfield.provider" class="anchor field"></a>
+                           <span id="provider.v" class='invisible'>
+                           <code>provider: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/string/struct.String.html" title="struct alloc::string::String">String</a></code>
+                           </span></span><div class='docblock'><p>The default email provider to use,
+can be <code>&quot;ses&quot;</code>, <code>&quot;sendgrid&quot;</code> or <code>&quot;mock&quot;</code>.
+Note that this setting can be overridden
+on a per-request basis.</p>
+</div><span id="structfield.redis" class="structfield small-section-header">
+                           <a href="#structfield.redis" class="anchor field"></a>
+                           <span id="redis.v" class='invisible'>
+                           <code>redis: <a class="struct" href="../../fxa_email_service/settings/struct.Redis.html" title="struct fxa_email_service::settings::Redis">Redis</a></code>
+                           </span></span><div class='docblock'><p>Settings for Redis,
+which is used to store metadata
+associated with a message.</p>
+</div><span id="structfield.sender" class="structfield small-section-header">
+                           <a href="#structfield.sender" class="anchor field"></a>
+                           <span id="sender.v" class='invisible'>
+                           <code>sender: <a class="struct" href="../../fxa_email_service/settings/struct.Sender.html" title="struct fxa_email_service::settings::Sender">Sender</a></code>
+                           </span></span><div class='docblock'><p>Controls the name and email address
+that are used for the <code>From</code> and <code>Sender</code>
+email headers.</p>
+</div><span id="structfield.sendgrid" class="structfield small-section-header">
+                           <a href="#structfield.sendgrid" class="anchor field"></a>
+                           <span id="sendgrid.v" class='invisible'>
+                           <code>sendgrid: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../../fxa_email_service/settings/struct.Sendgrid.html" title="struct fxa_email_service::settings::Sendgrid">Sendgrid</a>&gt;</code>
+                           </span></span><div class='docblock'><p>Settings for Sendgrid.</p>
+</div>
+                    <h2 id='methods' class='small-section-header'>
+                      Methods<a href='#methods' class='anchor'></a>
+                    </h2>
+                <h3 id='impl' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="struct" href="../../fxa_email_service/settings/struct.Settings.html" title="struct fxa_email_service::settings::Settings">Settings</a></code><a href='#impl' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/fxa_email_service/settings/mod.rs.html#216-266' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><table class='table-display'><tbody><tr><td><code>pub fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;Self, ConfigError&gt;</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/fxa_email_service/settings/mod.rs.html#233-265' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Construct a <code>Settings</code> instance, populating it with data from the file
+system and local environment.</p>
+<p>Precedence (earlier items override later ones):</p>
+<ol>
+<li>Environment variables: <code>$FXA_EMAIL_&lt;UPPERCASE_KEY_NAME&gt;</code></li>
+<li>File: <code>config/local.json</code></li>
+<li>File: <code>config/&lt;$NODE_ENV&gt;.json</code></li>
+<li>File: <code>config/default.json</code></li>
+</ol>
+<p><code>$NODE_ENV</code> is used so that this service automatically picks up the
+appropriate state from our existing node.js ecosystem, without needing
+to manage an extra environment variable.</p>
+<p>Immediately before returning, the parsed config object will be logged to
+the console.</p>
+</div></div>
+                <h2 id='implementations' class='small-section-header'>
+                  Trait Implementations<a href='#implementations' class='anchor'></a>
+                </h2>
+                <div id='implementations-list'><h3 id='impl-Value' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl Value for <a class="struct" href="../../fxa_email_service/settings/struct.Settings.html" title="struct fxa_email_service::settings::Settings">Settings</a></code><a href='#impl-Value' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/fxa_email_service/logging/mod.rs.html#62-68' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='method.serialize' class="method"><span id='serialize.v' class='invisible'><table class='table-display'><tbody><tr><td><code>fn <a href='#method.serialize' class='fnname'>serialize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;self, <br>&nbsp;&nbsp;&nbsp;&nbsp;_: &amp;Record, <br>&nbsp;&nbsp;&nbsp;&nbsp;_: &amp;'static <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;serializer: &amp;mut Serializer<br>) -&gt; Result</code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/fxa_email_service/logging/mod.rs.html#63-67' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Serialize self into <code>Serializer</code> <a href="#tymethod.serialize">Read more</a></p>
+</div></div><h3 id='impl-Debug' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="struct" href="../../fxa_email_service/settings/struct.Settings.html" title="struct fxa_email_service::settings::Settings">Settings</a></code><a href='#impl-Debug' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/fxa_email_service/settings/mod.rs.html#165' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><table class='table-display'><tbody><tr><td><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/fxa_email_service/settings/mod.rs.html#165' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Formats the value using the given formatter. <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt">Read more</a></p>
+</div></div><h3 id='impl-Default' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html" title="trait core::default::Default">Default</a> for <a class="struct" href="../../fxa_email_service/settings/struct.Settings.html" title="struct fxa_email_service::settings::Settings">Settings</a></code><a href='#impl-Default' class='anchor'></a></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/fxa_email_service/settings/mod.rs.html#165' title='goto source code'>[src]</a></span></td></tr></tbody></table></h3><div class='impl-items'><h4 id='method.default' class="method"><span id='default.v' class='invisible'><table class='table-display'><tbody><tr><td><code>fn <a href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default' class='fnname'>default</a>() -&gt; <a class="struct" href="../../fxa_email_service/settings/struct.Settings.html" title="struct fxa_email_service::settings::Settings">Settings</a></code></span></td><td><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/fxa_email_service/settings/mod.rs.html#165' title='goto source code'>[src]</a></td></tr></tbody></table></span></h4><div class='docblock'><p>Returns the &quot;default value&quot; for a type. <a href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default">Read more</a></p>
+</div></div></div>
+                <h2 id='synthetic-implementations' class='small-section-header'>
+                  Auto Trait Implementations<a href='#synthetic-implementations' class='anchor'></a>
+                </h2>
+                <div id='synthetic-implementations-list'>
+            <h3 id='impl-Send' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> for <a class="struct" href="../../fxa_email_service/settings/struct.Settings.html" title="struct fxa_email_service::settings::Settings">Settings</a></code><a href='#impl-Send' class='anchor'></a></span></td><td><span class='out-of-band'></span></td></tr></tbody></table></h3><div class='impl-items'></div><h3 id='impl-Sync' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html" title="trait core::marker::Sync">Sync</a> for <a class="struct" href="../../fxa_email_service/settings/struct.Settings.html" title="struct fxa_email_service::settings::Settings">Settings</a></code><a href='#impl-Sync' class='anchor'></a></span></td><td><span class='out-of-band'></span></td></tr></tbody></table></h3><div class='impl-items'></div></div></section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../../";window.currentCrate = "fxa_email_service";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>

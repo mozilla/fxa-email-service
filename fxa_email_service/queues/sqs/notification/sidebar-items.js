@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["BounceSubtype",""],["BounceType",""],["ComplaintFeedbackType",""],["HeaderValue",""],["NotificationType",""]],"struct":[["Bounce",""],["BouncedRecipient",""],["ComplainedRecipient",""],["Complaint",""],["Delivery",""],["Header",""],["Mail",""],["Notification","The root SQS queue notification type."]]});

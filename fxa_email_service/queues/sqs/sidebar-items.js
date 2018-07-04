@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["notification","SQS queue notification types."]],"struct":[["Queue","An AWS SQS queue type."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Bounce",""],["Complaint",""],["Delivery",""],["Mail",""],["Notification","The root notification type."]]});
