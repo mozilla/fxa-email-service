@@ -294,6 +294,18 @@
 <span id="294">294</span>
 <span id="295">295</span>
 <span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -319,7 +331,8 @@
 <span class="kw">mod</span> <span class="ident">test</span>;
 
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">deserialize_and_validate</span> {
-    ($((<span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">validator</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">expected</span>:<span class="ident">expr</span>)),<span class="op">+</span>) <span class="op">=&gt;</span> ($(
+    ($(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">docs</span>:<span class="ident">meta</span>]</span> (<span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">validator</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">expected</span>:<span class="ident">expr</span>)),<span class="op">+</span>) <span class="op">=&gt;</span> ($(
+        <span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">docs</span>]</span>
         <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Serialize</span>, <span class="ident">PartialEq</span>)]</span>
         <span class="kw">pub</span> <span class="kw">struct</span> <span class="macro-nonterminal">$</span><span class="kw">type</span>(<span class="kw">pub</span> <span class="macro-nonterminal">String</span>);
 
@@ -347,16 +360,26 @@
 }
 
 <span class="macro">deserialize_and_validate</span><span class="macro">!</span> {
-    (<span class="ident">AwsAccess</span>, <span class="ident">aws_access</span>, <span class="string">&quot;aws access&quot;</span>),
-    (<span class="ident">AwsRegion</span>, <span class="ident">aws_region</span>, <span class="string">&quot;aws region&quot;</span>),
-    (<span class="ident">AwsSecret</span>, <span class="ident">aws_secret</span>, <span class="string">&quot;aws secret&quot;</span>),
-    (<span class="ident">BaseUri</span>, <span class="ident">base_uri</span>, <span class="string">&quot;base uri&quot;</span>),
-    (<span class="ident">Host</span>, <span class="ident">host</span>, <span class="string">&quot;host name or ip address&quot;</span>),
-    (<span class="ident">Logging</span>, <span class="ident">logging</span>, <span class="string">&quot;&#39;mozlog&#39;, &#39;pretty&#39; ou &#39;null&#39;&quot;</span>),
+    <span class="doccomment">/// AWS access key type.</span>
+    (<span class="ident">AwsAccess</span>, <span class="ident">aws_access</span>, <span class="string">&quot;AWS access key&quot;</span>),
+    <span class="doccomment">/// AWS region type.</span>
+    (<span class="ident">AwsRegion</span>, <span class="ident">aws_region</span>, <span class="string">&quot;AWS region&quot;</span>),
+    <span class="doccomment">/// AWS secret key type.</span>
+    (<span class="ident">AwsSecret</span>, <span class="ident">aws_secret</span>, <span class="string">&quot;AWS secret key&quot;</span>),
+    <span class="doccomment">/// Base URI type.</span>
+    (<span class="ident">BaseUri</span>, <span class="ident">base_uri</span>, <span class="string">&quot;base URI&quot;</span>),
+    <span class="doccomment">/// Host name or IP address type.</span>
+    (<span class="ident">Host</span>, <span class="ident">host</span>, <span class="string">&quot;host name or IP address&quot;</span>),
+    <span class="doccomment">/// Logging format type.</span>
+    (<span class="ident">Logging</span>, <span class="ident">logging</span>, <span class="string">&quot;&#39;mozlog&#39;, &#39;pretty&#39; or &#39;null&#39;&quot;</span>),
+    <span class="doccomment">/// Email provider type.</span>
     (<span class="ident">Provider</span>, <span class="ident">provider</span>, <span class="string">&quot;&#39;ses&#39; or &#39;sendgrid&#39;&quot;</span>),
+    <span class="doccomment">/// Sender name type.</span>
     (<span class="ident">SenderName</span>, <span class="ident">sender_name</span>, <span class="string">&quot;sender name&quot;</span>),
-    (<span class="ident">SendgridApiKey</span>, <span class="ident">sendgrid_api_key</span>, <span class="string">&quot;sendgrid api key&quot;</span>),
-    (<span class="ident">SqsUrl</span>, <span class="ident">sqs_url</span>, <span class="string">&quot;sqs queue url&quot;</span>)
+    <span class="doccomment">/// Sendgrid API key type.</span>
+    (<span class="ident">SendgridApiKey</span>, <span class="ident">sendgrid_api_key</span>, <span class="string">&quot;Sendgrid API key&quot;</span>),
+    <span class="doccomment">/// AWS SQS queue URL type.</span>
+    (<span class="ident">SqsUrl</span>, <span class="ident">sqs_url</span>, <span class="string">&quot;SQS queue URL&quot;</span>)
 }
 
 <span class="doccomment">/// Settings related to `fxa-auth-db-mysql`,</span>
@@ -459,22 +482,23 @@
 }
 
 <span class="doccomment">/// URLs for SQS queues.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// Note that these are separate queues right now</span>
 <span class="doccomment">/// for consistency with the auth server.</span>
 <span class="doccomment">/// Long term,</span>
 <span class="doccomment">/// there is nothing preventing us</span>
 <span class="doccomment">/// from handling all incoming notification types</span>
 <span class="doccomment">/// with a single queue.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Queue URLs are specified</span>
+<span class="doccomment">/// for consistency with the auth server.</span>
+<span class="doccomment">/// However, we could also store queue names instead</span>
+<span class="doccomment">/// and then fetch the URL with rusoto_sqs::GetQueueUrl.</span>
+<span class="doccomment">/// Then we might be allowed to include</span>
+<span class="doccomment">/// the production queue names in default config?</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SqsUrls</span> {
     <span class="doccomment">/// The incoming bounce queue URL.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Queue URLs are specified here</span>
-    <span class="doccomment">/// for consistency with the auth server.</span>
-    <span class="doccomment">/// However, we could also store queue names instead</span>
-    <span class="doccomment">/// and then fetch the URL with rusoto_sqs::GetQueueUrl.</span>
-    <span class="doccomment">/// Then we might be allowed to include</span>
-    <span class="doccomment">/// the production queue names in default config?</span>
     <span class="kw">pub</span> <span class="ident">bounce</span>: <span class="ident">SqsUrl</span>,
 
     <span class="doccomment">/// The incoming complaint queue URL.</span>
