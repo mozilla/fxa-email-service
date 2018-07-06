@@ -1,1 +1,1 @@
-initSidebarItems({"static":[["static_rocket_route_info_for_handler","Rocket code generated static route information structure."]]});
+initSidebarItems({"static":[["static_rocket_route_info_for_handler","Rocket code generated static route information structure."]],"struct":[["EmailAddress",""]]});

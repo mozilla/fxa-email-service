@@ -93,10 +93,10 @@
         };
         <span class="ident">Queues</span>::<span class="ident">new</span>::<span class="op">&lt;</span><span class="ident">Sqs</span><span class="op">&gt;</span>(
             <span class="ident">QueueIds</span> {
-                <span class="ident">bounce</span>: <span class="ident">sqs_urls</span>.<span class="ident">bounce</span>.<span class="ident">clone</span>(),
-                <span class="ident">complaint</span>: <span class="ident">sqs_urls</span>.<span class="ident">complaint</span>.<span class="ident">clone</span>(),
-                <span class="ident">delivery</span>: <span class="ident">sqs_urls</span>.<span class="ident">delivery</span>.<span class="ident">clone</span>(),
-                <span class="ident">notification</span>: <span class="ident">sqs_urls</span>.<span class="ident">notification</span>.<span class="ident">clone</span>(),
+                <span class="ident">bounce</span>: <span class="ident">sqs_urls</span>.<span class="ident">bounce</span>.<span class="number">0</span>.<span class="ident">clone</span>(),
+                <span class="ident">complaint</span>: <span class="ident">sqs_urls</span>.<span class="ident">complaint</span>.<span class="number">0</span>.<span class="ident">clone</span>(),
+                <span class="ident">delivery</span>: <span class="ident">sqs_urls</span>.<span class="ident">delivery</span>.<span class="number">0</span>.<span class="ident">clone</span>(),
+                <span class="ident">notification</span>: <span class="ident">sqs_urls</span>.<span class="ident">notification</span>.<span class="number">0</span>.<span class="ident">clone</span>(),
             },
             <span class="kw-2">&amp;</span><span class="ident">SETTINGS</span>,
         )

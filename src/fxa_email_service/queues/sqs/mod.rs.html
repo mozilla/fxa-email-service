@@ -203,6 +203,7 @@
 <span id="203">203</span>
 <span id="204">204</span>
 <span id="205">205</span>
+<span id="206">206</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -296,12 +297,13 @@
         <span class="kw">let</span> <span class="ident">region</span> <span class="op">=</span> <span class="ident">settings</span>
             .<span class="ident">aws</span>
             .<span class="ident">region</span>
+            .<span class="number">0</span>
             .<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">Region</span><span class="op">&gt;</span>()
             .<span class="ident">expect</span>(<span class="string">&quot;invalid region&quot;</span>);
 
         <span class="kw">let</span> <span class="ident">client</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Sqs</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">keys</span>) <span class="op">=</span> <span class="ident">settings</span>.<span class="ident">aws</span>.<span class="ident">keys</span> {
             <span class="kw">let</span> <span class="ident">creds</span> <span class="op">=</span>
-                <span class="ident">StaticProvider</span>::<span class="ident">new</span>(<span class="ident">keys</span>.<span class="ident">access</span>.<span class="ident">to_string</span>(), <span class="ident">keys</span>.<span class="ident">secret</span>.<span class="ident">to_string</span>(), <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
+                <span class="ident">StaticProvider</span>::<span class="ident">new</span>(<span class="ident">keys</span>.<span class="ident">access</span>.<span class="number">0</span>.<span class="ident">clone</span>(), <span class="ident">keys</span>.<span class="ident">secret</span>.<span class="number">0</span>.<span class="ident">clone</span>(), <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
             <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">SqsClient</span>::<span class="ident">new</span>(<span class="ident">RequestDispatcher</span>::<span class="ident">default</span>(), <span class="ident">creds</span>, <span class="ident">region</span>))
         } <span class="kw">else</span> {
             <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">SqsClient</span>::<span class="ident">simple</span>(<span class="ident">region</span>))
