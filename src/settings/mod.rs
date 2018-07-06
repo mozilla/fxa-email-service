@@ -22,7 +22,8 @@ use validate;
 mod test;
 
 macro_rules! deserialize_and_validate {
-    ($(($type:ident, $validator:ident, $expected:expr)),+) => ($(
+    ($(#[$docs:meta] ($type:ident, $validator:ident, $expected:expr)),+) => ($(
+        #[$docs]
         #[derive(Clone, Debug, Default, Serialize, PartialEq)]
         pub struct $type(pub String);
 
@@ -50,16 +51,26 @@ macro_rules! deserialize_and_validate {
 }
 
 deserialize_and_validate! {
-    (AwsAccess, aws_access, "aws access"),
-    (AwsRegion, aws_region, "aws region"),
-    (AwsSecret, aws_secret, "aws secret"),
-    (BaseUri, base_uri, "base uri"),
-    (Host, host, "host name or ip address"),
-    (Logging, logging, "'mozlog', 'pretty' ou 'null'"),
+    /// AWS access key type.
+    (AwsAccess, aws_access, "AWS access key"),
+    /// AWS region type.
+    (AwsRegion, aws_region, "AWS region"),
+    /// AWS secret key type.
+    (AwsSecret, aws_secret, "AWS secret key"),
+    /// Base URI type.
+    (BaseUri, base_uri, "base URI"),
+    /// Host name or IP address type.
+    (Host, host, "host name or IP address"),
+    /// Logging format type.
+    (Logging, logging, "'mozlog', 'pretty' or 'null'"),
+    /// Email provider type.
     (Provider, provider, "'ses' or 'sendgrid'"),
+    /// Sender name type.
     (SenderName, sender_name, "sender name"),
-    (SendgridApiKey, sendgrid_api_key, "sendgrid api key"),
-    (SqsUrl, sqs_url, "sqs queue url")
+    /// Sendgrid API key type.
+    (SendgridApiKey, sendgrid_api_key, "Sendgrid API key"),
+    /// AWS SQS queue URL type.
+    (SqsUrl, sqs_url, "SQS queue URL")
 }
 
 /// Settings related to `fxa-auth-db-mysql`,
