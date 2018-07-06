@@ -173,22 +173,23 @@ pub struct Sendgrid {
 }
 
 /// URLs for SQS queues.
+///
 /// Note that these are separate queues right now
 /// for consistency with the auth server.
 /// Long term,
 /// there is nothing preventing us
 /// from handling all incoming notification types
 /// with a single queue.
+///
+/// Queue URLs are specified
+/// for consistency with the auth server.
+/// However, we could also store queue names instead
+/// and then fetch the URL with rusoto_sqs::GetQueueUrl.
+/// Then we might be allowed to include
+/// the production queue names in default config?
 #[derive(Debug, Default, Deserialize, Serialize)]
 pub struct SqsUrls {
     /// The incoming bounce queue URL.
-    ///
-    /// Queue URLs are specified here
-    /// for consistency with the auth server.
-    /// However, we could also store queue names instead
-    /// and then fetch the URL with rusoto_sqs::GetQueueUrl.
-    /// Then we might be allowed to include
-    /// the production queue names in default config?
     pub bounce: SqsUrl,
 
     /// The incoming complaint queue URL.
