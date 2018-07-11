@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["hidden_or_not_set","Serialize an `Option` containing sensitive data to either of the strings `\"[hidden]\"` or `\"[not set]\"`."]]});
+initSidebarItems({"fn":[["hidden","Serialize any sensitive data to `\"[hidden]\"`."],["hidden_or_not_set","Serialize an `Option` containing sensitive data to either of the strings `\"[hidden]\"` or `\"[not set]\"`."]]});

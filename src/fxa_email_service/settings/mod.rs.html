@@ -306,6 +306,33 @@
 <span id="306">306</span>
 <span id="307">307</span>
 <span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -373,7 +400,7 @@
     <span class="doccomment">/// Logging format type.</span>
     (<span class="ident">Logging</span>, <span class="ident">logging</span>, <span class="string">&quot;&#39;mozlog&#39;, &#39;pretty&#39; or &#39;null&#39;&quot;</span>),
     <span class="doccomment">/// Email provider type.</span>
-    (<span class="ident">Provider</span>, <span class="ident">provider</span>, <span class="string">&quot;&#39;ses&#39; or &#39;sendgrid&#39;&quot;</span>),
+    (<span class="ident">Provider</span>, <span class="ident">provider</span>, <span class="string">&quot;&#39;ses&#39;, &#39;sendgrid&#39; or &#39;smtp&#39;&quot;</span>),
     <span class="doccomment">/// Sender name type.</span>
     (<span class="ident">SenderName</span>, <span class="ident">sender_name</span>, <span class="string">&quot;sender name&quot;</span>),
     <span class="doccomment">/// Sendgrid API key type.</span>
@@ -481,6 +508,30 @@
     <span class="kw">pub</span> <span class="ident">key</span>: <span class="ident">SendgridApiKey</span>,
 }
 
+<span class="doccomment">/// Settings for SMTP custom provider.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Smtp</span> {
+    <span class="doccomment">/// SMTP host IP address.</span>
+    <span class="kw">pub</span> <span class="ident">host</span>: <span class="ident">Host</span>,
+
+    <span class="doccomment">/// SMTP host port.</span>
+    <span class="kw">pub</span> <span class="ident">port</span>: <span class="ident">u16</span>,
+
+    <span class="doccomment">/// Optional SMTP credentials.</span>
+    <span class="kw">pub</span> <span class="ident">credentials</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SmtpCredentials</span><span class="op">&gt;</span>,
+}
+
+<span class="doccomment">/// Settings for SMTP custom provider optional credentials.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SmtpCredentials</span> {
+    <span class="doccomment">///SMTP user.</span>
+    <span class="kw">pub</span> <span class="ident">user</span>: <span class="ident">String</span>,
+
+    <span class="doccomment">///SMTP password.</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">serialize_with</span> <span class="op">=</span> <span class="string">&quot;serialize::hidden&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="ident">password</span>: <span class="ident">String</span>,
+}
+
 <span class="doccomment">/// URLs for SQS queues.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Note that these are separate queues right now</span>
@@ -562,6 +613,9 @@
     <span class="doccomment">/// Settings for Sendgrid.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">serialize_with</span> <span class="op">=</span> <span class="string">&quot;serialize::hidden_or_not_set&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">sendgrid</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Sendgrid</span><span class="op">&gt;</span>,
+
+    <span class="doccomment">/// Settings for SMTP custom provider.</span>
+    <span class="kw">pub</span> <span class="ident">smtp</span>: <span class="ident">Smtp</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Settings</span> {
