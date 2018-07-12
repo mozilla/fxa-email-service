@@ -84,8 +84,8 @@ impl From<String> for AppError {
 impl From<SendRawEmailError> for AppError {
     fn from(error: SendRawEmailError) -> AppError {
         AppErrorKind::ProviderError {
-            _name: String::from("SES"),
-            _description: format!("{:?}", error),
+            name: String::from("SES"),
+            description: format!("{:?}", error),
         }.into()
     }
 }
