@@ -116,7 +116,7 @@
         .<span class="ident">manage</span>(<span class="ident">message_data</span>)
         .<span class="ident">manage</span>(<span class="ident">providers</span>)
         .<span class="ident">mount</span>(<span class="string">&quot;/&quot;</span>, <span class="macro">routes</span><span class="macro">!</span>[<span class="ident">send</span>::<span class="ident">handler</span>])
-        .<span class="ident">catch</span>(<span class="macro">errors</span><span class="macro">!</span>[
+        .<span class="ident">catch</span>(<span class="macro">catchers</span><span class="macro">!</span>[
             <span class="ident">app_errors</span>::<span class="ident">bad_request</span>,
             <span class="ident">app_errors</span>::<span class="ident">not_found</span>,
             <span class="ident">app_errors</span>::<span class="ident">method_not_allowed</span>,

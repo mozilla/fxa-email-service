@@ -309,7 +309,7 @@
     <span class="ident">response</span>::{<span class="self">self</span>, <span class="ident">Responder</span>, <span class="ident">Response</span>},
     <span class="ident">Request</span>,
 };
-<span class="kw">use</span> <span class="ident">rocket_contrib</span>::<span class="ident">Json</span>;
+<span class="kw">use</span> <span class="ident">rocket_contrib</span>::{<span class="ident">Json</span>, <span class="ident">JsonValue</span>};
 <span class="kw">use</span> <span class="ident">serde_json</span>::{<span class="ident">map</span>::<span class="ident">Map</span>, <span class="ident">ser</span>::<span class="ident">to_string</span>, <span class="ident">Value</span>};
 
 <span class="kw">use</span> <span class="ident">auth_db</span>::<span class="ident">BounceRecord</span>;
@@ -334,7 +334,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">AppError</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">json</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Value</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">json</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">JsonValue</span> {
         <span class="kw">let</span> <span class="ident">kind</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">kind</span>();
         <span class="kw">let</span> <span class="ident">status</span> <span class="op">=</span> <span class="ident">kind</span>.<span class="ident">http_status</span>();
 
@@ -560,32 +560,32 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">error</span>(<span class="number">400</span>)]</span>
+<span class="attribute">#[<span class="ident">catch</span>(<span class="number">400</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bad_request</span>() <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">BadRequest</span>)<span class="question-mark">?</span>
 }
 
-<span class="attribute">#[<span class="ident">error</span>(<span class="number">404</span>)]</span>
+<span class="attribute">#[<span class="ident">catch</span>(<span class="number">404</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">not_found</span>() <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">NotFound</span>)<span class="question-mark">?</span>
 }
 
-<span class="attribute">#[<span class="ident">error</span>(<span class="number">405</span>)]</span>
+<span class="attribute">#[<span class="ident">catch</span>(<span class="number">405</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">method_not_allowed</span>() <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">MethodNotAllowed</span>)<span class="question-mark">?</span>
 }
 
-<span class="attribute">#[<span class="ident">error</span>(<span class="number">422</span>)]</span>
+<span class="attribute">#[<span class="ident">catch</span>(<span class="number">422</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unprocessable_entity</span>() <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">UnprocessableEntity</span>)<span class="question-mark">?</span>
 }
 
-<span class="attribute">#[<span class="ident">error</span>(<span class="number">429</span>)]</span>
+<span class="attribute">#[<span class="ident">catch</span>(<span class="number">429</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">too_many_requests</span>() <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">TooManyRequests</span>)<span class="question-mark">?</span>
 }
 
-<span class="attribute">#[<span class="ident">error</span>(<span class="number">500</span>)]</span>
+<span class="attribute">#[<span class="ident">catch</span>(<span class="number">500</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">internal_server_error</span>() <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">InternalServerError</span>)<span class="question-mark">?</span>
 }

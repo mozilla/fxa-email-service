@@ -137,7 +137,7 @@
     <span class="ident">http</span>::<span class="ident">Status</span>,
     <span class="ident">Data</span>, <span class="ident">Outcome</span>, <span class="ident">Request</span>, <span class="ident">State</span>,
 };
-<span class="kw">use</span> <span class="ident">rocket_contrib</span>::{<span class="ident">Json</span>, <span class="ident">Value</span>};
+<span class="kw">use</span> <span class="ident">rocket_contrib</span>::{<span class="ident">Json</span>, <span class="ident">JsonValue</span>};
 
 <span class="kw">use</span> <span class="ident">app_errors</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 <span class="kw">use</span> <span class="ident">auth_db</span>::<span class="ident">DbClient</span>;
@@ -214,7 +214,7 @@
     <span class="ident">bounces</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">Bounces</span><span class="op">&lt;</span><span class="ident">DbClient</span><span class="op">&gt;&gt;</span>,
     <span class="ident">message_data</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">MessageData</span><span class="op">&gt;</span>,
     <span class="ident">providers</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">Providers</span><span class="op">&gt;</span>,
-) <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span><span class="ident">Json</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;&gt;</span> {
+) <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span><span class="ident">Json</span><span class="op">&lt;</span><span class="ident">JsonValue</span><span class="op">&gt;&gt;</span> {
     <span class="kw">let</span> <span class="ident">email</span> <span class="op">=</span> <span class="ident">email</span><span class="question-mark">?</span>;
 
     <span class="kw">let</span> <span class="ident">to</span> <span class="op">=</span> <span class="ident">email</span>.<span class="ident">to</span>.<span class="number">0</span>.<span class="ident">as_ref</span>();
