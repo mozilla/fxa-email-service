@@ -202,10 +202,7 @@ impl AppErrorKind {
     pub fn additional_fields(&self) -> Map<String, Value> {
         let mut fields = Map::new();
         match self {
-            AppErrorKind::ProviderError {
-                ref name,
-                ..
-            } => {
+            AppErrorKind::ProviderError { ref name, .. } => {
                 fields.insert(String::from("name"), Value::String(format!("{}", name)));
             }
 

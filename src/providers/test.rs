@@ -4,14 +4,12 @@
 
 use std::collections::HashMap;
 
-use super::{mock::MockProvider, Provider};
+use super::build_multipart_mime;
 
 #[test]
 fn build_mime_without_optional_data() {
-    let mock = MockProvider {};
-    let message = mock
-        .build_multipart_mime("a@a.com", "b@b.com", &[], None, "subject", "body", None)
-        .unwrap();
+    let message =
+        build_multipart_mime("a@a.com", "b@b.com", &[], None, "subject", "body", None).unwrap();
     let message: Vec<String> = format!("{}", message)
         .split("\r\n")
         .map(|s| s.to_owned())
@@ -27,17 +25,15 @@ fn build_mime_without_optional_data() {
 
 #[test]
 fn build_mime_with_cc_headers() {
-    let mock = MockProvider {};
-    let message =
-        mock.build_multipart_mime(
-            "a@a.com",
-            "b@b.com",
-            &["c@c.com", "d@d.com"],
-            None,
-            "subject",
-            "body",
-            None,
-        ).unwrap();
+    let message = build_multipart_mime(
+        "a@a.com",
+        "b@b.com",
+        &["c@c.com", "d@d.com"],
+        None,
+        "subject",
+        "body",
+        None,
+    ).unwrap();
     let message: Vec<String> = format!("{}", message)
         .split("\r\n")
         .map(|s| s.to_owned())
@@ -54,19 +50,17 @@ fn build_mime_with_cc_headers() {
 
 #[test]
 fn build_mime_with_custom_headers() {
-    let mock = MockProvider {};
     let mut custom_headers = HashMap::new();
     custom_headers.insert("x-foo".to_string(), "bar".to_string());
-    let message =
-        mock.build_multipart_mime(
-            "a@a.com",
-            "b@b.com",
-            &[],
-            Some(&custom_headers),
-            "subject",
-            "body",
-            None,
-        ).unwrap();
+    let message = build_multipart_mime(
+        "a@a.com",
+        "b@b.com",
+        &[],
+        Some(&custom_headers),
+        "subject",
+        "body",
+        None,
+    ).unwrap();
     let message: Vec<String> = format!("{}", message)
         .split("\r\n")
         .map(|s| s.to_owned())
@@ -83,17 +77,15 @@ fn build_mime_with_custom_headers() {
 
 #[test]
 fn build_mime_with_body_html() {
-    let mock = MockProvider {};
-    let message =
-        mock.build_multipart_mime(
-            "a@a.com",
-            "b@b.com",
-            &[],
-            None,
-            "subject",
-            "body",
-            Some("<p>body</p>"),
-        ).unwrap();
+    let message = build_multipart_mime(
+        "a@a.com",
+        "b@b.com",
+        &[],
+        None,
+        "subject",
+        "body",
+        Some("<p>body</p>"),
+    ).unwrap();
     let message: Vec<String> = format!("{}", message)
         .split("\r\n")
         .map(|s| s.to_owned())

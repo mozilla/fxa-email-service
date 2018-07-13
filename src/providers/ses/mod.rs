@@ -9,9 +9,12 @@ use rusoto_core::{reactor::RequestDispatcher, Region};
 use rusoto_credential::StaticProvider;
 use rusoto_ses::{RawMessage, SendRawEmailError, SendRawEmailRequest, Ses, SesClient};
 
-use super::{Headers, Provider};
+use super::{build_multipart_mime, Headers, Provider};
 use app_errors::{AppError, AppErrorKind, AppResult};
 use settings::Settings;
+
+#[cfg(test)]
+mod test;
 
 pub struct SesProvider {
     client: Box<Ses>,
@@ -52,15 +55,8 @@ impl Provider for SesProvider {
         body_text: &str,
         body_html: Option<&str>,
     ) -> AppResult<String> {
-        let message = self.build_multipart_mime(
-            &self.sender,
-            to,
-            cc,
-            headers,
-            subject,
-            body_text,
-            body_html,
-        )?;
+        let message =
+            build_multipart_mime(&self.sender, to, cc, headers, subject, body_text, body_html)?;
         let encoded_message = encode(&format!("{}", message));
         let mut request = SendRawEmailRequest::default();
         request.raw_message = RawMessage {
