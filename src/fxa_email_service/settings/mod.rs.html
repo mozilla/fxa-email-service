@@ -329,10 +329,6 @@
 <span id="329">329</span>
 <span id="330">330</span>
 <span id="331">331</span>
-<span id="332">332</span>
-<span id="333">333</span>
-<span id="334">334</span>
-<span id="335">335</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -645,12 +641,8 @@
         }
 
         <span class="ident">config</span>.<span class="ident">merge</span>(<span class="ident">File</span>::<span class="ident">with_name</span>(<span class="string">&quot;config/local&quot;</span>).<span class="ident">required</span>(<span class="bool-val">false</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">env</span> <span class="op">=</span> <span class="ident">Environment</span>::<span class="ident">with_prefix</span>(<span class="string">&quot;fxa_email&quot;</span>);
-        <span class="comment">// Event though &quot;_&quot; is the default separator for config-rs right now,</span>
-        <span class="comment">// that is going to change for the next versions.</span>
-        <span class="comment">// https://github.com/mehcode/config-rs/commit/536f52fed4a22ed158681edce08211845abff985</span>
-        <span class="ident">env</span>.<span class="ident">separator</span>(<span class="string">&quot;_&quot;</span>.<span class="ident">to_string</span>());
-        <span class="ident">config</span>.<span class="ident">merge</span>(<span class="ident">env</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">env</span> <span class="op">=</span> <span class="ident">Environment</span>::<span class="ident">with_prefix</span>(<span class="string">&quot;fxa_email&quot;</span>);
+        <span class="ident">config</span>.<span class="ident">merge</span>(<span class="ident">env</span>.<span class="ident">separator</span>(<span class="string">&quot;_&quot;</span>))<span class="question-mark">?</span>;
 
         <span class="kw">match</span> <span class="ident">config</span>.<span class="ident">try_into</span>::<span class="op">&lt;</span><span class="ident">Settings</span><span class="op">&gt;</span>() {
             <span class="prelude-val">Ok</span>(<span class="ident">settings</span>) <span class="op">=&gt;</span> {
