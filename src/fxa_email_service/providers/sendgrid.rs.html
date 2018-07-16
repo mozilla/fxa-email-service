@@ -208,8 +208,8 @@
                         .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">raw_header</span><span class="op">|</span> <span class="ident">raw_header</span>.<span class="ident">one</span>())
                         .<span class="ident">ok_or</span>(
                             <span class="ident">AppErrorKind</span>::<span class="ident">ProviderError</span> {
-                                <span class="ident">_name</span>: <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;Sendgrid&quot;</span>),
-                                <span class="ident">_description</span>: <span class="ident">String</span>::<span class="ident">from</span>(
+                                <span class="ident">name</span>: <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;Sendgrid&quot;</span>),
+                                <span class="ident">description</span>: <span class="ident">String</span>::<span class="ident">from</span>(
                                     <span class="string">&quot;Missing or duplicate X-Message-Id header in Sendgrid response&quot;</span>,
                                 ),
                             }.<span class="ident">into</span>(),
@@ -218,8 +218,8 @@
                         .<span class="ident">map</span>(<span class="op">|</span><span class="ident">message_id</span><span class="op">|</span> <span class="ident">message_id</span>.<span class="ident">to_string</span>())
                 } <span class="kw">else</span> {
                     <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">ProviderError</span> {
-                        <span class="ident">_name</span>: <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;Sendgrid&quot;</span>),
-                        <span class="ident">_description</span>: <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;Unsuccesful response status: {}&quot;</span>, <span class="ident">status</span>),
+                        <span class="ident">name</span>: <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;Sendgrid&quot;</span>),
+                        <span class="ident">description</span>: <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;Unsuccesful response status: {}&quot;</span>, <span class="ident">status</span>),
                     }.<span class="ident">into</span>())
                 }
             })
@@ -229,8 +229,8 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">SendgridError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AppError</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">error</span>: <span class="ident">SendgridError</span>) <span class="op">-&gt;</span> <span class="ident">AppError</span> {
         <span class="ident">AppErrorKind</span>::<span class="ident">ProviderError</span> {
-            <span class="ident">_name</span>: <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;Sendgrid&quot;</span>),
-            <span class="ident">_description</span>: <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">error</span>),
+            <span class="ident">name</span>: <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;Sendgrid&quot;</span>),
+            <span class="ident">description</span>: <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">error</span>),
         }.<span class="ident">into</span>()
     }
 }
@@ -238,8 +238,8 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Utf8Error</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AppError</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">error</span>: <span class="ident">Utf8Error</span>) <span class="op">-&gt;</span> <span class="ident">AppError</span> {
         <span class="ident">AppErrorKind</span>::<span class="ident">ProviderError</span> {
-            <span class="ident">_name</span>: <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;Sendgrid&quot;</span>),
-            <span class="ident">_description</span>: <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;Failed to decode string as UTF-8: {:?}&quot;</span>, <span class="ident">error</span>),
+            <span class="ident">name</span>: <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;Sendgrid&quot;</span>),
+            <span class="ident">description</span>: <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;Failed to decode string as UTF-8: {:?}&quot;</span>, <span class="ident">error</span>),
         }.<span class="ident">into</span>()
     }
 }

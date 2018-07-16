@@ -199,16 +199,16 @@
                     <span class="kw">if</span> <span class="ident">is_bounce_violation</span>(<span class="kw-2">*</span><span class="ident">count</span>, <span class="ident">bounce</span>.<span class="ident">created_at</span>, <span class="ident">now</span>, <span class="ident">limits</span>) {
                         <span class="kw">return</span> <span class="kw">match</span> <span class="ident">bounce</span>.<span class="ident">bounce_type</span> {
                             <span class="ident">DbBounceType</span>::<span class="ident">Hard</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">BounceHardError</span> {
-                                <span class="ident">_address</span>: <span class="ident">address</span>.<span class="ident">to_string</span>(),
-                                <span class="ident">_bounce</span>: <span class="prelude-val">Some</span>(<span class="ident">bounce</span>.<span class="ident">clone</span>()),
+                                <span class="ident">address</span>: <span class="ident">address</span>.<span class="ident">to_string</span>(),
+                                <span class="ident">bounce</span>: <span class="prelude-val">Some</span>(<span class="ident">bounce</span>.<span class="ident">clone</span>()),
                             }.<span class="ident">into</span>()),
                             <span class="ident">DbBounceType</span>::<span class="ident">Soft</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">BounceSoftError</span> {
-                                <span class="ident">_address</span>: <span class="ident">address</span>.<span class="ident">to_string</span>(),
-                                <span class="ident">_bounce</span>: <span class="prelude-val">Some</span>(<span class="ident">bounce</span>.<span class="ident">clone</span>()),
+                                <span class="ident">address</span>: <span class="ident">address</span>.<span class="ident">to_string</span>(),
+                                <span class="ident">bounce</span>: <span class="prelude-val">Some</span>(<span class="ident">bounce</span>.<span class="ident">clone</span>()),
                             }.<span class="ident">into</span>()),
                             <span class="ident">DbBounceType</span>::<span class="ident">Complaint</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">BounceComplaintError</span> {
-                                <span class="ident">_address</span>: <span class="ident">address</span>.<span class="ident">to_string</span>(),
-                                <span class="ident">_bounce</span>: <span class="prelude-val">Some</span>(<span class="ident">bounce</span>.<span class="ident">clone</span>()),
+                                <span class="ident">address</span>: <span class="ident">address</span>.<span class="ident">to_string</span>(),
+                                <span class="ident">bounce</span>: <span class="prelude-val">Some</span>(<span class="ident">bounce</span>.<span class="ident">clone</span>()),
                             }.<span class="ident">into</span>()),
                         };
                     }
