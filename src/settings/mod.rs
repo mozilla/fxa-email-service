@@ -291,15 +291,6 @@ pub struct Settings {
     pub smtp: Smtp,
 }
 
-/// Get environement type based on node_env.
-pub fn get_env() -> RocketEnvironment {
-    match env::var("NODE_ENV").as_ref().map(String::as_ref) {
-        Ok("staging") => RocketEnvironment::Staging,
-        Ok("production") => RocketEnvironment::Production,
-        Ok("dev") | _ => RocketEnvironment::Development,
-    }
-}
-
 impl Settings {
     /// Construct a `Settings` instance, populating it with data from the file
     /// system and local environment.
@@ -332,8 +323,8 @@ impl Settings {
 
         match config.try_into::<Settings>() {
             Ok(settings) => {
-                if let Ok(rocket_env) = env::var("ROCKET_ENV") {
-                    if rocket_env == "production" && &settings.hmackey == "YOU MUST CHANGE ME" {
+                if let Ok(node_env) = env::var("NODE_ENV") {
+                    if node_env == "production" && &settings.hmackey == "YOU MUST CHANGE ME" {
                         panic!("Please set a valid HMAC key.")
                     }
                 }
@@ -361,7 +352,7 @@ impl Settings {
                 .port(self.port.clone())
                 .log_level(LoggingLevel::Critical)
                 .finalize(),
-            Ok("dev") | _ => RocketConfig::build(RocketEnvironment::Development)
+            _ => RocketConfig::build(RocketEnvironment::Development)
                 .address(self.host.0.clone())
                 .port(self.port.clone())
                 .log_level(LoggingLevel::Normal)
