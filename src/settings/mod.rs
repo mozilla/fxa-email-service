@@ -12,7 +12,7 @@ use std::{
 use config::{Config, ConfigError, Environment, File};
 use rocket::config::{
     Config as RocketConfig, ConfigError as RocketConfigError, Environment as RocketEnvironment,
-    LoggingLevel,
+    LoggingLevel as RocketLoggingLevel,
 };
 use serde::de::{Deserialize, Deserializer, Error, Unexpected};
 
@@ -65,8 +65,10 @@ deserialize_and_validate! {
     (BaseUri, base_uri, "base URI"),
     /// Host name or IP address type.
     (Host, host, "host name or IP address"),
+    /// Logging level type.
+    (LoggingLevel, logging_level, "'normal', 'debug'm 'critical' or 'off'"),
     /// Logging format type.
-    (Logging, logging, "'mozlog', 'pretty' or 'null'"),
+    (LoggingFormat, logging_format, "'mozlog', 'pretty' or 'null'"),
     /// Email provider type.
     (Provider, provider, "'ses', 'sendgrid' or 'smtp'"),
     /// Sender name type.
@@ -142,6 +144,16 @@ pub struct BounceLimits {
 
     /// Limits for soft (transient) bounces.
     pub soft: Vec<BounceLimit>,
+}
+
+/// Settings for logging.
+#[derive(Debug, Default, Deserialize, Serialize)]
+pub struct Log {
+    /// The logging level.
+    pub level: LoggingLevel,
+
+    /// The logging format.
+    pub format: LoggingFormat,
 }
 
 /// Settings for Redis.
@@ -274,9 +286,9 @@ pub struct Settings {
 
     pub host: Host,
 
-    /// The logging format to use,
-    /// can be `"mozlog"`, `"pretty"` or `"null"`.
-    pub logging: Logging,
+    /// The logging settings,
+    /// about level and formatting.
+    pub log: Log,
 
     /// The port this application is listening to.
     pub port: u16,
@@ -359,22 +371,21 @@ impl Settings {
     /// Create rocket configuration based on the `NODE_ENV` environment
     /// variable. Defaults to `dev` mode if `NODE_ENV` is not set.
     pub fn build_rocket_config(&self) -> Result<RocketConfig, RocketConfigError> {
-        match env::var("NODE_ENV").as_ref().map(String::as_ref) {
-            Ok("production") => RocketConfig::build(RocketEnvironment::Production)
-                .address(self.host.0.clone())
-                .port(self.port.clone())
-                .log_level(LoggingLevel::Off)
-                .finalize(),
-            Ok("staging") => RocketConfig::build(RocketEnvironment::Staging)
-                .address(self.host.0.clone())
-                .port(self.port.clone())
-                .log_level(LoggingLevel::Critical)
-                .finalize(),
-            _ => RocketConfig::build(RocketEnvironment::Development)
-                .address(self.host.0.clone())
-                .port(self.port.clone())
-                .log_level(LoggingLevel::Normal)
-                .finalize(),
-        }
+        let log_level = match self.log.level.0.as_str() {
+            "debug" => RocketLoggingLevel::Debug,
+            "critical" => RocketLoggingLevel::Critical,
+            "off" => RocketLoggingLevel::Off,
+            _ => RocketLoggingLevel::Normal
+        };
+        let rocket_config = match env::var("NODE_ENV").as_ref().map(String::as_ref) {
+            Ok("production") => RocketEnvironment::Production,
+            Ok("staging") => RocketEnvironment::Staging,
+            _ => RocketEnvironment::Development
+        };
+        RocketConfig::build(rocket_config)
+            .address(self.host.0.clone())
+            .port(self.port.clone())
+            .log_level(log_level)
+            .finalize()
     }
 }

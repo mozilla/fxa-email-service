@@ -29,6 +29,7 @@ lazy_static! {
         "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]{1,64}@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)+$"
     ).unwrap();
     static ref HOST_FORMAT: Regex = Regex::new("^[A-Za-z0-9-]+(?:\\.[A-Za-z0-9-]+)*$").unwrap();
+    static ref LOGGING_LEVEL: Regex = Regex::new("^(?:normal|debug|critial|off)$").unwrap();
     static ref LOGGING_FORMAT: Regex = Regex::new("^(?:mozlog|pretty|null)$").unwrap();
     static ref PROVIDER_FORMAT: Regex = Regex::new("^(?:mock|sendgrid|ses|smtp|socketlabs)$").unwrap();
     static ref SENDER_NAME_FORMAT: Regex =
@@ -69,7 +70,12 @@ pub fn host(value: &str) -> bool {
 }
 
 /// Validate logging level.
-pub fn logging(value: &str) -> bool {
+pub fn logging_level(value: &str) -> bool {
+    LOGGING_LEVEL.is_match(value)
+}
+
+/// Validate logging format.
+pub fn logging_format(value: &str) -> bool {
     LOGGING_FORMAT.is_match(value)
 }
 
