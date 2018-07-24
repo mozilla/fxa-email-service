@@ -28,6 +28,7 @@ lazy_static! {
     static ref EMAIL_ADDRESS_FORMAT: Regex = Regex::new(
         "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]{1,64}@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)+$"
     ).unwrap();
+    static ref ENV: Regex = Regex::new("^(?:dev|staging|production|test)$").unwrap();
     static ref HOST_FORMAT: Regex = Regex::new("^[A-Za-z0-9-]+(?:\\.[A-Za-z0-9-]+)*$").unwrap();
     static ref LOGGING_LEVEL: Regex = Regex::new("^(?:normal|debug|critial|off)$").unwrap();
     static ref LOGGING_FORMAT: Regex = Regex::new("^(?:mozlog|pretty|null)$").unwrap();
@@ -62,6 +63,11 @@ pub fn base_uri(value: &str) -> bool {
 /// Validate an email address.
 pub fn email_address(value: &str) -> bool {
     value.len() < 254 && EMAIL_ADDRESS_FORMAT.is_match(value)
+}
+
+/// Validate env.
+pub fn env(value: &str) -> bool {
+    ENV.is_match(value)
 }
 
 /// Validate a host name or IP address.
