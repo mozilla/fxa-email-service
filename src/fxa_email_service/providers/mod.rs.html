@@ -143,6 +143,14 @@
 <span id="143">143</span>
 <span id="144">144</span>
 <span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -156,7 +164,7 @@
 
 <span class="kw">use</span> <span class="self">self</span>::{
     <span class="ident">mock</span>::<span class="ident">MockProvider</span> <span class="kw">as</span> <span class="ident">Mock</span>, <span class="ident">sendgrid</span>::<span class="ident">SendgridProvider</span> <span class="kw">as</span> <span class="ident">Sendgrid</span>, <span class="ident">ses</span>::<span class="ident">SesProvider</span> <span class="kw">as</span> <span class="ident">Ses</span>,
-    <span class="ident">smtp</span>::<span class="ident">SmtpProvider</span> <span class="kw">as</span> <span class="ident">Smtp</span>,
+    <span class="ident">smtp</span>::<span class="ident">SmtpProvider</span> <span class="kw">as</span> <span class="ident">Smtp</span>, <span class="ident">socketlabs</span>::<span class="ident">SocketLabsProvider</span> <span class="kw">as</span> <span class="ident">SocketLabs</span>,
 };
 <span class="kw">use</span> <span class="ident">app_errors</span>::{<span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 <span class="kw">use</span> <span class="ident">settings</span>::<span class="ident">Settings</span>;
@@ -165,6 +173,7 @@
 <span class="kw">mod</span> <span class="ident">sendgrid</span>;
 <span class="kw">mod</span> <span class="ident">ses</span>;
 <span class="kw">mod</span> <span class="ident">smtp</span>;
+<span class="kw">mod</span> <span class="ident">socketlabs</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">test</span>;
 
@@ -256,6 +265,13 @@
             <span class="ident">providers</span>.<span class="ident">insert</span>(
                 <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;sendgrid&quot;</span>),
                 <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">Sendgrid</span>::<span class="ident">new</span>(<span class="ident">sendgrid</span>, <span class="ident">settings</span>)),
+            );
+        }
+
+        <span class="kw">if</span> <span class="ident">settings</span>.<span class="ident">socketlabs</span>.<span class="ident">is_some</span>() {
+            <span class="ident">providers</span>.<span class="ident">insert</span>(
+                <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;socketlabs&quot;</span>),
+                <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">SocketLabs</span>::<span class="ident">new</span>(<span class="ident">settings</span>)),
             );
         }
 

@@ -360,6 +360,24 @@
 <span id="360">360</span>
 <span id="361">361</span>
 <span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -563,6 +581,20 @@
     <span class="kw">pub</span> <span class="ident">password</span>: <span class="ident">String</span>,
 }
 
+<span class="doccomment">/// Settings for SocketLabs.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SocketLabs</span> {
+    <span class="doccomment">/// The server ID.</span>
+    <span class="doccomment">/// This is sensitive data</span>
+    <span class="doccomment">/// and will not be logged.</span>
+    <span class="kw">pub</span> <span class="ident">serverid</span>: <span class="ident">u16</span>,
+
+    <span class="doccomment">/// The API key.</span>
+    <span class="doccomment">/// This is sensitive data</span>
+    <span class="doccomment">/// and will not be logged.</span>
+    <span class="kw">pub</span> <span class="ident">key</span>: <span class="ident">String</span>,
+}
+
 <span class="doccomment">/// URLs for SQS queues.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Note that these are separate queues right now</span>
@@ -652,6 +684,10 @@
 
     <span class="doccomment">/// Settings for SMTP custom provider.</span>
     <span class="kw">pub</span> <span class="ident">smtp</span>: <span class="ident">Smtp</span>,
+
+    <span class="doccomment">/// Settings for SocketLabs.</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">serialize_with</span> <span class="op">=</span> <span class="string">&quot;serialize::hidden_or_not_set&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="ident">socketlabs</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SocketLabs</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Settings</span> {
