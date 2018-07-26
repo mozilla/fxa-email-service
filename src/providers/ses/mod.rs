@@ -57,6 +57,8 @@ impl Provider for SesProvider {
     ) -> AppResult<String> {
         let message =
             build_multipart_mime(&self.sender, to, cc, headers, subject, body_text, body_html)?;
+        println!("Ses send() params, &self.sender {:?}, to {:?}, cc {:?}, headers {:?}, subject {:?}, body_text {:?}, body_html {:?}", &self.sender, to, cc, headers, subject, body_text, body_html);
+        println!("SES message before encoding, {}", message);
         let encoded_message = encode(&format!("{}", message));
         let mut request = SendRawEmailRequest::default();
         request.raw_message = RawMessage {
