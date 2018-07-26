@@ -1,4 +1,14 @@
 <a name="v1.116.2"></a>
+## v1.116.2 (2018-07-26)
+
+
+#### Features
+
+* **providers:**  create socketlabs provider ([13cd2213](13cd2213))
+
+
+
+<a name="v1.116.2"></a>
 ## v1.116.2 (2018-07-19)
 
 
