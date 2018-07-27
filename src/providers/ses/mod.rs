@@ -60,6 +60,7 @@ impl Provider for SesProvider {
         println!("Ses send() params, &self.sender {:?}, to {:?}, cc {:?}, headers {:?}, subject {:?}, body_text {:?}, body_html {:?}", &self.sender, to, cc, headers, subject, body_text, body_html);
         println!("SES message before encoding, {}", message);
         let encoded_message = encode(&format!("{}", message));
+        println!("SES message encoded, {}", encoded_message);
         let mut request = SendRawEmailRequest::default();
         request.raw_message = RawMessage {
             data: format!("{}", encoded_message).as_bytes().to_vec(),
