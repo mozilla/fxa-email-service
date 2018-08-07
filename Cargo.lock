@@ -475,11 +475,11 @@ dependencies = [
  "rocket 0.4.0-dev (git+https://github.com/SergioBenitez/Rocket?rev=18a91c938eb534a410a76137fbf114333ab38643)",
  "rocket_codegen 0.4.0-dev (git+https://github.com/SergioBenitez/Rocket?rev=18a91c938eb534a410a76137fbf114333ab38643)",
  "rocket_contrib 0.4.0-dev (git+https://github.com/SergioBenitez/Rocket?rev=18a91c938eb534a410a76137fbf114333ab38643)",
- "rusoto_core 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors)",
- "rusoto_credential 0.11.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors)",
- "rusoto_mock 0.26.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors)",
- "rusoto_ses 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors)",
- "rusoto_sqs 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors)",
+ "rusoto_core 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len)",
+ "rusoto_credential 0.11.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len)",
+ "rusoto_mock 0.26.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len)",
+ "rusoto_ses 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len)",
+ "rusoto_sqs 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len)",
  "sendgrid 0.7.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.70 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_derive 1.0.70 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1272,7 +1272,7 @@ dependencies = [
 [[package]]
 name = "rusoto_core"
 version = "0.32.0"
-source = "git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors#253088cc14a9fee6764d80f7ae360eb25de07b86"
+source = "git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len#e0d0517f2fb1fb54dbe21bdc2e08ef15ac71d1bc"
 dependencies = [
  "base64 0.9.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "futures 0.1.23 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1282,7 +1282,7 @@ dependencies = [
  "hyper-tls 0.1.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "lazy_static 1.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "log 0.4.3 (registry+https://github.com/rust-lang/crates.io-index)",
- "rusoto_credential 0.11.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors)",
+ "rusoto_credential 0.11.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len)",
  "rustc_version 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.70 (registry+https://github.com/rust-lang/crates.io-index)",
  "sha2 0.7.1 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1295,7 +1295,7 @@ dependencies = [
 [[package]]
 name = "rusoto_credential"
 version = "0.11.0"
-source = "git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors#253088cc14a9fee6764d80f7ae360eb25de07b86"
+source = "git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len#e0d0517f2fb1fb54dbe21bdc2e08ef15ac71d1bc"
 dependencies = [
  "chrono 0.4.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "futures 0.1.23 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1309,22 +1309,22 @@ dependencies = [
 [[package]]
 name = "rusoto_mock"
 version = "0.26.0"
-source = "git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors#253088cc14a9fee6764d80f7ae360eb25de07b86"
+source = "git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len#e0d0517f2fb1fb54dbe21bdc2e08ef15ac71d1bc"
 dependencies = [
  "chrono 0.4.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "futures 0.1.23 (registry+https://github.com/rust-lang/crates.io-index)",
  "hyper 0.11.27 (registry+https://github.com/rust-lang/crates.io-index)",
- "rusoto_core 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors)",
+ "rusoto_core 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len)",
 ]
 
 [[package]]
 name = "rusoto_ses"
 version = "0.32.0"
-source = "git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors#253088cc14a9fee6764d80f7ae360eb25de07b86"
+source = "git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len#e0d0517f2fb1fb54dbe21bdc2e08ef15ac71d1bc"
 dependencies = [
  "futures 0.1.23 (registry+https://github.com/rust-lang/crates.io-index)",
  "hyper 0.11.27 (registry+https://github.com/rust-lang/crates.io-index)",
- "rusoto_core 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors)",
+ "rusoto_core 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len)",
  "tokio-core 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "xml-rs 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -1332,11 +1332,11 @@ dependencies = [
 [[package]]
 name = "rusoto_sqs"
 version = "0.32.0"
-source = "git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors#253088cc14a9fee6764d80f7ae360eb25de07b86"
+source = "git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len#e0d0517f2fb1fb54dbe21bdc2e08ef15ac71d1bc"
 dependencies = [
  "futures 0.1.23 (registry+https://github.com/rust-lang/crates.io-index)",
  "hyper 0.11.27 (registry+https://github.com/rust-lang/crates.io-index)",
- "rusoto_core 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors)",
+ "rusoto_core 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len)",
  "tokio-core 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "xml-rs 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -2235,11 +2235,11 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum rocket_codegen_next 0.4.0-dev (git+https://github.com/SergioBenitez/Rocket?rev=18a91c938eb534a410a76137fbf114333ab38643)" = "<none>"
 "checksum rocket_contrib 0.4.0-dev (git+https://github.com/SergioBenitez/Rocket?rev=18a91c938eb534a410a76137fbf114333ab38643)" = "<none>"
 "checksum rocket_http 0.4.0-dev (git+https://github.com/SergioBenitez/Rocket?rev=18a91c938eb534a410a76137fbf114333ab38643)" = "<none>"
-"checksum rusoto_core 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors)" = "<none>"
-"checksum rusoto_credential 0.11.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors)" = "<none>"
-"checksum rusoto_mock 0.26.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors)" = "<none>"
-"checksum rusoto_ses 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors)" = "<none>"
-"checksum rusoto_sqs 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors)" = "<none>"
+"checksum rusoto_core 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len)" = "<none>"
+"checksum rusoto_credential 0.11.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len)" = "<none>"
+"checksum rusoto_mock 0.26.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len)" = "<none>"
+"checksum rusoto_ses 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len)" = "<none>"
+"checksum rusoto_sqs 0.32.0 (git+https://github.com/vladikoff/rusoto?branch=rusoto-032-ses-response-errors-content-len)" = "<none>"
 "checksum rust-ini 0.12.2 (registry+https://github.com/rust-lang/crates.io-index)" = "ac66e816614e124a692b6ac1b8437237a518c9155a3aacab83a373982630c715"
 "checksum rustc-demangle 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)" = "76d7ba1feafada44f2d38eed812bd2489a03c0f5abb975799251518b68848649"
 "checksum rustc_version 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)" = "a54aa04a10c68c1c4eacb4337fd883b435997ede17a9385784b990777686b09a"

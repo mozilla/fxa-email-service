@@ -33,11 +33,11 @@ reqwest = ">=0.8.5"
 rocket = { git = "https://github.com/SergioBenitez/Rocket", rev="18a91c938eb534a410a76137fbf114333ab38643" }
 rocket_codegen = { git = "https://github.com/SergioBenitez/Rocket", rev="18a91c938eb534a410a76137fbf114333ab38643" }
 rocket_contrib = { git = "https://github.com/SergioBenitez/Rocket", rev="18a91c938eb534a410a76137fbf114333ab38643" }
-rusoto_core = { git = "https://github.com/vladikoff/rusoto", branch="rusoto-032-ses-response-errors" }
-rusoto_credential = { git = "https://github.com/vladikoff/rusoto", branch="rusoto-032-ses-response-errors" }
-rusoto_mock = { git = "https://github.com/vladikoff/rusoto", branch="rusoto-032-ses-response-errors" }
-rusoto_ses = { git = "https://github.com/vladikoff/rusoto", branch="rusoto-032-ses-response-errors" }
-rusoto_sqs = { git = "https://github.com/vladikoff/rusoto", branch="rusoto-032-ses-response-errors" }
+rusoto_core = { git = "https://github.com/vladikoff/rusoto", branch="rusoto-032-ses-response-errors-content-len" }
+rusoto_credential = { git = "https://github.com/vladikoff/rusoto", branch="rusoto-032-ses-response-errors-content-len" }
+rusoto_mock = { git = "https://github.com/vladikoff/rusoto", branch="rusoto-032-ses-response-errors-content-len" }
+rusoto_ses = { git = "https://github.com/vladikoff/rusoto", branch="rusoto-032-ses-response-errors-content-len" }
+rusoto_sqs = { git = "https://github.com/vladikoff/rusoto", branch="rusoto-032-ses-response-errors-content-len" }
 sendgrid = ">=0.7.1"
 serde = ">=1.0"
 serde_derive = ">=1.0"
