@@ -90,13 +90,13 @@ fn handler(
 ) -> AppResult<Json<JsonValue>> {
     let email = email?;
 
-    let to = email.to.0.as_ref();
-    bounces.check(to)?;
+    // let to = email.to.0.as_ref();
+    // bounces.check(to)?;
 
     let cc = if let Some(ref cc) = email.cc {
         let mut refs = Vec::new();
         for address in cc.iter() {
-            bounces.check(address)?;
+            // bounces.check(address)?;
             refs.push(address.as_ref());
         }
         refs
