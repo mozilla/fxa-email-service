@@ -212,7 +212,7 @@ impl AppErrorKind {
         }
     }
 
-    pub fn errno(&self) -> Option<i32> {
+    pub fn errno(&self) -> Option<u16> {
         match self {
             AppErrorKind::RocketError(_) => Some(100),
 

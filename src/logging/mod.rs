@@ -62,9 +62,9 @@ impl KV for RequestMozlogFields {
 
 #[derive(Clone)]
 struct AppErrorFields {
-    code: String,
+    code: u16,
     error: String,
-    errno: Option<i32>,
+    errno: Option<u16>,
     message: String,
     additional_fields: Map<String, JsonValue>,
 }
@@ -75,7 +75,7 @@ impl AppErrorFields {
         let status = kind.http_status();
 
         AppErrorFields {
-            code: status.code.to_string(),
+            code: status.code,
             error: status.reason.to_string(),
             errno: kind.errno(),
             message: format!("{}", error),
@@ -86,10 +86,10 @@ impl AppErrorFields {
 
 impl KV for AppErrorFields {
     fn serialize(&self, _: &Record, serializer: &mut Serializer) -> slog::Result {
-        serializer.emit_str("code", &self.code)?;
+        serializer.emit_u16("code", self.code)?;
         serializer.emit_str("error", &self.error)?;
-        if let Some(ref errno) = self.errno {
-            serializer.emit_i32("errno", errno.to_owned())?;
+        if let Some(errno) = self.errno {
+            serializer.emit_u16("errno", errno)?;
         }
         serializer.emit_str("message", &self.message)?;
         serializer.emit_str(
