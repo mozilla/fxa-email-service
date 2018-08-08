@@ -337,7 +337,7 @@ impl<'r> Responder<'r> for AppError {
                     .map_err(|_| Status::InternalServerError)?;
                 slog_error!(log, "{}", "Request errored");
             }
-            _ => println!("Internal error: No managed MozlogLogger"),
+            _ => panic!("Internal error: No managed MozlogLogger"),
         }
 
         let status = self.kind().http_status();
