@@ -331,12 +331,17 @@ impl From<Context<AppErrorKind>> for AppError {
 /// Generate HTTP error responses for AppErrors
 impl<'r> Responder<'r> for AppError {
     fn respond_to(self, request: &Request) -> response::Result<'r> {
+        match request.guard::<State<MozlogLogger>>() {
+            Outcome::Success(logger) => {
+                let log = MozlogLogger::with_app_error(&logger, &self)
+                    .map_err(|_| Status::InternalServerError)?;
+                slog_error!(log, "{}", "Request errored.");
+            }
+            _ => println!("Internal error: No managed MozlogLogger"),
+        }
+
         let status = self.kind().http_status();
         let json = Json(self.json());
-
-        let log = MozlogLogger::with_request(request).map_err(|_| Status::InternalServerError)?;
-        slog_error!(log, "{}", json.to_string());
-
         let mut builder = Response::build_from(json.respond_to(request)?);
         builder.status(status).ok()
     }
