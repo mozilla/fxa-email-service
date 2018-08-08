@@ -65,12 +65,12 @@ fn main() {
                 let logger = MozlogLogger(slog_scope::logger());
                 let log = MozlogLogger::with_app_error(&logger, &error)
                     .expect("MozlogLogger::with_app_error error");
-                slog_error!(log, "{}", "Error processing queue.");
+                slog_error!(log, "{}", "Error processing queue");
                 future::ok(0)
             }).and_then(move |count: usize| {
                 let total_count = count + previous_count;
                 info!(
-                    "Succesfully processed queue message.";
+                    "Succesfully processed queue message";
                     "processed_messages" => count, "total_messages" => total_count
                 );
                 Ok(Loop::Continue(total_count))

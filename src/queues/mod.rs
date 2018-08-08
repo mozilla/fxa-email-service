@@ -142,7 +142,7 @@ impl Queues {
                     .notification_queue
                     .send(&notification)
                     .map(|id| {
-                        info!("{}", "Sent message to notification queue."; "id" => id);
+                        info!("{}", "Sent message to notification queue"; "id" => id);
                         ()
                     })
                     .or_else(|error| {
@@ -151,7 +151,7 @@ impl Queues {
                         let logger = MozlogLogger(slog_scope::logger());
                         let log = MozlogLogger::with_app_error(&logger, &error)
                             .expect("MozlogLogger::with_app_error error");
-                        slog_error!(log, "{}", "Error sending notification to queue.");
+                        slog_error!(log, "{}", "Error sending notification to queue");
                         Ok(())
                     });
                 Box::new(future)

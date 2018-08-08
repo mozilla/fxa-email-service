@@ -124,7 +124,7 @@ fn handler(
                 .map(|error| {
                     let log = MozlogLogger::with_app_error(&logger, &error)
                         .expect("MozlogLogger::with_request error");
-                    slog_error!(log, "{}", "Request errored.");
+                    slog_error!(log, "{}", "Request errored");
                 });
             Json(json!({ "messageId": message_id }))
         })

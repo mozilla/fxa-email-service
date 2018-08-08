@@ -71,7 +71,7 @@ impl Queue {
             serde_json::from_str(message)
                 .map(|notification: SqsNotification| {
                     info!(
-                        "Successfully parsed SQS message.";
+                        "Successfully parsed SQS message";
                         "queue" => &self.url.clone(), 
                         "receipt_handle" => &receipt_handle, 
                         "notification_type" => &format!("{}", notification.notification_type)
@@ -90,7 +90,7 @@ impl Queue {
                 })
         } else {
             Err(AppErrorKind::SqsMessageParsingError {
-                message: format!("{}", "Unexpected SQS message structure."),
+                message: format!("{}", "Unexpected SQS message structure"),
                 queue: self.url.clone(),
                 body: format!("{}", body),
             }.into())
@@ -148,7 +148,7 @@ impl Incoming for Queue {
                             let logger = MozlogLogger(slog_scope::logger());
                             let log = MozlogLogger::with_app_error(&logger, &error)
                                 .expect("MozlogLogger::with_app_error error");
-                            slog_error!(log, "{}", "Error receiving from queue."; "url" => self.url.clone());
+                            slog_error!(log, "{}", "Error receiving from queue"; "url" => self.url.clone());
                             Message::default()
                         })
                     }).collect()
@@ -173,7 +173,7 @@ impl Incoming for Queue {
             let logger = MozlogLogger(slog_scope::logger());
             let log = MozlogLogger::with_app_error(&logger, &error)
                 .expect("MozlogLogger::with_app_error error");
-            slog_error!(log, "{}", "Error deleting from queue."; "url" => self.url.clone());
+            slog_error!(log, "{}", "Error deleting from queue"; "url" => self.url.clone());
             error
 >>>>>>> feat(logging): use mozlog logger for queues process
         });

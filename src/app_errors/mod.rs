@@ -114,10 +114,10 @@ pub enum AppErrorKind {
     RocketError(rocket::Error),
 
     /// An error for invalid email params in the /send handler.
-    #[fail(display = "Error validating email params.")]
+    #[fail(display = "Error validating email params")]
     InvalidEmailParams,
     /// An error for missing email params in the /send handler.
-    #[fail(display = "Missing email params.")]
+    #[fail(display = "Missing email params")]
     MissingEmailParams(String),
 
     /// An error for invalid provider names.
@@ -131,17 +131,17 @@ pub enum AppErrorKind {
     EmailParsingError(String),
 
     /// An error for when a bounce violation happens.
-    #[fail(display = "Email account sent complaint.")]
+    #[fail(display = "Email account sent complaint")]
     BounceComplaintError {
         address: String,
         bounce: Option<BounceRecord>,
     },
-    #[fail(display = "Email account soft bounced.")]
+    #[fail(display = "Email account soft bounced")]
     BounceSoftError {
         address: String,
         bounce: Option<BounceRecord>,
     },
-    #[fail(display = "Email account hard bounced.")]
+    #[fail(display = "Email account hard bounced")]
     BounceHardError {
         address: String,
         bounce: Option<BounceRecord>,
@@ -156,25 +156,25 @@ pub enum AppErrorKind {
     QueueError(String),
     /// An error for when we get an invalid notification type in the queues
     /// process.
-    #[fail(display = "Invalid notification type.")]
+    #[fail(display = "Invalid notification type")]
     InvalidNotificationType,
     /// An error for when we get notification without a payload in the queues
     /// process.
-    #[fail(display = "Missing payload in {} notification.", _0)]
+    #[fail(display = "Missing payload in {} notification", _0)]
     MissingNotificationPayload(String),
 
     /// An error for when we get SQS messages with missing fields.
-    #[fail(display = "Missing SQS message {} field.", field)]
+    #[fail(display = "Missing SQS message {} field", field)]
     MissingSqsMessageFields { queue: String, field: String },
     /// An error for when the SQS message body does not match MD5 hash.
-    #[fail(display = "Message body does not match MD5 hash.")]
+    #[fail(display = "Message body does not match MD5 hash")]
     SqsMessageHashMismatch {
         queue: String,
         hash: String,
         body: String,
     },
     /// An error for when we can't parse the SQS message.
-    #[fail(display = "SQS message parsing error.")]
+    #[fail(display = "SQS message parsing error")]
     SqsMessageParsingError {
         queue: String,
         message: String,
@@ -191,7 +191,7 @@ pub enum AppErrorKind {
 
     /// An error for when we try to access functionality that is not
     /// implemented.
-    #[fail(display = "Feature not implemented.")]
+    #[fail(display = "Feature not implemented")]
     NotImplemented,
 }
 
@@ -335,7 +335,7 @@ impl<'r> Responder<'r> for AppError {
             Outcome::Success(logger) => {
                 let log = MozlogLogger::with_app_error(&logger, &self)
                     .map_err(|_| Status::InternalServerError)?;
-                slog_error!(log, "{}", "Request errored.");
+                slog_error!(log, "{}", "Request errored");
             }
             _ => println!("Internal error: No managed MozlogLogger"),
         }

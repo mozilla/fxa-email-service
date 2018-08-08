@@ -84,7 +84,7 @@ fn ses_send_handles_error_response() {
         sender: "Foo Bar <a@a.com>".to_string(),
     };
     match mock_ses.send("b@b.com", &[], None, "subject", "body", None) {
-        Ok(_) => assert!(false, "Request should have failed."),
+        Ok(_) => assert!(false, "Request should have failed"),
         Err(error) => {
             let error = error.json();
             assert_eq!(
