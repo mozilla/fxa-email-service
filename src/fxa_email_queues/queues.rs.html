@@ -60,7 +60,6 @@
 <span id="60">60</span>
 <span id="61">61</span>
 <span id="62">62</span>
-<span id="63">63</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -112,8 +111,7 @@
             .<span class="ident">or_else</span>(<span class="op">|</span><span class="ident">error</span>: <span class="ident">QueueError</span><span class="op">|</span> {
                 <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">error</span>);
                 <span class="ident">future</span>::<span class="ident">ok</span>(<span class="number">0</span>)
-            })
-            .<span class="ident">and_then</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">count</span>: <span class="ident">usize</span><span class="op">|</span> {
+            }).<span class="ident">and_then</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">count</span>: <span class="ident">usize</span><span class="op">|</span> {
                 <span class="kw">let</span> <span class="ident">total_count</span> <span class="op">=</span> <span class="ident">count</span> <span class="op">+</span> <span class="ident">previous_count</span>;
                 <span class="macro">println</span><span class="macro">!</span>(
                     <span class="string">&quot;Processed {} messages, total message count is now {}&quot;</span>,

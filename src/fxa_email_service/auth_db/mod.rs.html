@@ -262,7 +262,6 @@
 <span id="262">262</span>
 <span id="263">263</span>
 <span id="264">264</span>
-<span id="265">265</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -521,8 +520,7 @@
                 <span class="ident">bounce_type</span>,
                 <span class="ident">bounce_subtype</span>,
                 <span class="ident">created_at</span>: <span class="number">0</span>,
-            })
-            .<span class="ident">send</span>()<span class="question-mark">?</span>;
+            }).<span class="ident">send</span>()<span class="question-mark">?</span>;
         <span class="kw">match</span> <span class="ident">response</span>.<span class="ident">status</span>() {
             <span class="ident">StatusCode</span>::<span class="prelude-val">Ok</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(()),
             <span class="ident">status</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">DbError</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">status</span>)).<span class="ident">into</span>()),

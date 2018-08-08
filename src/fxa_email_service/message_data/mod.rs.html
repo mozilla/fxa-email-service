@@ -109,7 +109,6 @@
 <span id="109">109</span>
 <span id="110">110</span>
 <span id="111">111</span>
-<span id="112">112</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -170,8 +169,7 @@
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">metadata</span><span class="op">|</span> {
                 <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">del</span>::<span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">key_str</span>).<span class="ident">ok</span>();
                 <span class="ident">metadata</span>
-            })
-            .<span class="ident">map_err</span>(<span class="ident">From</span>::<span class="ident">from</span>)
+            }).<span class="ident">map_err</span>(<span class="ident">From</span>::<span class="ident">from</span>)
     }
 
     <span class="doccomment">/// Store message metadata.</span>
