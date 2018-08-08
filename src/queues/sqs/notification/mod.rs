@@ -4,7 +4,9 @@
 
 //! SQS queue notification types.
 
-use std::fmt::{self, Display, Formatter};
+use std::{
+    fmt::{self, Display, Formatter},
+};
 
 use chrono::{DateTime, Utc};
 use serde::{
@@ -210,7 +212,7 @@ impl From<BounceType> for AuthDbBounceType {
     fn from(bounce_type: BounceType) -> AuthDbBounceType {
         match bounce_type {
             BounceType::Undetermined => {
-                println!("Mapped SesBounceType::Undetermined to AuthDbBounceType::Soft");
+                info!("Mapped SesBounceType::Undetermined to AuthDbBounceType::Soft");
                 AuthDbBounceType::Soft
             }
             BounceType::Permanent => AuthDbBounceType::Hard,
@@ -230,7 +232,7 @@ impl<'d> Deserialize<'d> for BounceType {
             "Permanent" => Ok(BounceType::Permanent),
             "Transient" => Ok(BounceType::Transient),
             _ => {
-                println!(
+                info!(
                     "Mapped unrecognised SES bounceType `{}` to BounceType::Undetermined",
                     value.as_str()
                 );
@@ -283,7 +285,7 @@ impl<'d> Deserialize<'d> for BounceSubtype {
             "ContentRejected" => Ok(BounceSubtype::ContentRejected),
             "AttachmentRejected" => Ok(BounceSubtype::AttachmentRejected),
             _ => {
-                println!(
+                info!(
                     "Mapped unrecognised SES bounceSubType `{}` to BounceSubtype::Undetermined",
                     value.as_str()
                 );
@@ -375,7 +377,7 @@ impl<'d> Deserialize<'d> for ComplaintFeedbackType {
             "other" => Ok(ComplaintFeedbackType::Other),
             "virus" => Ok(ComplaintFeedbackType::Virus),
             _ => {
-                println!("Mapped unrecognised SES complaintFeedbackType `{}` to ComplaintFeedbackType::Other", value.as_str());
+                info!("Mapped unrecognised SES complaintFeedbackType `{}` to ComplaintFeedbackType::Other", value.as_str());
                 Ok(ComplaintFeedbackType::Other)
             }
         }

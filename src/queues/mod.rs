@@ -7,12 +7,14 @@
 use std::{boxed::Box, fmt::Debug};
 
 use futures::future::{self, Future};
+use slog_scope;
 
 use self::notification::{Notification, NotificationType};
 pub use self::sqs::Queue as Sqs;
 use app_errors::{AppError, AppErrorKind, AppResult};
 use auth_db::DbClient;
 use bounces::Bounces;
+use logging::MozlogLogger;
 use message_data::MessageData;
 use settings::Settings;
 
@@ -95,7 +97,8 @@ impl Queues {
             .join3(
                 self.process_queue(&self.complaint_queue),
                 self.process_queue(&self.delivery_queue),
-            ).map(|results| results.0 + results.1 + results.2);
+            )
+            .map(|results| results.0 + results.1 + results.2);
 
         Box::new(joined_futures)
     }
@@ -114,7 +117,8 @@ impl Queues {
                     }
                 }
                 future::join_all(futures.into_iter())
-            }).map(|results| results.len());
+            })
+            .map(|results| results.len());
         Box::new(future)
     }
 
@@ -138,12 +142,16 @@ impl Queues {
                     .notification_queue
                     .send(&notification)
                     .map(|id| {
-                        println!("Sent message to notification queue, id=`{}`", id);
+                        info!("{}", "Sent message to notification queue."; "id" => id);
                         ()
-                    }).or_else(|error| {
+                    })
+                    .or_else(|error| {
                         // Errors sending to this queue are non-fatal because it's only used
                         // for logging. We still want to delete the message from the queue.
-                        println!("{:?}", error);
+                        let logger = MozlogLogger(slog_scope::logger());
+                        let log = MozlogLogger::with_app_error(&logger, &error)
+                            .expect("MozlogLogger::with_app_error error");
+                        slog_error!(log, "{}", "Error sending notification to queue.");
                         Ok(())
                     });
                 Box::new(future)
@@ -155,11 +163,8 @@ impl Queues {
     fn record_bounce(&'static self, notification: &Notification) -> AppResult<()> {
         if let Some(ref bounce) = notification.bounce {
             for recipient in &bounce.bounced_recipients {
-                self.bounces.record_bounce(
-                    &recipient,
-                    bounce.bounce_type,
-                    bounce.bounce_subtype,
-                )?;
+                self.bounces
+                    .record_bounce(&recipient, bounce.bounce_type, bounce.bounce_subtype)?;
             }
             Ok(())
         } else {

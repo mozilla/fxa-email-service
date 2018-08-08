@@ -19,6 +19,7 @@ use rusoto_sqs::{
     ReceiveMessageRequest, SendMessageError, SendMessageRequest, Sqs, SqsClient,
 };
 use serde_json::{self, Error as JsonError, Value as JsonValue};
+use slog_scope;
 
 use self::notification::Notification as SqsNotification;
 use super::{
@@ -26,6 +27,7 @@ use super::{
     SendFuture,
 };
 use app_errors::{AppError, AppErrorKind, AppResult};
+use logging::MozlogLogger;
 use settings::Settings;
 
 pub mod notification;
@@ -68,17 +70,18 @@ impl Queue {
         if let Some(ref message) = serde_json::from_str::<JsonValue>(&body)?["Message"].as_str() {
             serde_json::from_str(message)
                 .map(|notification: SqsNotification| {
-                    println!(
-                    "Successfully parsed SQS message, queue=`{}`, receipt_handle=`{}`, notification_type=`{}`",
-                    self.url,
-                    receipt_handle,
-                    notification.notification_type
-                );
+                    info!(
+                        "Successfully parsed SQS message.";
+                        "queue" => &self.url.clone(), 
+                        "receipt_handle" => &receipt_handle, 
+                        "notification_type" => &format!("{}", notification.notification_type)
+                    );
                     Message {
                         notification: From::from(notification),
                         id: receipt_handle,
                     }
-                }).map_err(|error| {
+                })
+                .map_err(|error| {
                     AppErrorKind::SqsMessageParsingError {
                         message: format!("{:?}", error),
                         queue: self.url.clone(),
@@ -142,7 +145,10 @@ impl Incoming for Queue {
                             // At this point any parse errors are message-specific.
                             // Log them but don't fail the broader call to receive,
                             // because other messages might be fine.
-                            println!("Queue error receiving from {}: {:?}", self.url, error);
+                            let logger = MozlogLogger(slog_scope::logger());
+                            let log = MozlogLogger::with_app_error(&logger, &error)
+                                .expect("MozlogLogger::with_app_error error");
+                            slog_error!(log, "{}", "Error receiving from queue."; "url" => self.url.clone());
                             Message::default()
                         })
                     }).collect()
@@ -157,9 +163,19 @@ impl Incoming for Queue {
             receipt_handle: message.id,
         };
 
+<<<<<<< HEAD
         let future = self.client.delete_message(request).map_err(move |error| {
             println!("Queue error deleting from {}: {:?}", self.url, error);
             From::from(error)
+=======
+        let future = self.client.delete_message(&request).map_err(move |error| {
+            let error: AppError = error.into();
+            let logger = MozlogLogger(slog_scope::logger());
+            let log = MozlogLogger::with_app_error(&logger, &error)
+                .expect("MozlogLogger::with_app_error error");
+            slog_error!(log, "{}", "Error deleting from queue."; "url" => self.url.clone());
+            error
+>>>>>>> feat(logging): use mozlog logger for queues process
         });
 
         Box::new(future)

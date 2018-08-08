@@ -109,7 +109,7 @@ impl Value for Settings {
 }
 
 /// Mozlog-compatible logger type.
-pub struct MozlogLogger(slog::Logger);
+pub struct MozlogLogger(pub slog::Logger);
 
 impl MozlogLogger {
     /// Construct a logger.
