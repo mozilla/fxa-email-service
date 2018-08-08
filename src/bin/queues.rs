@@ -16,6 +16,7 @@ extern crate lazy_static;
 use futures::future::{self, Future, Loop};
 
 use fxa_email_service::{
+    app_errors::AppError,
     queues::{QueueError, QueueIds, Queues, Sqs},
     settings::Settings,
 };
@@ -39,13 +40,13 @@ lazy_static! {
     };
 }
 
-type LoopResult = Box<Future<Item = Loop<usize, usize>, Error = QueueError>>;
+type LoopResult = Box<Future<Item = Loop<usize, usize>, Error = AppError>>;
 
 fn main() {
     let process_queues: &Fn(usize) -> LoopResult = &|previous_count: usize| {
         let future = QUEUES
             .process()
-            .or_else(|error: QueueError| {
+            .or_else(|error: AppError| {
                 println!("{:?}", error);
                 future::ok(0)
             }).and_then(move |count: usize| {

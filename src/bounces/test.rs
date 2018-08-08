@@ -267,7 +267,7 @@ fn check_db_error() {
     match bounces.check("foo@example.com") {
         Ok(_) => assert!(false, "Bounces::check should have failed"),
         Err(error) => {
-            assert_eq!(format!("{}", error), "\"wibble blee\"");
+            assert_eq!(format!("{}", error), "wibble blee");
             assert_eq!(error.kind().http_status(), Status::InternalServerError);
         }
     }

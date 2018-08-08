@@ -44,7 +44,7 @@ lazy_static! {
 fn process() {
     match GOOD_QUEUES.process().wait() {
         Ok(count) => assert_eq!(count, 3),
-        Err(error) => assert!(false, error.description().to_string()),
+        Err(error) => assert!(false, format!("{}", error)),
     }
 }
 
@@ -53,8 +53,8 @@ fn process_error() {
     match BAD_BOUNCE_QUEUE.process().wait() {
         Ok(_) => assert!(false, "Queues::process should have failed"),
         Err(error) => assert_eq!(
-            error.description(),
-            "Missing payload in bounce notification",
+            &format!("{}", error),
+            "Missing payload in bounce notification.",
         ),
     }
 }

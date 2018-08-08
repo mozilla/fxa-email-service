@@ -11,7 +11,7 @@ use rocket::{
     self,
     http::Status,
     response::{self, Responder, Response},
-    Request,
+    Outcome, Request, State,
 };
 use rocket_contrib::{Json, JsonValue};
 use serde_json::{map::Map, ser::to_string, Value};
@@ -45,7 +45,7 @@ impl AppError {
         let mut fields = Map::new();
         fields.insert(
             String::from("code"),
-            Value::String(format!("{}", status.code)),
+            Value::Number(status.code.to_owned().into()),
         );
         fields.insert(
             String::from("error"),
@@ -53,7 +53,10 @@ impl AppError {
         );
         let errno = kind.errno();
         if let Some(ref errno) = errno {
-            fields.insert(String::from("errno"), Value::String(format!("{}", errno)));
+            fields.insert(
+                String::from("errno"),
+                Value::Number(errno.to_owned().into()),
+            );
             fields.insert(String::from("message"), Value::String(format!("{}", self)));
         };
         let additional_fields = kind.additional_fields();
@@ -145,8 +148,46 @@ pub enum AppErrorKind {
     },
 
     /// An error for when an error happens on a request to the db.
-    #[fail(display = "{:?}", _0)]
+    #[fail(display = "{}", _0)]
     DbError(String),
+
+    /// An error for when an error happens on the queues process.
+    #[fail(display = "{}", _0)]
+    QueueError(String),
+    /// An error for when we get an invalid notification type in the queues
+    /// process.
+    #[fail(display = "Invalid notification type.")]
+    InvalidNotificationType,
+    /// An error for when we get notification without a payload in the queues
+    /// process.
+    #[fail(display = "Missing payload in {} notification.", _0)]
+    MissingNotificationPayload(String),
+
+    /// An error for when we get SQS messages with missing fields.
+    #[fail(display = "Missing SQS message {} field.", field)]
+    MissingSqsMessageFields { queue: String, field: String },
+    /// An error for when the SQS message body does not match MD5 hash.
+    #[fail(display = "Message body does not match MD5 hash.")]
+    SqsMessageHashMismatch {
+        queue: String,
+        hash: String,
+        body: String,
+    },
+    /// An error for when we can't parse the SQS message.
+    #[fail(display = "SQS message parsing error.")]
+    SqsMessageParsingError {
+        queue: String,
+        message: String,
+        body: String,
+    },
+
+    /// An error for when we get and invalid duration string.
+    #[fail(display = "invalid duration: {}", _0)]
+    DurationError(String),
+
+    /// An error for when we get erros in the message_data module.
+    #[fail(display = "{}", _0)]
+    MessageDataError(String),
 
     /// An error for when we try to access functionality that is not
     /// implemented.
@@ -188,7 +229,18 @@ impl AppErrorKind {
 
             AppErrorKind::DbError(_) => Some(109),
 
-            AppErrorKind::NotImplemented => Some(110),
+            AppErrorKind::QueueError(_) => Some(110),
+            AppErrorKind::InvalidNotificationType => Some(111),
+            AppErrorKind::MissingNotificationPayload(_) => Some(112),
+
+            AppErrorKind::MissingSqsMessageFields { .. } => Some(113),
+            AppErrorKind::SqsMessageHashMismatch { .. } => Some(114),
+            AppErrorKind::SqsMessageParsingError { .. } => Some(115),
+
+            AppErrorKind::DurationError(_) => Some(116),
+            AppErrorKind::MessageDataError(_) => Some(117),
+
+            AppErrorKind::NotImplemented => Some(118),
 
             AppErrorKind::BadRequest
             | AppErrorKind::NotFound
@@ -229,6 +281,35 @@ impl AppErrorKind {
                     );
                 }
             }
+
+            AppErrorKind::MissingSqsMessageFields {
+                ref queue,
+                ref field,
+            } => {
+                fields.insert(String::from("queue"), Value::String(queue.to_owned()));
+                fields.insert(String::from("field"), Value::String(field.to_owned()));
+            }
+
+            AppErrorKind::SqsMessageHashMismatch {
+                ref queue,
+                ref hash,
+                ref body,
+            } => {
+                fields.insert(String::from("queue"), Value::String(queue.to_owned()));
+                fields.insert(String::from("hash"), Value::String(hash.to_owned()));
+                fields.insert(String::from("body"), Value::String(body.to_owned()));
+            }
+
+            AppErrorKind::SqsMessageParsingError {
+                ref queue,
+                ref message,
+                ref body,
+            } => {
+                fields.insert(String::from("queue"), Value::String(queue.to_owned()));
+                fields.insert(String::from("message"), Value::String(message.to_owned()));
+                fields.insert(String::from("body"), Value::String(body.to_owned()));
+            }
+
             _ => (),
         }
         fields
