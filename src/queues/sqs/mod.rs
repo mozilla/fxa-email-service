@@ -163,19 +163,13 @@ impl Incoming for Queue {
             receipt_handle: message.id,
         };
 
-<<<<<<< HEAD
         let future = self.client.delete_message(request).map_err(move |error| {
-            println!("Queue error deleting from {}: {:?}", self.url, error);
-            From::from(error)
-=======
-        let future = self.client.delete_message(&request).map_err(move |error| {
             let error: AppError = error.into();
             let logger = MozlogLogger(slog_scope::logger());
             let log = MozlogLogger::with_app_error(&logger, &error)
                 .expect("MozlogLogger::with_app_error error");
             slog_error!(log, "{}", "Error deleting from queue"; "url" => self.url.clone());
             error
->>>>>>> feat(logging): use mozlog logger for queues process
         });
 
         Box::new(future)
