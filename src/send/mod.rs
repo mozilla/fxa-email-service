@@ -115,7 +115,8 @@ fn handler(
             email.body.text.as_ref(),
             email.body.html.as_ref().map(|html| html.as_ref()),
             email.provider.as_ref().map(|provider| provider.as_ref()),
-        ).map(|message_id| {
+        )
+        .map(|message_id| {
             email
                 .metadata
                 .as_ref()
@@ -126,5 +127,6 @@ fn handler(
                     slog_error!(log, "{}", "Request errored.");
                 });
             Json(json!({ "messageId": message_id }))
-        }).map_err(|error| error)
+        })
+        .map_err(|error| error)
 }

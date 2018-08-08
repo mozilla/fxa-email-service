@@ -5,6 +5,7 @@
 //! SQS queue notification types.
 
 use std::{
+    collections::HashMap,
     fmt::{self, Display, Formatter},
 };
 
@@ -139,10 +140,10 @@ pub struct Mail {
     sending_account_id: Option<String>,
     destination: Option<Vec<String>>,
     #[serde(rename = "headersTruncated")]
-    headers_truncated: Option<String>,
+    headers_truncated: Option<bool>,
     headers: Option<Vec<Header>>,
     #[serde(rename = "commonHeaders")]
-    common_headers: Option<Vec<Header>>,
+    common_headers: Option<HashMap<String, HeaderValue>>,
 }
 
 impl From<Mail> for GenericMail {
@@ -164,6 +165,7 @@ pub struct Header {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
+#[serde(untagged)]
 pub enum HeaderValue {
     Single(String),
     Multiple(Vec<String>),
