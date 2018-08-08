@@ -80,8 +80,7 @@ impl Queue {
                         notification: From::from(notification),
                         id: receipt_handle,
                     }
-                })
-                .map_err(|error| {
+                }).map_err(|error| {
                     AppErrorKind::SqsMessageParsingError {
                         message: format!("{:?}", error),
                         queue: self.url.clone(),
