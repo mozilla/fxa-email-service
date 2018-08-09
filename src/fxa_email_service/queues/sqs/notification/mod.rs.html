@@ -421,6 +421,10 @@
 <span id="421">421</span>
 <span id="422">422</span>
 <span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -428,7 +432,10 @@
 
 <span class="doccomment">//! SQS queue notification types.</span>
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>::{<span class="self">self</span>, <span class="ident">Display</span>, <span class="ident">Formatter</span>};
+<span class="kw">use</span> <span class="ident">std</span>::{
+    <span class="ident">collections</span>::<span class="ident">HashMap</span>,
+    <span class="ident">fmt</span>::{<span class="self">self</span>, <span class="ident">Display</span>, <span class="ident">Formatter</span>},
+};
 
 <span class="kw">use</span> <span class="ident">chrono</span>::{<span class="ident">DateTime</span>, <span class="ident">Utc</span>};
 <span class="kw">use</span> <span class="ident">serde</span>::{
@@ -561,10 +568,10 @@
     <span class="ident">sending_account_id</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     <span class="ident">destination</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;&gt;</span>,
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;headersTruncated&quot;</span>)]</span>
-    <span class="ident">headers_truncated</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="ident">headers_truncated</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>,
     <span class="ident">headers</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Header</span><span class="op">&gt;&gt;</span>,
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;commonHeaders&quot;</span>)]</span>
-    <span class="ident">common_headers</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Header</span><span class="op">&gt;&gt;</span>,
+    <span class="ident">common_headers</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">HeaderValue</span><span class="op">&gt;&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Mail</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GenericMail</span> {
@@ -586,6 +593,7 @@
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
+<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">untagged</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">HeaderValue</span> {
     <span class="ident">Single</span>(<span class="ident">String</span>),
     <span class="ident">Multiple</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>),
@@ -634,7 +642,7 @@
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">bounce_type</span>: <span class="ident">BounceType</span>) <span class="op">-&gt;</span> <span class="ident">AuthDbBounceType</span> {
         <span class="kw">match</span> <span class="ident">bounce_type</span> {
             <span class="ident">BounceType</span>::<span class="ident">Undetermined</span> <span class="op">=&gt;</span> {
-                <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Mapped SesBounceType::Undetermined to AuthDbBounceType::Soft&quot;</span>);
+                <span class="macro">info</span><span class="macro">!</span>(<span class="string">&quot;Mapped SesBounceType::Undetermined to AuthDbBounceType::Soft&quot;</span>);
                 <span class="ident">AuthDbBounceType</span>::<span class="ident">Soft</span>
             }
             <span class="ident">BounceType</span>::<span class="ident">Permanent</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceType</span>::<span class="ident">Hard</span>,
@@ -654,7 +662,7 @@
             <span class="string">&quot;Permanent&quot;</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">BounceType</span>::<span class="ident">Permanent</span>),
             <span class="string">&quot;Transient&quot;</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">BounceType</span>::<span class="ident">Transient</span>),
             <span class="kw">_</span> <span class="op">=&gt;</span> {
-                <span class="macro">println</span><span class="macro">!</span>(
+                <span class="macro">info</span><span class="macro">!</span>(
                     <span class="string">&quot;Mapped unrecognised SES bounceType `{}` to BounceType::Undetermined&quot;</span>,
                     <span class="ident">value</span>.<span class="ident">as_str</span>()
                 );
@@ -707,7 +715,7 @@
             <span class="string">&quot;ContentRejected&quot;</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">BounceSubtype</span>::<span class="ident">ContentRejected</span>),
             <span class="string">&quot;AttachmentRejected&quot;</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">BounceSubtype</span>::<span class="ident">AttachmentRejected</span>),
             <span class="kw">_</span> <span class="op">=&gt;</span> {
-                <span class="macro">println</span><span class="macro">!</span>(
+                <span class="macro">info</span><span class="macro">!</span>(
                     <span class="string">&quot;Mapped unrecognised SES bounceSubType `{}` to BounceSubtype::Undetermined&quot;</span>,
                     <span class="ident">value</span>.<span class="ident">as_str</span>()
                 );
@@ -799,7 +807,7 @@
             <span class="string">&quot;other&quot;</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">ComplaintFeedbackType</span>::<span class="ident">Other</span>),
             <span class="string">&quot;virus&quot;</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">ComplaintFeedbackType</span>::<span class="ident">Virus</span>),
             <span class="kw">_</span> <span class="op">=&gt;</span> {
-                <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Mapped unrecognised SES complaintFeedbackType `{}` to ComplaintFeedbackType::Other&quot;</span>, <span class="ident">value</span>.<span class="ident">as_str</span>());
+                <span class="macro">info</span><span class="macro">!</span>(<span class="string">&quot;Mapped unrecognised SES complaintFeedbackType `{}` to ComplaintFeedbackType::Other&quot;</span>, <span class="ident">value</span>.<span class="ident">as_str</span>());
                 <span class="prelude-val">Ok</span>(<span class="ident">ComplaintFeedbackType</span>::<span class="ident">Other</span>)
             }
         }

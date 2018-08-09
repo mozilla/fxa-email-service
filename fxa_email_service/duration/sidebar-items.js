@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Duration","A duration type represented in milliseconds, for compatibility with the rest of the FxA ecosystem."],["DurationError","The error type returned by `Duration::try_from`."]]});
+initSidebarItems({"struct":[["Duration","A duration type represented in milliseconds, for compatibility with the rest of the FxA ecosystem."]]});

@@ -104,13 +104,6 @@
 <span id="104">104</span>
 <span id="105">105</span>
 <span id="106">106</span>
-<span id="107">107</span>
-<span id="108">108</span>
-<span id="109">109</span>
-<span id="110">110</span>
-<span id="111">111</span>
-<span id="112">112</span>
-<span id="113">113</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -123,8 +116,9 @@
     <span class="ident">notification</span>::{
         <span class="ident">Bounce</span>, <span class="ident">BounceSubtype</span>, <span class="ident">BounceType</span>, <span class="ident">Complaint</span>, <span class="ident">Delivery</span>, <span class="ident">Notification</span>, <span class="ident">NotificationType</span>,
     },
-    <span class="ident">DeleteFuture</span>, <span class="ident">Factory</span>, <span class="ident">Incoming</span>, <span class="ident">Message</span>, <span class="ident">Outgoing</span>, <span class="ident">QueueError</span>, <span class="ident">ReceiveFuture</span>, <span class="ident">SendFuture</span>,
+    <span class="ident">DeleteFuture</span>, <span class="ident">Factory</span>, <span class="ident">Incoming</span>, <span class="ident">Message</span>, <span class="ident">Outgoing</span>, <span class="ident">ReceiveFuture</span>, <span class="ident">SendFuture</span>,
 };
+<span class="kw">use</span> <span class="ident">app_errors</span>::<span class="ident">AppErrorKind</span>;
 <span class="kw">use</span> <span class="ident">settings</span>::<span class="ident">Settings</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
@@ -193,11 +187,7 @@
                 <span class="ident">invalid_message</span>
             }
 
-            <span class="kw">_</span> <span class="op">=&gt;</span> {
-                <span class="kw">return</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">future</span>::<span class="ident">err</span>(<span class="ident">QueueError</span>::<span class="ident">new</span>(<span class="ident">String</span>::<span class="ident">from</span>(
-                    <span class="string">&quot;Not implemented&quot;</span>,
-                ))))
-            }
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">future</span>::<span class="ident">err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">NotImplemented</span>.<span class="ident">into</span>())),
         };
 
         <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">future</span>::<span class="ident">ok</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="ident">message</span>]))
@@ -205,9 +195,7 @@
 
     <span class="kw">fn</span> <span class="ident">delete</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="self">self</span>, <span class="ident">_message</span>: <span class="ident">Message</span>) <span class="op">-&gt;</span> <span class="ident">DeleteFuture</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">id</span> <span class="op">==</span> <span class="string">&quot;outgoing&quot;</span> {
-            <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">future</span>::<span class="ident">err</span>(<span class="ident">QueueError</span>::<span class="ident">new</span>(<span class="ident">String</span>::<span class="ident">from</span>(
-                <span class="string">&quot;Not implemented&quot;</span>,
-            ))))
+            <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">future</span>::<span class="ident">err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">NotImplemented</span>.<span class="ident">into</span>()))
         } <span class="kw">else</span> {
             <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">future</span>::<span class="ident">ok</span>(()))
         }
@@ -219,9 +207,7 @@
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">id</span> <span class="op">==</span> <span class="string">&quot;outgoing&quot;</span> {
             <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">future</span>::<span class="ident">ok</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;deadbeef&quot;</span>)))
         } <span class="kw">else</span> {
-            <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">future</span>::<span class="ident">err</span>(<span class="ident">QueueError</span>::<span class="ident">new</span>(<span class="ident">String</span>::<span class="ident">from</span>(
-                <span class="string">&quot;Not implemented&quot;</span>,
-            ))))
+            <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">future</span>::<span class="ident">err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">NotImplemented</span>.<span class="ident">into</span>()))
         }
     }
 }

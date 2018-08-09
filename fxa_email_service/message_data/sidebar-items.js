@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["MessageData","Message data store."],["MessageDataError","The error type returned by `MessageData` methods."]]});
+initSidebarItems({"struct":[["MessageData","Message data store."]]});
