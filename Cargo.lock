@@ -524,11 +524,11 @@ dependencies = [
  "rocket 0.4.0-dev (git+https://github.com/SergioBenitez/Rocket?rev=d7f6d82fe4d35ee79c424dd4164733b22f17f80a)",
  "rocket_codegen 0.4.0-dev (git+https://github.com/SergioBenitez/Rocket?rev=d7f6d82fe4d35ee79c424dd4164733b22f17f80a)",
  "rocket_contrib 0.4.0-dev (git+https://github.com/SergioBenitez/Rocket?rev=d7f6d82fe4d35ee79c424dd4164733b22f17f80a)",
- "rusoto_core 0.33.0 (git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9)",
- "rusoto_credential 0.12.0 (git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9)",
- "rusoto_mock 0.26.0 (git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9)",
- "rusoto_ses 0.33.0 (git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9)",
- "rusoto_sqs 0.33.0 (git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9)",
+ "rusoto_core 0.33.0 (git+https://github.com/brizental/rusoto?branch=request-body-params)",
+ "rusoto_credential 0.12.0 (git+https://github.com/brizental/rusoto?branch=request-body-params)",
+ "rusoto_mock 0.26.0 (git+https://github.com/brizental/rusoto?branch=request-body-params)",
+ "rusoto_ses 0.33.0 (git+https://github.com/brizental/rusoto?branch=request-body-params)",
+ "rusoto_sqs 0.33.0 (git+https://github.com/brizental/rusoto?branch=request-body-params)",
  "sendgrid 0.7.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.70 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_derive 1.0.70 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1383,7 +1383,7 @@ dependencies = [
 [[package]]
 name = "rusoto_core"
 version = "0.33.0"
-source = "git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9#9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9"
+source = "git+https://github.com/brizental/rusoto?branch=request-body-params#2579ecd2fbfc89ea44cf62bf5fa65f71849faa85"
 dependencies = [
  "base64 0.9.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "futures 0.1.23 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1394,7 +1394,7 @@ dependencies = [
  "lazy_static 1.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "log 0.4.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "md5 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)",
- "rusoto_credential 0.12.0 (git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9)",
+ "rusoto_credential 0.12.0 (git+https://github.com/brizental/rusoto?branch=request-body-params)",
  "rustc_version 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.70 (registry+https://github.com/rust-lang/crates.io-index)",
  "sha2 0.7.1 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1408,7 +1408,7 @@ dependencies = [
 [[package]]
 name = "rusoto_credential"
 version = "0.12.0"
-source = "git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9#9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9"
+source = "git+https://github.com/brizental/rusoto?branch=request-body-params#2579ecd2fbfc89ea44cf62bf5fa65f71849faa85"
 dependencies = [
  "chrono 0.4.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "dirs 1.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1423,31 +1423,37 @@ dependencies = [
 [[package]]
 name = "rusoto_mock"
 version = "0.26.0"
-source = "git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9#9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9"
+source = "git+https://github.com/brizental/rusoto?branch=request-body-params#2579ecd2fbfc89ea44cf62bf5fa65f71849faa85"
 dependencies = [
  "chrono 0.4.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "futures 0.1.23 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.9 (registry+https://github.com/rust-lang/crates.io-index)",
- "rusoto_core 0.33.0 (git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9)",
+ "rusoto_core 0.33.0 (git+https://github.com/brizental/rusoto?branch=request-body-params)",
 ]
 
 [[package]]
 name = "rusoto_ses"
 version = "0.33.0"
-source = "git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9#9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9"
+source = "git+https://github.com/brizental/rusoto?branch=request-body-params#2579ecd2fbfc89ea44cf62bf5fa65f71849faa85"
 dependencies = [
  "futures 0.1.23 (registry+https://github.com/rust-lang/crates.io-index)",
- "rusoto_core 0.33.0 (git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9)",
+ "hyper 0.11.27 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rusoto_core 0.33.0 (git+https://github.com/brizental/rusoto?branch=request-body-params)",
+ "serde_urlencoded 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "tokio-core 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "xml-rs 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "rusoto_sqs"
 version = "0.33.0"
-source = "git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9#9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9"
+source = "git+https://github.com/brizental/rusoto?branch=request-body-params#2579ecd2fbfc89ea44cf62bf5fa65f71849faa85"
 dependencies = [
  "futures 0.1.23 (registry+https://github.com/rust-lang/crates.io-index)",
- "rusoto_core 0.33.0 (git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9)",
+ "hyper 0.11.27 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rusoto_core 0.33.0 (git+https://github.com/brizental/rusoto?branch=request-body-params)",
+ "serde_urlencoded 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "tokio-core 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)",
  "xml-rs 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -2363,11 +2369,11 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum rocket_codegen_next 0.4.0-dev (git+https://github.com/SergioBenitez/Rocket?rev=d7f6d82fe4d35ee79c424dd4164733b22f17f80a)" = "<none>"
 "checksum rocket_contrib 0.4.0-dev (git+https://github.com/SergioBenitez/Rocket?rev=d7f6d82fe4d35ee79c424dd4164733b22f17f80a)" = "<none>"
 "checksum rocket_http 0.4.0-dev (git+https://github.com/SergioBenitez/Rocket?rev=d7f6d82fe4d35ee79c424dd4164733b22f17f80a)" = "<none>"
-"checksum rusoto_core 0.33.0 (git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9)" = "<none>"
-"checksum rusoto_credential 0.12.0 (git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9)" = "<none>"
-"checksum rusoto_mock 0.26.0 (git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9)" = "<none>"
-"checksum rusoto_ses 0.33.0 (git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9)" = "<none>"
-"checksum rusoto_sqs 0.33.0 (git+https://github.com/rusoto/rusoto/?rev=9e22eb3876a02375b3dbe14d0340f9b5c1fc55e9)" = "<none>"
+"checksum rusoto_core 0.33.0 (git+https://github.com/brizental/rusoto?branch=request-body-params)" = "<none>"
+"checksum rusoto_credential 0.12.0 (git+https://github.com/brizental/rusoto?branch=request-body-params)" = "<none>"
+"checksum rusoto_mock 0.26.0 (git+https://github.com/brizental/rusoto?branch=request-body-params)" = "<none>"
+"checksum rusoto_ses 0.33.0 (git+https://github.com/brizental/rusoto?branch=request-body-params)" = "<none>"
+"checksum rusoto_sqs 0.33.0 (git+https://github.com/brizental/rusoto?branch=request-body-params)" = "<none>"
 "checksum rust-ini 0.12.2 (registry+https://github.com/rust-lang/crates.io-index)" = "ac66e816614e124a692b6ac1b8437237a518c9155a3aacab83a373982630c715"
 "checksum rustc-demangle 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)" = "76d7ba1feafada44f2d38eed812bd2489a03c0f5abb975799251518b68848649"
 "checksum rustc_version 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)" = "a54aa04a10c68c1c4eacb4337fd883b435997ede17a9385784b990777686b09a"
