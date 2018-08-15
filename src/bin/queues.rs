@@ -12,6 +12,7 @@ extern crate futures;
 extern crate fxa_email_service;
 #[macro_use]
 extern crate lazy_static;
+extern crate env_logger;
 
 use futures::future::{self, Future, Loop};
 #[macro_use(
@@ -56,6 +57,7 @@ lazy_static! {
 type LoopResult = Box<Future<Item = Loop<usize, usize>, Error = AppError>>;
 
 fn main() {
+    env_logger::init();
     let logger = MozlogLogger::new(&SETTINGS).expect("MozlogLogger::init error");
     let _guard = slog_scope::set_global_logger(logger.0);
     let process_queues: &Fn(usize) -> LoopResult = &|previous_count: usize| {
