@@ -234,14 +234,10 @@ lazy_static! {
 #[test]
 fn test_queue() {
     type LoopResult = Box<Future<Item = Loop<usize, usize>, Error = AppError>>;
-    let process_queues: &Fn(usize) -> LoopResult = &|previous_count: usize| {
+    let process_queues: &Fn(usize) -> LoopResult = &|_: usize| {
         let future = Q.receive()
             .and_then(move |response| {
                 println!("{:#?}", response);
-                future::ok(0)
-            })
-            .and_then(move |response2| {
-                println!(" what {:#?}", response2);
                 Ok(Loop::Continue(0))
             });
         Box::new(future)
