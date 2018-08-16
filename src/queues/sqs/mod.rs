@@ -10,7 +10,7 @@ use std::{
     fmt::{self, Debug, Formatter},
 };
 
-use futures::future::{self, Future};
+use futures::future::{self, Future, Loop};
 use md5;
 use rusoto_core::{request::HttpClient, Region};
 use rusoto_credential::StaticProvider;
@@ -224,4 +224,27 @@ impl From<JsonError> for AppError {
     fn from(error: JsonError) -> AppError {
         AppErrorKind::QueueError(format!("JSON error: {:?}", error)).into()
     }
+}
+
+lazy_static! {
+    static ref S: Settings = Settings::new().expect("Settings::new");
+    static ref Q: Queue = Factory::new("https://sqs.us-east-1.amazonaws.com/927034868273/fxa-email-delivery-dev".to_string(), &S);
+}
+
+#[test]
+fn test_queue() {
+    type LoopResult = Box<Future<Item = Loop<usize, usize>, Error = AppError>>;
+    let process_queues: &Fn(usize) -> LoopResult = &|_: usize| {
+        let future = Q.receive()
+            .and_then(move |response| {
+                println!("{:#?}", response);
+                Ok(Loop::Continue(0))
+            });
+        Box::new(future)
+    };
+    future::loop_fn(0, process_queues).wait().map_err(|error| {
+        println!("******** error bellow *******");
+        println!("{:?}", error);
+        "wut".to_string()
+    });
 }
