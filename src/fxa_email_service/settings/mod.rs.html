@@ -415,6 +415,19 @@
 <span id="415">415</span>
 <span id="416">416</span>
 <span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -495,6 +508,8 @@
     (<span class="ident">SenderName</span>, <span class="ident">sender_name</span>, <span class="string">&quot;sender name&quot;</span>),
     <span class="doccomment">/// Sendgrid API key type.</span>
     (<span class="ident">SendgridApiKey</span>, <span class="ident">sendgrid_api_key</span>, <span class="string">&quot;Sendgrid API key&quot;</span>),
+    <span class="doccomment">/// Sentry DSN type.</span>
+    (<span class="ident">SentryDsn</span>, <span class="ident">sentry_dsn</span>, <span class="string">&quot;sentry dsn&quot;</span>),
     <span class="doccomment">/// AWS SQS queue URL type.</span>
     (<span class="ident">SqsUrl</span>, <span class="ident">sqs_url</span>, <span class="string">&quot;SQS queue URL&quot;</span>)
 }
@@ -621,6 +636,13 @@
     <span class="doccomment">/// This is sensitive data</span>
     <span class="doccomment">/// and will not be logged.</span>
     <span class="kw">pub</span> <span class="ident">key</span>: <span class="ident">SendgridApiKey</span>,
+}
+
+<span class="doccomment">/// Settings for Sentry.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Sentry</span> {
+    <span class="doccomment">/// The Sentry Data Source Name</span>
+    <span class="kw">pub</span> <span class="ident">dsn</span>: <span class="ident">SentryDsn</span>,
 }
 
 <span class="doccomment">/// Settings for SMTP custom provider.</span>
@@ -753,6 +775,10 @@
     <span class="doccomment">/// Settings for Sendgrid.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">serialize_with</span> <span class="op">=</span> <span class="string">&quot;serialize::hidden_or_not_set&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">sendgrid</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Sendgrid</span><span class="op">&gt;</span>,
+
+    <span class="doccomment">/// Settings for Sentry.</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">serialize_with</span> <span class="op">=</span> <span class="string">&quot;serialize::hidden_or_not_set&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="ident">sentry</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Sentry</span><span class="op">&gt;</span>,
 
     <span class="doccomment">/// Settings for SMTP custom provider.</span>
     <span class="kw">pub</span> <span class="ident">smtp</span>: <span class="ident">Smtp</span>,
