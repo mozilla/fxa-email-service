@@ -126,6 +126,9 @@
 <span id="126">126</span>
 <span id="127">127</span>
 <span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -199,15 +202,18 @@
                         <span class="kw">return</span> <span class="kw">match</span> <span class="ident">bounce</span>.<span class="ident">bounce_type</span> {
                             <span class="ident">DbBounceType</span>::<span class="ident">Hard</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">BounceHardError</span> {
                                 <span class="ident">address</span>: <span class="ident">address</span>.<span class="ident">to_string</span>(),
-                                <span class="ident">bounce</span>: <span class="prelude-val">Some</span>(<span class="ident">bounce</span>.<span class="ident">clone</span>()),
+                                <span class="ident">bounced_at</span>: <span class="ident">bounce</span>.<span class="ident">created_at</span>,
+                                <span class="ident">bounce</span>: <span class="ident">bounce</span>.<span class="ident">clone</span>(),
                             }.<span class="ident">into</span>()),
                             <span class="ident">DbBounceType</span>::<span class="ident">Soft</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">BounceSoftError</span> {
                                 <span class="ident">address</span>: <span class="ident">address</span>.<span class="ident">to_string</span>(),
-                                <span class="ident">bounce</span>: <span class="prelude-val">Some</span>(<span class="ident">bounce</span>.<span class="ident">clone</span>()),
+                                <span class="ident">bounced_at</span>: <span class="ident">bounce</span>.<span class="ident">created_at</span>,
+                                <span class="ident">bounce</span>: <span class="ident">bounce</span>.<span class="ident">clone</span>(),
                             }.<span class="ident">into</span>()),
                             <span class="ident">DbBounceType</span>::<span class="ident">Complaint</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">BounceComplaintError</span> {
                                 <span class="ident">address</span>: <span class="ident">address</span>.<span class="ident">to_string</span>(),
-                                <span class="ident">bounce</span>: <span class="prelude-val">Some</span>(<span class="ident">bounce</span>.<span class="ident">clone</span>()),
+                                <span class="ident">bounced_at</span>: <span class="ident">bounce</span>.<span class="ident">created_at</span>,
+                                <span class="ident">bounce</span>: <span class="ident">bounce</span>.<span class="ident">clone</span>(),
                             }.<span class="ident">into</span>()),
                         };
                     }
