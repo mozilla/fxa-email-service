@@ -814,7 +814,7 @@
         <span class="ident">config</span>.<span class="ident">set_default</span>(<span class="string">&quot;env&quot;</span>, <span class="string">&quot;dev&quot;</span>)<span class="question-mark">?</span>;
 
         <span class="ident">config</span>.<span class="ident">merge</span>(<span class="ident">File</span>::<span class="ident">with_name</span>(<span class="string">&quot;config/local&quot;</span>).<span class="ident">required</span>(<span class="bool-val">false</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">env</span> <span class="op">=</span> <span class="ident">Environment</span>::<span class="ident">with_prefix</span>(<span class="string">&quot;fxa_email&quot;</span>);
+        <span class="kw">let</span> <span class="ident">env</span> <span class="op">=</span> <span class="ident">Environment</span>::<span class="ident">with_prefix</span>(<span class="string">&quot;fxa_email&quot;</span>).<span class="ident">ignore_empty</span>(<span class="bool-val">true</span>);
         <span class="ident">config</span>.<span class="ident">merge</span>(<span class="ident">env</span>.<span class="ident">separator</span>(<span class="string">&quot;_&quot;</span>))<span class="question-mark">?</span>;
 
         <span class="kw">match</span> <span class="ident">config</span>.<span class="ident">try_into</span>::<span class="op">&lt;</span><span class="ident">Settings</span><span class="op">&gt;</span>() {
