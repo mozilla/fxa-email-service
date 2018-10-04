@@ -384,6 +384,12 @@
 <span id="384">384</span>
 <span id="385">385</span>
 <span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
+<span id="391">391</span>
+<span id="392">392</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -537,9 +543,9 @@
         <span class="ident">bounce</span>: <span class="ident">BounceRecord</span>,
     },
 
-    <span class="doccomment">/// An error for when an error happens on a request to the db.</span>
+    <span class="doccomment">/// An error occurred inside an auth db method.</span>
     <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;{}&quot;</span>, <span class="ident">_0</span>)]</span>
-    <span class="ident">DbError</span>(<span class="ident">String</span>),
+    <span class="ident">AuthDbError</span>(<span class="ident">String</span>),
 
     <span class="doccomment">/// An error for when an error happens on the queues process.</span>
     <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;{}&quot;</span>, <span class="ident">_0</span>)]</span>
@@ -575,14 +581,18 @@
     <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;invalid duration: {}&quot;</span>, <span class="ident">_0</span>)]</span>
     <span class="ident">DurationError</span>(<span class="ident">String</span>),
 
-    <span class="doccomment">/// An error for when we get erros in the message_data module.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;{}&quot;</span>, <span class="ident">_0</span>)]</span>
-    <span class="ident">MessageDataError</span>(<span class="ident">String</span>),
+    <span class="doccomment">/// An error occured inside a db method.</span>
+    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Redis error: {}&quot;</span>, <span class="ident">_0</span>)]</span>
+    <span class="ident">DbError</span>(<span class="ident">String</span>),
 
     <span class="doccomment">/// An error for when we try to access functionality that is not</span>
     <span class="doccomment">/// implemented.</span>
     <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Feature not implemented&quot;</span>)]</span>
     <span class="ident">NotImplemented</span>,
+
+    <span class="doccomment">/// An error occured while hashing a value.</span>
+    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;HMAC error: {}&quot;</span>, <span class="ident">_0</span>)]</span>
+    <span class="ident">HmacError</span>(<span class="ident">String</span>),
 }
 
 <span class="kw">impl</span> <span class="ident">AppErrorKind</span> {
@@ -617,7 +627,7 @@
             <span class="ident">AppErrorKind</span>::<span class="ident">BounceSoftError</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">107</span>),
             <span class="ident">AppErrorKind</span>::<span class="ident">BounceHardError</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">108</span>),
 
-            <span class="ident">AppErrorKind</span>::<span class="ident">DbError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">109</span>),
+            <span class="ident">AppErrorKind</span>::<span class="ident">AuthDbError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">109</span>),
 
             <span class="ident">AppErrorKind</span>::<span class="ident">QueueError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">110</span>),
             <span class="ident">AppErrorKind</span>::<span class="ident">InvalidNotificationType</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">111</span>),
@@ -628,9 +638,11 @@
             <span class="ident">AppErrorKind</span>::<span class="ident">SqsMessageParsingError</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">115</span>),
 
             <span class="ident">AppErrorKind</span>::<span class="ident">DurationError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">116</span>),
-            <span class="ident">AppErrorKind</span>::<span class="ident">MessageDataError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">117</span>),
+            <span class="ident">AppErrorKind</span>::<span class="ident">DbError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">117</span>),
 
             <span class="ident">AppErrorKind</span>::<span class="ident">NotImplemented</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">118</span>),
+
+            <span class="ident">AppErrorKind</span>::<span class="ident">HmacError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">119</span>),
 
             <span class="ident">AppErrorKind</span>::<span class="ident">BadRequest</span>
             <span class="op">|</span> <span class="ident">AppErrorKind</span>::<span class="ident">NotFound</span>

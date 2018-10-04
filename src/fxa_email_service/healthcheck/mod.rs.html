@@ -39,15 +39,17 @@
 <span id="39">39</span>
 <span id="40">40</span>
 <span id="41">41</span>
+<span id="42">42</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
 <span class="comment">// file, you can obtain one at https://mozilla.org/MPL/2.0/.</span>
 
-<span class="doccomment">//! Route handlers for our heathcheck endpoints:</span>
-<span class="doccomment">//! for the `GET /__version__` endpoint,</span>
-<span class="doccomment">//! for the `GET /__lbheartbeat__` endpoint and</span>
-<span class="doccomment">//! for the `GET /__heartbeat__` endpoint,</span>
+<span class="doccomment">//! Route handlers for our heathcheck endpoints.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! * `GET /__version__`</span>
+<span class="doccomment">//! * `GET /__lbheartbeat__`</span>
+<span class="doccomment">//! * `GET /__heartbeat__`</span>
 
 <span class="kw">use</span> <span class="ident">reqwest</span>::<span class="ident">Client</span> <span class="kw">as</span> <span class="ident">RequestClient</span>;
 <span class="kw">use</span> <span class="ident">rocket</span>::<span class="ident">State</span>;
@@ -78,7 +80,7 @@
 
     <span class="kw">match</span> <span class="ident">db</span> {
         <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Json</span>(<span class="macro">json</span><span class="macro">!</span>({}))),
-        <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">DbError</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">err</span>)).<span class="ident">into</span>()),
+        <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">AuthDbError</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">err</span>)).<span class="ident">into</span>()),
     }
 }
 </pre>
