@@ -388,8 +388,6 @@
 <span id="388">388</span>
 <span id="389">389</span>
 <span id="390">390</span>
-<span id="391">391</span>
-<span id="392">392</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -410,6 +408,7 @@
 <span class="kw">use</span> <span class="ident">serde_json</span>::{<span class="ident">map</span>::<span class="ident">Map</span>, <span class="ident">ser</span>::<span class="ident">to_string</span>, <span class="ident">Value</span>};
 
 <span class="kw">use</span> <span class="ident">auth_db</span>::<span class="ident">BounceRecord</span>;
+<span class="kw">use</span> <span class="ident">email_address</span>::<span class="ident">EmailAddress</span>;
 <span class="kw">use</span> <span class="ident">logging</span>::<span class="ident">MozlogLogger</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
@@ -526,19 +525,19 @@
     <span class="doccomment">/// An error for when a bounce violation happens.</span>
     <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Email account sent complaint&quot;</span>)]</span>
     <span class="ident">BounceComplaintError</span> {
-        <span class="ident">address</span>: <span class="ident">String</span>,
+        <span class="ident">address</span>: <span class="ident">EmailAddress</span>,
         <span class="ident">bounced_at</span>: <span class="ident">u64</span>,
         <span class="ident">bounce</span>: <span class="ident">BounceRecord</span>,
     },
     <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Email account soft bounced&quot;</span>)]</span>
     <span class="ident">BounceSoftError</span> {
-        <span class="ident">address</span>: <span class="ident">String</span>,
+        <span class="ident">address</span>: <span class="ident">EmailAddress</span>,
         <span class="ident">bounced_at</span>: <span class="ident">u64</span>,
         <span class="ident">bounce</span>: <span class="ident">BounceRecord</span>,
     },
     <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Email account hard bounced&quot;</span>)]</span>
     <span class="ident">BounceHardError</span> {
-        <span class="ident">address</span>: <span class="ident">String</span>,
+        <span class="ident">address</span>: <span class="ident">EmailAddress</span>,
         <span class="ident">bounced_at</span>: <span class="ident">u64</span>,
         <span class="ident">bounce</span>: <span class="ident">BounceRecord</span>,
     },
@@ -675,10 +674,7 @@
                 <span class="kw-2">ref</span> <span class="ident">bounced_at</span>,
                 <span class="kw-2">ref</span> <span class="ident">bounce</span>,
             } <span class="op">=&gt;</span> {
-                <span class="ident">fields</span>.<span class="ident">insert</span>(
-                    <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;address&quot;</span>),
-                    <span class="ident">Value</span>::<span class="ident">String</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">address</span>)),
-                );
+                <span class="ident">fields</span>.<span class="ident">insert</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;address&quot;</span>), <span class="ident">Value</span>::<span class="ident">String</span>(<span class="ident">address</span>.<span class="ident">to_string</span>()));
                 <span class="ident">fields</span>.<span class="ident">insert</span>(
                     <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;bouncedAt&quot;</span>),
                     <span class="ident">Value</span>::<span class="ident">Number</span>(<span class="ident">bounced_at</span>.<span class="ident">clone</span>().<span class="ident">into</span>()),

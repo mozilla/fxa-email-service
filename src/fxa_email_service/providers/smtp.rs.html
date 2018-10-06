@@ -123,7 +123,7 @@
             <span class="ident">port</span>: <span class="ident">settings</span>.<span class="ident">smtp</span>.<span class="ident">port</span>,
             <span class="ident">_credentials</span>: <span class="ident">settings</span>.<span class="ident">smtp</span>.<span class="ident">credentials</span>.<span class="ident">clone</span>(),
             <span class="ident">sender</span>: (
-                <span class="ident">settings</span>.<span class="ident">sender</span>.<span class="ident">address</span>.<span class="number">0</span>.<span class="ident">clone</span>(),
+                <span class="ident">settings</span>.<span class="ident">sender</span>.<span class="ident">address</span>.<span class="ident">to_string</span>(),
                 <span class="ident">settings</span>.<span class="ident">sender</span>.<span class="ident">name</span>.<span class="number">0</span>.<span class="ident">clone</span>(),
             ),
         }

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["EmailAddress",""]]});
+initSidebarItems({"struct":[["EmailAddress","Email address type."]]});

@@ -396,6 +396,7 @@
 <span id="396">396</span>
 <span id="397">397</span>
 <span id="398">398</span>
+<span id="399">399</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -416,6 +417,7 @@
     <span class="ident">Mail</span> <span class="kw">as</span> <span class="ident">GenericMail</span>, <span class="ident">Notification</span> <span class="kw">as</span> <span class="ident">GenericNotification</span>,
 };
 <span class="kw">use</span> <span class="ident">auth_db</span>::{<span class="ident">BounceSubtype</span> <span class="kw">as</span> <span class="ident">AuthDbBounceSubtype</span>, <span class="ident">BounceType</span> <span class="kw">as</span> <span class="ident">AuthDbBounceType</span>};
+<span class="kw">use</span> <span class="ident">email_address</span>::<span class="ident">EmailAddress</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">test</span>;
@@ -682,7 +684,7 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BouncedRecipient</span> {
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;emailAddress&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">email_address</span>: <span class="ident">String</span>,
+    <span class="kw">pub</span> <span class="ident">email_address</span>: <span class="ident">EmailAddress</span>,
     <span class="kw">pub</span> <span class="ident">action</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">status</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;diagnosticCode&quot;</span>)]</span>
@@ -717,7 +719,7 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ComplainedRecipient</span> {
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;emailAddress&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">email_address</span>: <span class="ident">String</span>,
+    <span class="kw">pub</span> <span class="ident">email_address</span>: <span class="ident">EmailAddress</span>,
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
@@ -784,7 +786,7 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Delivery</span> {
     <span class="kw">pub</span> <span class="ident">timestamp</span>: <span class="ident">DateTime</span><span class="op">&lt;</span><span class="ident">Utc</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">recipients</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">recipients</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">EmailAddress</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Delivery</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GenericDelivery</span> {
