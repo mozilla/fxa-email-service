@@ -186,6 +186,7 @@
 <span id="186">186</span>
 <span id="187">187</span>
 <span id="188">188</span>
+<span id="189">189</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -324,7 +325,8 @@
                 <span class="ident">notification</span>.<span class="ident">metadata</span> <span class="op">=</span> <span class="self">self</span>
                     .<span class="ident">message_data</span>
                     .<span class="ident">consume</span>(<span class="kw-2">&amp;</span><span class="ident">notification</span>.<span class="ident">mail</span>.<span class="ident">message_id</span>)
-                    .<span class="ident">ok</span>();
+                    .<span class="ident">ok</span>()
+                    .<span class="ident">unwrap_or</span>(<span class="prelude-val">None</span>);
                 <span class="kw">let</span> <span class="ident">future</span> <span class="op">=</span> <span class="self">self</span>
                     .<span class="ident">notification_queue</span>
                     .<span class="ident">send</span>(<span class="kw-2">&amp;</span><span class="ident">notification</span>)
