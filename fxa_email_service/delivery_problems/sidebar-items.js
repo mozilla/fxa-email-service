@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["ProblemSubtype","The problem subtype, indicating the underlying cause of a bounce or complaint."],["ProblemType","The type of the delivery problem."]],"struct":[["DeliveryProblem","Encapsulates some kind of delivery problem, either a bounced email or a complaint."],["DeliveryProblems","Bounce/complaint registry."]]});

@@ -416,7 +416,7 @@
     <span class="ident">Bounce</span> <span class="kw">as</span> <span class="ident">GenericBounce</span>, <span class="ident">Complaint</span> <span class="kw">as</span> <span class="ident">GenericComplaint</span>, <span class="ident">Delivery</span> <span class="kw">as</span> <span class="ident">GenericDelivery</span>,
     <span class="ident">Mail</span> <span class="kw">as</span> <span class="ident">GenericMail</span>, <span class="ident">Notification</span> <span class="kw">as</span> <span class="ident">GenericNotification</span>,
 };
-<span class="kw">use</span> <span class="ident">auth_db</span>::{<span class="ident">BounceSubtype</span> <span class="kw">as</span> <span class="ident">AuthDbBounceSubtype</span>, <span class="ident">BounceType</span> <span class="kw">as</span> <span class="ident">AuthDbBounceType</span>};
+<span class="kw">use</span> <span class="ident">delivery_problems</span>::{<span class="ident">ProblemSubtype</span>, <span class="ident">ProblemType</span>};
 <span class="kw">use</span> <span class="ident">email_address</span>::<span class="ident">EmailAddress</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
@@ -594,15 +594,15 @@
     <span class="ident">Transient</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">BounceType</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AuthDbBounceType</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">bounce_type</span>: <span class="ident">BounceType</span>) <span class="op">-&gt;</span> <span class="ident">AuthDbBounceType</span> {
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">BounceType</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ProblemType</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">bounce_type</span>: <span class="ident">BounceType</span>) <span class="op">-&gt;</span> <span class="ident">ProblemType</span> {
         <span class="kw">match</span> <span class="ident">bounce_type</span> {
             <span class="ident">BounceType</span>::<span class="ident">Undetermined</span> <span class="op">=&gt;</span> {
-                <span class="macro">info</span><span class="macro">!</span>(<span class="string">&quot;Mapped SesBounceType::Undetermined to AuthDbBounceType::Soft&quot;</span>);
-                <span class="ident">AuthDbBounceType</span>::<span class="ident">Soft</span>
+                <span class="macro">info</span><span class="macro">!</span>(<span class="string">&quot;Mapped SesBounceType::Undetermined to ProblemType::Soft&quot;</span>);
+                <span class="ident">ProblemType</span>::<span class="ident">SoftBounce</span>
             }
-            <span class="ident">BounceType</span>::<span class="ident">Permanent</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceType</span>::<span class="ident">Hard</span>,
-            <span class="ident">BounceType</span>::<span class="ident">Transient</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceType</span>::<span class="ident">Soft</span>,
+            <span class="ident">BounceType</span>::<span class="ident">Permanent</span> <span class="op">=&gt;</span> <span class="ident">ProblemType</span>::<span class="ident">HardBounce</span>,
+            <span class="ident">BounceType</span>::<span class="ident">Transient</span> <span class="op">=&gt;</span> <span class="ident">ProblemType</span>::<span class="ident">SoftBounce</span>,
         }
     }
 }
@@ -640,17 +640,17 @@
     <span class="ident">AttachmentRejected</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">BounceSubtype</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AuthDbBounceSubtype</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">bounce_subtype</span>: <span class="ident">BounceSubtype</span>) <span class="op">-&gt;</span> <span class="ident">AuthDbBounceSubtype</span> {
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">BounceSubtype</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ProblemSubtype</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">bounce_subtype</span>: <span class="ident">BounceSubtype</span>) <span class="op">-&gt;</span> <span class="ident">ProblemSubtype</span> {
         <span class="kw">match</span> <span class="ident">bounce_subtype</span> {
-            <span class="ident">BounceSubtype</span>::<span class="ident">Undetermined</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceSubtype</span>::<span class="ident">Undetermined</span>,
-            <span class="ident">BounceSubtype</span>::<span class="ident">General</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceSubtype</span>::<span class="ident">General</span>,
-            <span class="ident">BounceSubtype</span>::<span class="ident">NoEmail</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceSubtype</span>::<span class="ident">NoEmail</span>,
-            <span class="ident">BounceSubtype</span>::<span class="ident">Suppressed</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceSubtype</span>::<span class="ident">Suppressed</span>,
-            <span class="ident">BounceSubtype</span>::<span class="ident">MailboxFull</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceSubtype</span>::<span class="ident">MailboxFull</span>,
-            <span class="ident">BounceSubtype</span>::<span class="ident">MessageTooLarge</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceSubtype</span>::<span class="ident">MessageTooLarge</span>,
-            <span class="ident">BounceSubtype</span>::<span class="ident">ContentRejected</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceSubtype</span>::<span class="ident">ContentRejected</span>,
-            <span class="ident">BounceSubtype</span>::<span class="ident">AttachmentRejected</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceSubtype</span>::<span class="ident">AttachmentRejected</span>,
+            <span class="ident">BounceSubtype</span>::<span class="ident">Undetermined</span> <span class="op">=&gt;</span> <span class="ident">ProblemSubtype</span>::<span class="ident">Undetermined</span>,
+            <span class="ident">BounceSubtype</span>::<span class="ident">General</span> <span class="op">=&gt;</span> <span class="ident">ProblemSubtype</span>::<span class="ident">General</span>,
+            <span class="ident">BounceSubtype</span>::<span class="ident">NoEmail</span> <span class="op">=&gt;</span> <span class="ident">ProblemSubtype</span>::<span class="ident">NoEmail</span>,
+            <span class="ident">BounceSubtype</span>::<span class="ident">Suppressed</span> <span class="op">=&gt;</span> <span class="ident">ProblemSubtype</span>::<span class="ident">Suppressed</span>,
+            <span class="ident">BounceSubtype</span>::<span class="ident">MailboxFull</span> <span class="op">=&gt;</span> <span class="ident">ProblemSubtype</span>::<span class="ident">MailboxFull</span>,
+            <span class="ident">BounceSubtype</span>::<span class="ident">MessageTooLarge</span> <span class="op">=&gt;</span> <span class="ident">ProblemSubtype</span>::<span class="ident">MessageTooLarge</span>,
+            <span class="ident">BounceSubtype</span>::<span class="ident">ContentRejected</span> <span class="op">=&gt;</span> <span class="ident">ProblemSubtype</span>::<span class="ident">ContentRejected</span>,
+            <span class="ident">BounceSubtype</span>::<span class="ident">AttachmentRejected</span> <span class="op">=&gt;</span> <span class="ident">ProblemSubtype</span>::<span class="ident">AttachmentRejected</span>,
         }
     }
 }
@@ -732,15 +732,15 @@
     <span class="ident">Virus</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">ComplaintFeedbackType</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AuthDbBounceSubtype</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">complaint_feedback_type</span>: <span class="ident">ComplaintFeedbackType</span>) <span class="op">-&gt;</span> <span class="ident">AuthDbBounceSubtype</span> {
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">ComplaintFeedbackType</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ProblemSubtype</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">complaint_feedback_type</span>: <span class="ident">ComplaintFeedbackType</span>) <span class="op">-&gt;</span> <span class="ident">ProblemSubtype</span> {
         <span class="kw">match</span> <span class="ident">complaint_feedback_type</span> {
-            <span class="ident">ComplaintFeedbackType</span>::<span class="ident">Abuse</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceSubtype</span>::<span class="ident">Abuse</span>,
-            <span class="ident">ComplaintFeedbackType</span>::<span class="ident">AuthFailure</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceSubtype</span>::<span class="ident">AuthFailure</span>,
-            <span class="ident">ComplaintFeedbackType</span>::<span class="ident">Fraud</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceSubtype</span>::<span class="ident">Fraud</span>,
-            <span class="ident">ComplaintFeedbackType</span>::<span class="ident">NotSpam</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceSubtype</span>::<span class="ident">NotSpam</span>,
-            <span class="ident">ComplaintFeedbackType</span>::<span class="ident">Other</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceSubtype</span>::<span class="ident">Other</span>,
-            <span class="ident">ComplaintFeedbackType</span>::<span class="ident">Virus</span> <span class="op">=&gt;</span> <span class="ident">AuthDbBounceSubtype</span>::<span class="ident">Virus</span>,
+            <span class="ident">ComplaintFeedbackType</span>::<span class="ident">Abuse</span> <span class="op">=&gt;</span> <span class="ident">ProblemSubtype</span>::<span class="ident">Abuse</span>,
+            <span class="ident">ComplaintFeedbackType</span>::<span class="ident">AuthFailure</span> <span class="op">=&gt;</span> <span class="ident">ProblemSubtype</span>::<span class="ident">AuthFailure</span>,
+            <span class="ident">ComplaintFeedbackType</span>::<span class="ident">Fraud</span> <span class="op">=&gt;</span> <span class="ident">ProblemSubtype</span>::<span class="ident">Fraud</span>,
+            <span class="ident">ComplaintFeedbackType</span>::<span class="ident">NotSpam</span> <span class="op">=&gt;</span> <span class="ident">ProblemSubtype</span>::<span class="ident">NotSpam</span>,
+            <span class="ident">ComplaintFeedbackType</span>::<span class="ident">Other</span> <span class="op">=&gt;</span> <span class="ident">ProblemSubtype</span>::<span class="ident">Other</span>,
+            <span class="ident">ComplaintFeedbackType</span>::<span class="ident">Virus</span> <span class="op">=&gt;</span> <span class="ident">ProblemSubtype</span>::<span class="ident">Virus</span>,
         }
     }
 }

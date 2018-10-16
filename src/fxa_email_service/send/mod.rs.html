@@ -118,7 +118,7 @@
 
 <span class="kw">use</span> <span class="ident">app_errors</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 <span class="kw">use</span> <span class="ident">auth_db</span>::<span class="ident">DbClient</span>;
-<span class="kw">use</span> <span class="ident">bounces</span>::<span class="ident">Bounces</span>;
+<span class="kw">use</span> <span class="ident">delivery_problems</span>::<span class="ident">DeliveryProblems</span>;
 <span class="kw">use</span> <span class="ident">email_address</span>::<span class="ident">EmailAddress</span>;
 <span class="kw">use</span> <span class="ident">logging</span>::<span class="ident">MozlogLogger</span>;
 <span class="kw">use</span> <span class="ident">message_data</span>::<span class="ident">MessageData</span>;
@@ -163,7 +163,7 @@
 <span class="attribute">#[<span class="ident">post</span>(<span class="string">&quot;/send&quot;</span>, <span class="ident">format</span> <span class="op">=</span> <span class="string">&quot;application/json&quot;</span>, <span class="ident">data</span> <span class="op">=</span> <span class="string">&quot;&lt;email&gt;&quot;</span>)]</span>
 <span class="kw">fn</span> <span class="ident">handler</span>(
     <span class="ident">email</span>: <span class="ident">AppResult</span><span class="op">&lt;</span><span class="ident">Email</span><span class="op">&gt;</span>,
-    <span class="ident">bounces</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">Bounces</span><span class="op">&lt;</span><span class="ident">DbClient</span><span class="op">&gt;&gt;</span>,
+    <span class="ident">bounces</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">DeliveryProblems</span><span class="op">&lt;</span><span class="ident">DbClient</span><span class="op">&gt;&gt;</span>,
     <span class="ident">logger</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">MozlogLogger</span><span class="op">&gt;</span>,
     <span class="ident">message_data</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">MessageData</span><span class="op">&gt;</span>,
     <span class="ident">providers</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">Providers</span><span class="op">&gt;</span>,

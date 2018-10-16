@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["Bounces","Bounce/complaint registry."]]});
