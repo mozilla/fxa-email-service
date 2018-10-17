@@ -151,7 +151,7 @@
 <span class="kw">use</span> <span class="ident">reqwest</span>::{<span class="ident">Client</span> <span class="kw">as</span> <span class="ident">RequestClient</span>, <span class="ident">Error</span> <span class="kw">as</span> <span class="ident">RequestError</span>, <span class="ident">StatusCode</span>, <span class="ident">Url</span>, <span class="ident">UrlError</span>};
 
 <span class="kw">use</span> <span class="ident">app_errors</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
-<span class="kw">use</span> <span class="ident">delivery_problems</span>::{<span class="ident">DeliveryProblem</span>, <span class="ident">ProblemSubtype</span>, <span class="ident">ProblemType</span>};
+<span class="kw">use</span> <span class="ident">delivery_problems</span>::{<span class="ident">LegacyDeliveryProblem</span> <span class="kw">as</span> <span class="ident">DeliveryProblem</span>, <span class="ident">ProblemSubtype</span>, <span class="ident">ProblemType</span>};
 <span class="kw">use</span> <span class="ident">email_address</span>::<span class="ident">EmailAddress</span>;
 <span class="kw">use</span> <span class="ident">settings</span>::<span class="ident">Settings</span>;
 
