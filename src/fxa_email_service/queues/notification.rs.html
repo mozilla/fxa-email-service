@@ -85,6 +85,7 @@
 <span id="85">85</span>
 <span id="86">86</span>
 <span id="87">87</span>
+<span id="88">88</span>
 </pre><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -155,6 +156,7 @@
     <span class="kw">pub</span> <span class="ident">bounce_type</span>: <span class="ident">BounceType</span>,
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;bounceSubType&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">bounce_subtype</span>: <span class="ident">BounceSubtype</span>,
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;bouncedRecipients&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">bounced_recipients</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">EmailAddress</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">timestamp</span>: <span class="ident">DateTime</span><span class="op">&lt;</span><span class="ident">Utc</span><span class="op">&gt;</span>,
 }
