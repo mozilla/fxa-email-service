@@ -1,1 +1,1 @@
-initSidebarItems({"constant":[["_IMPL_DESERIALIZE_FOR_Body",""],["_IMPL_DESERIALIZE_FOR_Email",""]],"fn":[["handler",""],["rocket_route_fn_handler",""]],"static":[["static_rocket_route_info_for_handler","Rocket code generated static route information structure."]],"struct":[["Body",""],["Email",""]]});
+initSidebarItems({"static":[["static_rocket_route_info_for_handler","Rocket code generated static route information structure."]]});
