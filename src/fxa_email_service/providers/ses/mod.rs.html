@@ -122,13 +122,13 @@
         <span class="kw">let</span> <span class="ident">region</span> <span class="op">=</span> <span class="ident">settings</span>
             .<span class="ident">aws</span>
             .<span class="ident">region</span>
-            .<span class="number">0</span>
+            .<span class="ident">as_ref</span>()
             .<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">Region</span><span class="op">&gt;</span>()
             .<span class="ident">expect</span>(<span class="string">&quot;invalid region&quot;</span>);
 
         <span class="kw">let</span> <span class="ident">client</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Ses</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">keys</span>) <span class="op">=</span> <span class="ident">settings</span>.<span class="ident">aws</span>.<span class="ident">keys</span> {
             <span class="kw">let</span> <span class="ident">creds</span> <span class="op">=</span>
-                <span class="ident">StaticProvider</span>::<span class="ident">new</span>(<span class="ident">keys</span>.<span class="ident">access</span>.<span class="number">0</span>.<span class="ident">clone</span>(), <span class="ident">keys</span>.<span class="ident">secret</span>.<span class="number">0</span>.<span class="ident">clone</span>(), <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
+                <span class="ident">StaticProvider</span>::<span class="ident">new</span>(<span class="ident">keys</span>.<span class="ident">access</span>.<span class="ident">to_string</span>(), <span class="ident">keys</span>.<span class="ident">secret</span>.<span class="ident">to_string</span>(), <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
             <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">SesClient</span>::<span class="ident">new_with</span>(
                 <span class="ident">HttpClient</span>::<span class="ident">new</span>().<span class="ident">expect</span>(<span class="string">&quot;Couldn&#39;t start HTTP Client.&quot;</span>),
                 <span class="ident">creds</span>,

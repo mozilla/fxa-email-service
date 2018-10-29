@@ -119,12 +119,12 @@
 <span class="kw">impl</span> <span class="ident">SmtpProvider</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">settings</span>: <span class="kw-2">&amp;</span><span class="ident">Settings</span>) <span class="op">-&gt;</span> <span class="ident">SmtpProvider</span> {
         <span class="ident">SmtpProvider</span> {
-            <span class="ident">host</span>: <span class="ident">settings</span>.<span class="ident">smtp</span>.<span class="ident">host</span>.<span class="number">0</span>.<span class="ident">clone</span>(),
+            <span class="ident">host</span>: <span class="ident">settings</span>.<span class="ident">smtp</span>.<span class="ident">host</span>.<span class="ident">to_string</span>(),
             <span class="ident">port</span>: <span class="ident">settings</span>.<span class="ident">smtp</span>.<span class="ident">port</span>,
             <span class="ident">_credentials</span>: <span class="ident">settings</span>.<span class="ident">smtp</span>.<span class="ident">credentials</span>.<span class="ident">clone</span>(),
             <span class="ident">sender</span>: (
                 <span class="ident">settings</span>.<span class="ident">sender</span>.<span class="ident">address</span>.<span class="ident">to_string</span>(),
-                <span class="ident">settings</span>.<span class="ident">sender</span>.<span class="ident">name</span>.<span class="number">0</span>.<span class="ident">clone</span>(),
+                <span class="ident">settings</span>.<span class="ident">sender</span>.<span class="ident">name</span>.<span class="ident">to_string</span>(),
             ),
         }
     }
