@@ -188,8 +188,6 @@
 <span id="188">188</span>
 <span id="189">189</span>
 <span id="190">190</span>
-<span id="191">191</span>
-<span id="192">192</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -204,12 +202,10 @@
 
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">notification</span>::{<span class="ident">Notification</span>, <span class="ident">NotificationType</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">sqs</span>::<span class="ident">Queue</span> <span class="kw">as</span> <span class="ident">Sqs</span>;
-<span class="kw">use</span> <span class="ident">app_errors</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
-<span class="kw">use</span> <span class="ident">auth_db</span>::<span class="ident">DbClient</span>;
-<span class="kw">use</span> <span class="ident">delivery_problems</span>::<span class="ident">DeliveryProblems</span>;
+<span class="kw">use</span> <span class="ident">db</span>::{<span class="ident">auth_db</span>::<span class="ident">DbClient</span>, <span class="ident">delivery_problems</span>::<span class="ident">DeliveryProblems</span>, <span class="ident">message_data</span>::<span class="ident">MessageData</span>};
 <span class="kw">use</span> <span class="ident">logging</span>::<span class="ident">MozlogLogger</span>;
-<span class="kw">use</span> <span class="ident">message_data</span>::<span class="ident">MessageData</span>;
 <span class="kw">use</span> <span class="ident">settings</span>::<span class="ident">Settings</span>;
+<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">error</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 
 <span class="kw">mod</span> <span class="ident">mock</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">notification</span>;

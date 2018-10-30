@@ -416,8 +416,8 @@
     <span class="ident">Bounce</span> <span class="kw">as</span> <span class="ident">GenericBounce</span>, <span class="ident">Complaint</span> <span class="kw">as</span> <span class="ident">GenericComplaint</span>, <span class="ident">Delivery</span> <span class="kw">as</span> <span class="ident">GenericDelivery</span>,
     <span class="ident">Mail</span> <span class="kw">as</span> <span class="ident">GenericMail</span>, <span class="ident">Notification</span> <span class="kw">as</span> <span class="ident">GenericNotification</span>,
 };
-<span class="kw">use</span> <span class="ident">delivery_problems</span>::{<span class="ident">ProblemSubtype</span>, <span class="ident">ProblemType</span>};
-<span class="kw">use</span> <span class="ident">email_address</span>::<span class="ident">EmailAddress</span>;
+<span class="kw">use</span> <span class="ident">db</span>::<span class="ident">delivery_problems</span>::{<span class="ident">ProblemSubtype</span>, <span class="ident">ProblemType</span>};
+<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">email_address</span>::<span class="ident">EmailAddress</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">test</span>;

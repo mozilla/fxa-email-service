@@ -97,8 +97,8 @@
 <span class="kw">use</span> <span class="ident">uuid</span>::<span class="ident">Uuid</span>;
 
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Headers</span>, <span class="ident">Provider</span>};
-<span class="kw">use</span> <span class="ident">app_errors</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 <span class="kw">use</span> <span class="ident">settings</span>::{<span class="ident">Sender</span>, <span class="ident">Settings</span>, <span class="ident">SocketLabs</span> <span class="kw">as</span> <span class="ident">SocketLabsSettings</span>};
+<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">error</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SocketLabsProvider</span> {
     <span class="ident">settings</span>: <span class="ident">SocketLabsSettings</span>,

@@ -89,6 +89,9 @@
 <span id="89">89</span>
 <span id="90">90</span>
 <span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -116,9 +119,12 @@
 <span class="kw">use</span> <span class="ident">sentry</span>::<span class="ident">integrations</span>::<span class="ident">panic</span>::<span class="ident">register_panic_handler</span>;
 
 <span class="kw">use</span> <span class="ident">fxa_email_service</span>::{
-    <span class="ident">app_errors</span>, <span class="ident">auth_db</span>::<span class="ident">DbClient</span>, <span class="ident">delivery_problems</span>::<span class="ident">DeliveryProblems</span>, <span class="ident">healthcheck</span>,
-    <span class="ident">logging</span>::<span class="ident">MozlogLogger</span>, <span class="ident">message_data</span>::<span class="ident">MessageData</span>, <span class="ident">providers</span>::<span class="ident">Providers</span>, <span class="ident">send</span>,
+    <span class="ident">api</span>::{<span class="ident">healthcheck</span>, <span class="ident">send</span>},
+    <span class="ident">db</span>::{<span class="ident">auth_db</span>::<span class="ident">DbClient</span>, <span class="ident">delivery_problems</span>::<span class="ident">DeliveryProblems</span>, <span class="ident">message_data</span>::<span class="ident">MessageData</span>},
+    <span class="ident">logging</span>::<span class="ident">MozlogLogger</span>,
+    <span class="ident">providers</span>::<span class="ident">Providers</span>,
     <span class="ident">settings</span>::<span class="ident">Settings</span>,
+    <span class="ident">types</span>::<span class="ident">error</span>,
 };
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
@@ -159,12 +165,12 @@
             ],
         )
         .<span class="ident">catch</span>(<span class="macro">catchers</span><span class="macro">!</span>[
-            <span class="ident">app_errors</span>::<span class="ident">bad_request</span>,
-            <span class="ident">app_errors</span>::<span class="ident">not_found</span>,
-            <span class="ident">app_errors</span>::<span class="ident">method_not_allowed</span>,
-            <span class="ident">app_errors</span>::<span class="ident">unprocessable_entity</span>,
-            <span class="ident">app_errors</span>::<span class="ident">too_many_requests</span>,
-            <span class="ident">app_errors</span>::<span class="ident">internal_server_error</span>
+            <span class="ident">error</span>::<span class="ident">bad_request</span>,
+            <span class="ident">error</span>::<span class="ident">not_found</span>,
+            <span class="ident">error</span>::<span class="ident">method_not_allowed</span>,
+            <span class="ident">error</span>::<span class="ident">unprocessable_entity</span>,
+            <span class="ident">error</span>::<span class="ident">too_many_requests</span>,
+            <span class="ident">error</span>::<span class="ident">internal_server_error</span>
         ])
         .<span class="ident">attach</span>(<span class="ident">rocket</span>::<span class="ident">fairing</span>::<span class="ident">AdHoc</span>::<span class="ident">on_request</span>(<span class="op">|</span><span class="ident">request</span>, <span class="kw">_</span><span class="op">|</span> {
             <span class="kw">let</span> <span class="ident">log</span> <span class="op">=</span>

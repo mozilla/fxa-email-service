@@ -140,8 +140,8 @@
 };
 
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Headers</span>, <span class="ident">Provider</span>};
-<span class="kw">use</span> <span class="ident">app_errors</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 <span class="kw">use</span> <span class="ident">settings</span>::{<span class="ident">Sender</span>, <span class="ident">Sendgrid</span> <span class="kw">as</span> <span class="ident">SendgridSettings</span>, <span class="ident">Settings</span>};
+<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">error</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SendgridProvider</span> {
     <span class="ident">client</span>: <span class="ident">Client</span>,

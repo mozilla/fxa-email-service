@@ -108,8 +108,8 @@
 <span class="kw">use</span> <span class="ident">lettre_email</span>::{<span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">EmailError</span>, <span class="ident">EmailBuilder</span>, <span class="ident">Header</span> <span class="kw">as</span> <span class="ident">LettreHeader</span>};
 
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Headers</span>, <span class="ident">Provider</span>};
-<span class="kw">use</span> <span class="ident">app_errors</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 <span class="kw">use</span> <span class="ident">settings</span>::{<span class="ident">Settings</span>, <span class="ident">SmtpCredentials</span>};
+<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">error</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SmtpProvider</span> {
     <span class="ident">host</span>: <span class="ident">String</span>,

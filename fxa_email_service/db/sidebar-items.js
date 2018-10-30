@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["DataType","Date types included in this store."]],"struct":[["Client","Database client."]]});
+initSidebarItems({"mod":[["auth_db","Strongly-typed wrapper for a subset of [`fxa-auth-db-mysql`][authdb]."],["delivery_problems","Bounce and complaint handling."],["message_data","Storage for message metadata."]]});

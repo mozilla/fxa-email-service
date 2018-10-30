@@ -107,8 +107,8 @@
 <span class="kw">use</span> <span class="ident">rusoto_ses</span>::{<span class="ident">RawMessage</span>, <span class="ident">SendRawEmailError</span>, <span class="ident">SendRawEmailRequest</span>, <span class="ident">Ses</span>, <span class="ident">SesClient</span>};
 
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">build_multipart_mime</span>, <span class="ident">Headers</span>, <span class="ident">Provider</span>};
-<span class="kw">use</span> <span class="ident">app_errors</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 <span class="kw">use</span> <span class="ident">settings</span>::<span class="ident">Settings</span>;
+<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">error</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">test</span>;

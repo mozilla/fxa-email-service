@@ -134,10 +134,10 @@
 <span class="kw">use</span> <span class="ident">sentry</span>::<span class="ident">integrations</span>::<span class="ident">panic</span>::<span class="ident">register_panic_handler</span>;
 
 <span class="kw">use</span> <span class="ident">fxa_email_service</span>::{
-    <span class="ident">app_errors</span>::<span class="ident">AppError</span>,
     <span class="ident">logging</span>::<span class="ident">MozlogLogger</span>,
     <span class="ident">queues</span>::{<span class="ident">QueueIds</span>, <span class="ident">Queues</span>, <span class="ident">Sqs</span>},
     <span class="ident">settings</span>::<span class="ident">Settings</span>,
+    <span class="ident">types</span>::<span class="ident">error</span>::<span class="ident">AppError</span>,
 };
 
 <span class="macro">lazy_static</span><span class="macro">!</span> {

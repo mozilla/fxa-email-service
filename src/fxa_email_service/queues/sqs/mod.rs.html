@@ -260,9 +260,9 @@
     <span class="ident">notification</span>::<span class="ident">Notification</span>, <span class="ident">DeleteFuture</span>, <span class="ident">Factory</span>, <span class="ident">Incoming</span>, <span class="ident">Message</span>, <span class="ident">Outgoing</span>, <span class="ident">ReceiveFuture</span>,
     <span class="ident">SendFuture</span>,
 };
-<span class="kw">use</span> <span class="ident">app_errors</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 <span class="kw">use</span> <span class="ident">logging</span>::<span class="ident">MozlogLogger</span>;
 <span class="kw">use</span> <span class="ident">settings</span>::<span class="ident">Settings</span>;
+<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">error</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">notification</span>;
 

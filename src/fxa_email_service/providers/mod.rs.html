@@ -176,8 +176,8 @@
     <span class="ident">mock</span>::<span class="ident">MockProvider</span> <span class="kw">as</span> <span class="ident">Mock</span>, <span class="ident">sendgrid</span>::<span class="ident">SendgridProvider</span> <span class="kw">as</span> <span class="ident">Sendgrid</span>, <span class="ident">ses</span>::<span class="ident">SesProvider</span> <span class="kw">as</span> <span class="ident">Ses</span>,
     <span class="ident">smtp</span>::<span class="ident">SmtpProvider</span> <span class="kw">as</span> <span class="ident">Smtp</span>, <span class="ident">socketlabs</span>::<span class="ident">SocketLabsProvider</span> <span class="kw">as</span> <span class="ident">SocketLabs</span>,
 };
-<span class="kw">use</span> <span class="ident">app_errors</span>::{<span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 <span class="kw">use</span> <span class="ident">settings</span>::{<span class="ident">DefaultProvider</span>, <span class="ident">Settings</span>};
+<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">error</span>::{<span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
 
 <span class="kw">mod</span> <span class="ident">mock</span>;
 <span class="kw">mod</span> <span class="ident">sendgrid</span>;
