@@ -7,7 +7,10 @@
 use std::convert::{From, TryFrom};
 
 use regex::Regex;
-use serde::de::{Deserialize, Deserializer, Error as SerdeError, Unexpected};
+use serde::{
+    de::{Deserialize, Deserializer, Error as SerdeError, Unexpected},
+    ser::{Serialize, Serializer},
+};
 
 use types::error::{AppError, AppErrorKind, AppResult};
 
@@ -34,10 +37,12 @@ lazy_static! {
 /// for compatibility with
 /// the rest of the FxA ecosystem.
 ///
-/// Can be deserialized from duration strings
+/// Can be serialized to
+/// and deserialized from
+/// duration strings
 /// of the format `"{number} {period}"`,
 /// e.g. `"1 hour"` or `"10 minutes"`.
-#[derive(Clone, Debug, Default, Serialize, PartialEq)]
+#[derive(Clone, Debug, Default, PartialEq)]
 pub struct Duration(pub u64);
 
 impl<'d> Deserialize<'d> for Duration {
@@ -53,6 +58,35 @@ impl<'d> Deserialize<'d> for Duration {
         Duration::try_from(value.as_str())
             .map(From::from)
             .map_err(|_| D::Error::invalid_value(Unexpected::Str(&value), &"duration"))
+    }
+}
+
+impl Serialize for Duration {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        let mut duration = if self.0 % YEAR == 0 {
+            format!("{} year", self.0 / YEAR)
+        } else if self.0 % MONTH == 0 {
+            format!("{} month", self.0 / MONTH)
+        } else if self.0 % WEEK == 0 {
+            format!("{} week", self.0 / WEEK)
+        } else if self.0 % DAY == 0 {
+            format!("{} day", self.0 / DAY)
+        } else if self.0 % HOUR == 0 {
+            format!("{} hour", self.0 / HOUR)
+        } else if self.0 % MINUTE == 0 {
+            format!("{} minute", self.0 / MINUTE)
+        } else {
+            format!("{} second", self.0 / SECOND)
+        };
+
+        if self.0 > 1 {
+            duration = format!("{}s", duration);
+        }
+
+        serializer.serialize_str(&duration)
     }
 }
 

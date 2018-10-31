@@ -34,10 +34,6 @@ impl TestFixture {
         }
     }
 
-    pub fn key(&self) -> &str {
-        &self.unhashed_key
-    }
-
     pub fn assert_not_set(&self) {
         let exists: bool = self.redis_client.exists(&self.internal_key).unwrap();
         assert!(!exists);
@@ -51,7 +47,7 @@ impl TestFixture {
         assert!(!exists);
     }
 
-    pub fn assert_data<D>(&self, expected: D)
+    pub fn assert_data<D>(&self, expected: &D)
     where
         D: Debug + DeserializeOwned + PartialEq,
     {
@@ -62,6 +58,6 @@ impl TestFixture {
             .get(&self.internal_key)
             .map(|value: String| serde_json::from_str(&value).unwrap())
             .unwrap();
-        assert_eq!(data, expected);
+        assert_eq!(data, *expected);
     }
 }

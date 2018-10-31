@@ -24,7 +24,7 @@ use serde_json;
 use sha2::Sha256;
 
 use settings::Settings;
-use types::error::AppResult;
+use types::error::{AppError, AppResult};
 
 /// Database client.
 ///
@@ -98,6 +98,40 @@ impl Client {
             .map_err(From::from)
     }
 
+    /// Merge data with existing stored data.
+    pub fn merge<D>(&self, key: &str, data: &D, data_type: DataType) -> AppResult<()>
+    where
+        D: DeserializeOwned + Merge<D> + Serialize,
+    {
+        let key = self.generate_key(key, data_type)?;
+        let key_str = key.as_str();
+        self.client
+            .get(key_str)
+            .map_err(AppError::from)
+            .and_then(|value: Option<String>| {
+                value.map_or_else(
+                    || {
+                        self.client
+                            .set(
+                                key_str,
+                                serde_json::to_string(data).map_err(AppError::from)?,
+                            )
+                            .map_err(From::from)
+                    },
+                    |value| {
+                        let merge_with = serde_json::from_str(&value).map_err(AppError::from)?;
+                        self.client
+                            .set(
+                                key_str,
+                                serde_json::to_string(&data.merge(&merge_with))
+                                    .map_err(AppError::from)?,
+                            )
+                            .map_err(From::from)
+                    },
+                )
+            })
+    }
+
     fn generate_key(&self, key: &str, data_type: DataType) -> AppResult<String> {
         let mut hmac: Hmac<Sha256> = Hmac::new_varkey(self.hmac_key.as_bytes())?;
         hmac.input(key.as_bytes());
@@ -108,6 +142,7 @@ impl Client {
 /// Date types included in this store.
 #[derive(Clone, Copy, Debug)]
 pub enum DataType {
+    Configuration,
     DeliveryProblem,
     MessageData,
 }
@@ -115,6 +150,7 @@ pub enum DataType {
 impl AsRef<str> for DataType {
     fn as_ref(&self) -> &str {
         match *self {
+            DataType::Configuration => "cfg",
             DataType::DeliveryProblem => "del",
             DataType::MessageData => "msg",
         }
@@ -125,4 +161,8 @@ impl Display for DataType {
     fn fmt(&self, formatter: &mut Formatter) -> fmt::Result {
         write!(formatter, "{}", self.as_ref())
     }
+}
+
+pub trait Merge<W> {
+    fn merge(&self, with: &W) -> W;
 }
