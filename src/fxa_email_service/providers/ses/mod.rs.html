@@ -101,7 +101,7 @@
 
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">boxed</span>::<span class="ident">Box</span>;
 
-<span class="kw">use</span> <span class="ident">base64</span>::<span class="ident">encode</span>;
+<span class="kw">use</span> <span class="ident">base64</span>;
 <span class="kw">use</span> <span class="ident">rusoto_core</span>::{<span class="ident">request</span>::<span class="ident">HttpClient</span>, <span class="ident">Region</span>};
 <span class="kw">use</span> <span class="ident">rusoto_credential</span>::<span class="ident">StaticProvider</span>;
 <span class="kw">use</span> <span class="ident">rusoto_ses</span>::{<span class="ident">RawMessage</span>, <span class="ident">SendRawEmailError</span>, <span class="ident">SendRawEmailRequest</span>, <span class="ident">Ses</span>, <span class="ident">SesClient</span>};
@@ -162,10 +162,10 @@
     ) <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">message</span> <span class="op">=</span>
             <span class="ident">build_multipart_mime</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">sender</span>, <span class="ident">to</span>, <span class="ident">cc</span>, <span class="ident">headers</span>, <span class="ident">subject</span>, <span class="ident">body_text</span>, <span class="ident">body_html</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">encoded_message</span> <span class="op">=</span> <span class="ident">encode</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">message</span>));
+        <span class="kw">let</span> <span class="ident">encoded_message</span> <span class="op">=</span> <span class="ident">base64</span>::<span class="ident">encode</span>(<span class="kw-2">&amp;</span><span class="ident">message</span>.<span class="ident">to_string</span>());
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">request</span> <span class="op">=</span> <span class="ident">SendRawEmailRequest</span>::<span class="ident">default</span>();
         <span class="ident">request</span>.<span class="ident">raw_message</span> <span class="op">=</span> <span class="ident">RawMessage</span> {
-            <span class="ident">data</span>: <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">encoded_message</span>).<span class="ident">as_bytes</span>().<span class="ident">to_vec</span>(),
+            <span class="ident">data</span>: <span class="ident">encoded_message</span>.<span class="ident">as_bytes</span>().<span class="ident">to_vec</span>(),
         };
 
         <span class="self">self</span>.<span class="ident">client</span>
