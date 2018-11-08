@@ -29,9 +29,29 @@ jobs:
             "$CIRCLE_PROJECT_REPONAME" \
             "$CIRCLE_BUILD_URL" > version.json
 
+      - restore_cache:
+          key: rust-v1-{{ checksum "Cargo.lock" }}-{{ arch }}
+
+      - run:
+          name: Get cache or build Docker cache image
+          shell: /bin/bash
+          command: |
+            if [ -f dockercache/fxa-email-service-cache.tar ]; then
+              docker load --input dockercache/fxa-email-service-cache.tar
+            else
+              docker build -f Dockerfile-cache -t fxa-email-service-cache:build .
+              mkdir dockercache
+              docker save fxa-email-service-cache > dockercache/fxa-email-service-cache.tar
+            fi
+
+      - save_cache:
+          key: rust-v1-{{ checksum "Cargo.lock" }}-{{ arch }}
+          paths:
+            - dockercache
+
       - run:
           name: Build Docker image
-          command: docker build -f Dockerfile -t fxa-email-service:build .
+          command: docker build -f Dockerfile-withcache -t fxa-email-service:build .
 
       - run:
           name: Deploy to Dockerhub
@@ -72,8 +92,6 @@ workflows:
     jobs:
       - build:
           filters:
-            branches:
-              ignore: /.*/
 
             tags:
               only: /^v[0-9.]+$/

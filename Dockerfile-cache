@@ -1,0 +1,12 @@
+# Docker 17.05 or higher required for multi-stage builds
+FROM rust:1.26.0-stretch as builder
+ADD . /app
+WORKDIR /app
+RUN \
+    apt-get -qq update && \
+    apt-get -qq install -y default-libmysqlclient-dev wget unzip && \
+    \
+    cargo --version && \
+    rustc --version && \
+    cargo install --git https://github.com/vladikoff/cargo-build-deps.git && \
+    cargo build-deps --release
