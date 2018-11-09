@@ -262,151 +262,6 @@
 <span id="262">262</span>
 <span id="263">263</span>
 <span id="264">264</span>
-<span id="265">265</span>
-<span id="266">266</span>
-<span id="267">267</span>
-<span id="268">268</span>
-<span id="269">269</span>
-<span id="270">270</span>
-<span id="271">271</span>
-<span id="272">272</span>
-<span id="273">273</span>
-<span id="274">274</span>
-<span id="275">275</span>
-<span id="276">276</span>
-<span id="277">277</span>
-<span id="278">278</span>
-<span id="279">279</span>
-<span id="280">280</span>
-<span id="281">281</span>
-<span id="282">282</span>
-<span id="283">283</span>
-<span id="284">284</span>
-<span id="285">285</span>
-<span id="286">286</span>
-<span id="287">287</span>
-<span id="288">288</span>
-<span id="289">289</span>
-<span id="290">290</span>
-<span id="291">291</span>
-<span id="292">292</span>
-<span id="293">293</span>
-<span id="294">294</span>
-<span id="295">295</span>
-<span id="296">296</span>
-<span id="297">297</span>
-<span id="298">298</span>
-<span id="299">299</span>
-<span id="300">300</span>
-<span id="301">301</span>
-<span id="302">302</span>
-<span id="303">303</span>
-<span id="304">304</span>
-<span id="305">305</span>
-<span id="306">306</span>
-<span id="307">307</span>
-<span id="308">308</span>
-<span id="309">309</span>
-<span id="310">310</span>
-<span id="311">311</span>
-<span id="312">312</span>
-<span id="313">313</span>
-<span id="314">314</span>
-<span id="315">315</span>
-<span id="316">316</span>
-<span id="317">317</span>
-<span id="318">318</span>
-<span id="319">319</span>
-<span id="320">320</span>
-<span id="321">321</span>
-<span id="322">322</span>
-<span id="323">323</span>
-<span id="324">324</span>
-<span id="325">325</span>
-<span id="326">326</span>
-<span id="327">327</span>
-<span id="328">328</span>
-<span id="329">329</span>
-<span id="330">330</span>
-<span id="331">331</span>
-<span id="332">332</span>
-<span id="333">333</span>
-<span id="334">334</span>
-<span id="335">335</span>
-<span id="336">336</span>
-<span id="337">337</span>
-<span id="338">338</span>
-<span id="339">339</span>
-<span id="340">340</span>
-<span id="341">341</span>
-<span id="342">342</span>
-<span id="343">343</span>
-<span id="344">344</span>
-<span id="345">345</span>
-<span id="346">346</span>
-<span id="347">347</span>
-<span id="348">348</span>
-<span id="349">349</span>
-<span id="350">350</span>
-<span id="351">351</span>
-<span id="352">352</span>
-<span id="353">353</span>
-<span id="354">354</span>
-<span id="355">355</span>
-<span id="356">356</span>
-<span id="357">357</span>
-<span id="358">358</span>
-<span id="359">359</span>
-<span id="360">360</span>
-<span id="361">361</span>
-<span id="362">362</span>
-<span id="363">363</span>
-<span id="364">364</span>
-<span id="365">365</span>
-<span id="366">366</span>
-<span id="367">367</span>
-<span id="368">368</span>
-<span id="369">369</span>
-<span id="370">370</span>
-<span id="371">371</span>
-<span id="372">372</span>
-<span id="373">373</span>
-<span id="374">374</span>
-<span id="375">375</span>
-<span id="376">376</span>
-<span id="377">377</span>
-<span id="378">378</span>
-<span id="379">379</span>
-<span id="380">380</span>
-<span id="381">381</span>
-<span id="382">382</span>
-<span id="383">383</span>
-<span id="384">384</span>
-<span id="385">385</span>
-<span id="386">386</span>
-<span id="387">387</span>
-<span id="388">388</span>
-<span id="389">389</span>
-<span id="390">390</span>
-<span id="391">391</span>
-<span id="392">392</span>
-<span id="393">393</span>
-<span id="394">394</span>
-<span id="395">395</span>
-<span id="396">396</span>
-<span id="397">397</span>
-<span id="398">398</span>
-<span id="399">399</span>
-<span id="400">400</span>
-<span id="401">401</span>
-<span id="402">402</span>
-<span id="403">403</span>
-<span id="404">404</span>
-<span id="405">405</span>
-<span id="406">406</span>
-<span id="407">407</span>
-<span id="408">408</span>
-<span id="409">409</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -417,18 +272,26 @@
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">fmt</span>::{<span class="self">self</span>, <span class="ident">Display</span>, <span class="ident">Formatter</span>},
     <span class="ident">result</span>,
+    <span class="ident">str</span>::<span class="ident">Utf8Error</span>,
 };
 
 <span class="kw">use</span> <span class="ident">failure</span>::{<span class="ident">Backtrace</span>, <span class="ident">Context</span>, <span class="ident">Fail</span>};
+<span class="kw">use</span> <span class="ident">hmac</span>::<span class="ident">crypto_mac</span>::<span class="ident">InvalidKeyLength</span>;
+<span class="kw">use</span> <span class="ident">lettre</span>::<span class="ident">smtp</span>::<span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">SmtpError</span>;
+<span class="kw">use</span> <span class="ident">lettre_email</span>::<span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">EmailError</span>;
+<span class="kw">use</span> <span class="ident">redis</span>::<span class="ident">RedisError</span>;
+<span class="kw">use</span> <span class="ident">reqwest</span>::{<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">RequestError</span>, <span class="ident">UrlError</span>};
 <span class="kw">use</span> <span class="ident">rocket</span>::{
-    <span class="self">self</span>,
     <span class="ident">http</span>::<span class="ident">Status</span>,
     <span class="ident">response</span>::{<span class="self">self</span>, <span class="ident">Responder</span>, <span class="ident">Response</span>},
     <span class="ident">Outcome</span>, <span class="ident">Request</span>, <span class="ident">State</span>,
 };
 <span class="kw">use</span> <span class="ident">rocket_contrib</span>::<span class="ident">Json</span>;
+<span class="kw">use</span> <span class="ident">rusoto_ses</span>::<span class="ident">SendRawEmailError</span>;
+<span class="kw">use</span> <span class="ident">sendgrid</span>::<span class="ident">errors</span>::<span class="ident">SendgridError</span>;
 <span class="kw">use</span> <span class="ident">serde</span>::<span class="ident">ser</span>::{<span class="ident">Serialize</span>, <span class="ident">SerializeMap</span>, <span class="ident">Serializer</span>};
-<span class="kw">use</span> <span class="ident">serde_json</span>::{<span class="ident">map</span>::<span class="ident">Map</span>, <span class="ident">ser</span>::<span class="ident">to_string</span>, <span class="ident">Value</span>};
+<span class="kw">use</span> <span class="ident">serde_json</span>::{<span class="ident">map</span>::<span class="ident">Map</span>, <span class="ident">ser</span>::<span class="ident">to_string</span>, <span class="ident">Error</span> <span class="kw">as</span> <span class="ident">JsonError</span>, <span class="ident">Value</span>};
+<span class="kw">use</span> <span class="ident">socketlabs</span>::<span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">SocketLabsError</span>;
 
 <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">email_address</span>::<span class="ident">EmailAddress</span>;
 <span class="kw">use</span> <span class="ident">db</span>::<span class="ident">delivery_problems</span>::<span class="ident">DeliveryProblem</span>;
@@ -488,13 +351,9 @@
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AppErrorKind</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AppError</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">kind</span>: <span class="ident">AppErrorKind</span>) <span class="op">-&gt;</span> <span class="ident">AppError</span> {
-        <span class="ident">Context</span>::<span class="ident">new</span>(<span class="ident">kind</span>).<span class="ident">into</span>()
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Context</span><span class="op">&lt;</span><span class="ident">AppErrorKind</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">AppError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">inner</span>: <span class="ident">Context</span><span class="op">&lt;</span><span class="ident">AppErrorKind</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">AppError</span> {
-        <span class="kw">let</span> <span class="ident">error</span> <span class="op">=</span> <span class="ident">AppError</span> { <span class="ident">inner</span> };
+        <span class="kw">let</span> <span class="ident">error</span> <span class="op">=</span> <span class="ident">AppError</span> {
+            <span class="ident">inner</span>: <span class="ident">Context</span>::<span class="ident">new</span>(<span class="ident">kind</span>).<span class="ident">into</span>(),
+        };
         <span class="ident">sentry</span>::<span class="ident">integrations</span>::<span class="ident">failure</span>::<span class="ident">capture_fail</span>(<span class="kw-2">&amp;</span><span class="ident">error</span>);
         <span class="ident">error</span>
     }
@@ -549,199 +408,86 @@
 <span class="doccomment">/// The specific kind of error that can occur.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Eq</span>, <span class="ident">Fail</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">AppErrorKind</span> {
-    <span class="doccomment">/// 400 Bad Request</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Bad Request&quot;</span>)]</span>
-    <span class="ident">BadRequest</span>,
-    <span class="doccomment">/// 404 Not Found</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Not Found&quot;</span>)]</span>
-    <span class="ident">NotFound</span>,
-    <span class="doccomment">/// 405 Method Not Allowed</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Method Not Allowed&quot;</span>)]</span>
-    <span class="ident">MethodNotAllowed</span>,
-    <span class="doccomment">/// 422 Unprocessable Entity</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Unprocessable Entity&quot;</span>)]</span>
-    <span class="ident">UnprocessableEntity</span>,
-    <span class="doccomment">/// 429 Too Many Requests,</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Too Many Requests&quot;</span>)]</span>
-    <span class="ident">TooManyRequests</span>,
-    <span class="doccomment">/// 500 Internal Server Error</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Internal Server Error&quot;</span>)]</span>
-    <span class="ident">InternalServerError</span>,
-    <span class="comment">// Unexpected rocket error</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;{:?}&quot;</span>, <span class="ident">_0</span>)]</span>
-    <span class="ident">RocketError</span>(<span class="ident">rocket</span>::<span class="ident">Error</span>),
-
-    <span class="doccomment">/// An error for invalid email params in the /send handler.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Error validating email params&quot;</span>)]</span>
-    <span class="ident">InvalidEmailParams</span>,
-    <span class="doccomment">/// An error for missing email params in the /send handler.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Missing email params&quot;</span>)]</span>
-    <span class="ident">MissingEmailParams</span>(<span class="ident">String</span>),
-
-    <span class="doccomment">/// An error for invalid provider names.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Invalid provider name: {}&quot;</span>, <span class="ident">_0</span>)]</span>
-    <span class="ident">InvalidProvider</span>(<span class="ident">String</span>),
-    <span class="doccomment">/// An error for when we get an error from a provider.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;{}&quot;</span>, <span class="ident">description</span>)]</span>
-    <span class="ident">ProviderError</span> { <span class="ident">name</span>: <span class="ident">String</span>, <span class="ident">description</span>: <span class="ident">String</span> },
-    <span class="doccomment">/// An error for when we have trouble parsing the email message.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;{:?}&quot;</span>, <span class="ident">_0</span>)]</span>
-    <span class="ident">EmailParsingError</span>(<span class="ident">String</span>),
-
-    <span class="doccomment">/// An error for when a bounce violation happens.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Email account sent complaint&quot;</span>)]</span>
-    <span class="ident">ComplaintError</span> {
-        <span class="ident">address</span>: <span class="ident">EmailAddress</span>,
-        <span class="ident">time</span>: <span class="ident">u64</span>,
-        <span class="ident">problem</span>: <span class="ident">DeliveryProblem</span>,
-    },
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Email account soft bounced&quot;</span>)]</span>
-    <span class="ident">BounceSoftError</span> {
-        <span class="ident">address</span>: <span class="ident">EmailAddress</span>,
-        <span class="ident">time</span>: <span class="ident">u64</span>,
-        <span class="ident">problem</span>: <span class="ident">DeliveryProblem</span>,
-    },
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Email account hard bounced&quot;</span>)]</span>
-    <span class="ident">BounceHardError</span> {
-        <span class="ident">address</span>: <span class="ident">EmailAddress</span>,
-        <span class="ident">time</span>: <span class="ident">u64</span>,
-        <span class="ident">problem</span>: <span class="ident">DeliveryProblem</span>,
-    },
-
-    <span class="doccomment">/// An error occurred inside an auth db method.</span>
     <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;{}&quot;</span>, <span class="ident">_0</span>)]</span>
-    <span class="ident">AuthDbError</span>(<span class="ident">String</span>),
+    <span class="ident">Internal</span>(<span class="ident">String</span>),
 
-    <span class="doccomment">/// An error for when an error happens on the queues process.</span>
+    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Not implemented: {}&quot;</span>, <span class="ident">_0</span>)]</span>
+    <span class="ident">NotImplemented</span>(<span class="ident">String</span>),
+
+    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Invalid payload: {}&quot;</span>, <span class="number">0</span>)]</span>
+    <span class="ident">InvalidPayload</span>(<span class="ident">String</span>),
+
+    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Invalid notification: {}&quot;</span>, <span class="ident">_0</span>)]</span>
+    <span class="ident">InvalidNotification</span>(<span class="ident">String</span>),
+
     <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;{}&quot;</span>, <span class="ident">_0</span>)]</span>
     <span class="ident">QueueError</span>(<span class="ident">String</span>),
-    <span class="doccomment">/// An error for when we get an invalid notification type in the queues</span>
-    <span class="doccomment">/// process.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Invalid notification type&quot;</span>)]</span>
-    <span class="ident">InvalidNotificationType</span>,
-    <span class="doccomment">/// An error for when we get notification without a payload in the queues</span>
-    <span class="doccomment">/// process.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Missing payload in {} notification&quot;</span>, <span class="ident">_0</span>)]</span>
-    <span class="ident">MissingNotificationPayload</span>(<span class="ident">String</span>),
 
-    <span class="doccomment">/// An error for when we get SQS messages with missing fields.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Missing SQS message {} field&quot;</span>, <span class="ident">field</span>)]</span>
-    <span class="ident">MissingSqsMessageFields</span> { <span class="ident">queue</span>: <span class="ident">String</span>, <span class="ident">field</span>: <span class="ident">String</span> },
-    <span class="doccomment">/// An error for when the SQS message body does not match MD5 hash.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Message body does not match MD5 hash&quot;</span>)]</span>
-    <span class="ident">SqsMessageHashMismatch</span> {
-        <span class="ident">queue</span>: <span class="ident">String</span>,
-        <span class="ident">hash</span>: <span class="ident">String</span>,
-        <span class="ident">body</span>: <span class="ident">String</span>,
-    },
-    <span class="doccomment">/// An error for when we can&#39;t parse the SQS message.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;SQS message parsing error&quot;</span>)]</span>
-    <span class="ident">SqsMessageParsingError</span> {
-        <span class="ident">queue</span>: <span class="ident">String</span>,
-        <span class="ident">message</span>: <span class="ident">String</span>,
-        <span class="ident">body</span>: <span class="ident">String</span>,
+    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Invalid duration: {}&quot;</span>, <span class="ident">_0</span>)]</span>
+    <span class="ident">InvalidDuration</span>(<span class="ident">String</span>),
+
+    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Soft-bounce limit violated&quot;</span>)]</span>
+    <span class="ident">SoftBounce</span> {
+        <span class="ident">address</span>: <span class="ident">EmailAddress</span>,
+        <span class="ident">time</span>: <span class="ident">u64</span>,
+        <span class="ident">problem</span>: <span class="ident">DeliveryProblem</span>,
     },
 
-    <span class="doccomment">/// An error for when we get and invalid duration string.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;invalid duration: {}&quot;</span>, <span class="ident">_0</span>)]</span>
-    <span class="ident">DurationError</span>(<span class="ident">String</span>),
+    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Hard-bounce limit violated&quot;</span>)]</span>
+    <span class="ident">HardBounce</span> {
+        <span class="ident">address</span>: <span class="ident">EmailAddress</span>,
+        <span class="ident">time</span>: <span class="ident">u64</span>,
+        <span class="ident">problem</span>: <span class="ident">DeliveryProblem</span>,
+    },
 
-    <span class="doccomment">/// An error occured inside a db method.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Redis error: {}&quot;</span>, <span class="ident">_0</span>)]</span>
-    <span class="ident">DbError</span>(<span class="ident">String</span>),
-
-    <span class="doccomment">/// An error for when we try to access functionality that is not</span>
-    <span class="doccomment">/// implemented.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Feature not implemented&quot;</span>)]</span>
-    <span class="ident">NotImplemented</span>,
-
-    <span class="doccomment">/// An error occured while hashing a value.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;HMAC error: {}&quot;</span>, <span class="ident">_0</span>)]</span>
-    <span class="ident">HmacError</span>(<span class="ident">String</span>),
-
-    <span class="doccomment">/// An error occured while serializing or deserializing JSON.</span>
-    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;JSON error: {}&quot;</span>, <span class="ident">_0</span>)]</span>
-    <span class="ident">JsonError</span>(<span class="ident">String</span>),
+    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Complaint limit violated&quot;</span>)]</span>
+    <span class="ident">Complaint</span> {
+        <span class="ident">address</span>: <span class="ident">EmailAddress</span>,
+        <span class="ident">time</span>: <span class="ident">u64</span>,
+        <span class="ident">problem</span>: <span class="ident">DeliveryProblem</span>,
+    },
 }
 
 <span class="kw">impl</span> <span class="ident">AppErrorKind</span> {
     <span class="doccomment">/// Return a rocket response Status to be rendered for an error</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">http_status</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Status</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">AppErrorKind</span>::<span class="ident">NotFound</span> <span class="op">=&gt;</span> <span class="ident">Status</span>::<span class="ident">NotFound</span>,
-            <span class="ident">AppErrorKind</span>::<span class="ident">MethodNotAllowed</span> <span class="op">=&gt;</span> <span class="ident">Status</span>::<span class="ident">MethodNotAllowed</span>,
-            <span class="ident">AppErrorKind</span>::<span class="ident">UnprocessableEntity</span> <span class="op">=&gt;</span> <span class="ident">Status</span>::<span class="ident">UnprocessableEntity</span>,
-            <span class="ident">AppErrorKind</span>::<span class="ident">TooManyRequests</span> <span class="op">=&gt;</span> <span class="ident">Status</span>::<span class="ident">TooManyRequests</span>,
-            <span class="ident">AppErrorKind</span>::<span class="ident">ComplaintError</span> { .. }
-            <span class="op">|</span> <span class="ident">AppErrorKind</span>::<span class="ident">BounceSoftError</span> { .. }
-            <span class="op">|</span> <span class="ident">AppErrorKind</span>::<span class="ident">BounceHardError</span> { .. } <span class="op">=&gt;</span> <span class="ident">Status</span>::<span class="ident">TooManyRequests</span>,
-            <span class="ident">AppErrorKind</span>::<span class="ident">BadRequest</span> <span class="op">|</span> <span class="ident">AppErrorKind</span>::<span class="ident">InvalidEmailParams</span> <span class="op">=&gt;</span> <span class="ident">Status</span>::<span class="ident">BadRequest</span>,
-            <span class="ident">AppErrorKind</span>::<span class="ident">MissingEmailParams</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="ident">Status</span>::<span class="ident">BadRequest</span>,
+            <span class="ident">AppErrorKind</span>::<span class="ident">InvalidPayload</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="ident">Status</span>::<span class="ident">BadRequest</span>,
+            <span class="ident">AppErrorKind</span>::<span class="ident">Complaint</span> { .. } <span class="op">=&gt;</span> <span class="ident">Status</span>::<span class="ident">TooManyRequests</span>,
+            <span class="ident">AppErrorKind</span>::<span class="ident">SoftBounce</span> { .. } <span class="op">=&gt;</span> <span class="ident">Status</span>::<span class="ident">TooManyRequests</span>,
+            <span class="ident">AppErrorKind</span>::<span class="ident">HardBounce</span> { .. } <span class="op">=&gt;</span> <span class="ident">Status</span>::<span class="ident">TooManyRequests</span>,
             <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">Status</span>::<span class="ident">InternalServerError</span>,
         }
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">errno</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">AppErrorKind</span>::<span class="ident">RocketError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">100</span>),
-
-            <span class="ident">AppErrorKind</span>::<span class="ident">MissingEmailParams</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">101</span>),
-            <span class="ident">AppErrorKind</span>::<span class="ident">InvalidEmailParams</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">102</span>),
-
-            <span class="ident">AppErrorKind</span>::<span class="ident">InvalidProvider</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">103</span>),
-            <span class="ident">AppErrorKind</span>::<span class="ident">ProviderError</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">104</span>),
-            <span class="ident">AppErrorKind</span>::<span class="ident">EmailParsingError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">105</span>),
-
-            <span class="ident">AppErrorKind</span>::<span class="ident">ComplaintError</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">106</span>),
-            <span class="ident">AppErrorKind</span>::<span class="ident">BounceSoftError</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">107</span>),
-            <span class="ident">AppErrorKind</span>::<span class="ident">BounceHardError</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">108</span>),
-
-            <span class="ident">AppErrorKind</span>::<span class="ident">AuthDbError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">109</span>),
-
-            <span class="ident">AppErrorKind</span>::<span class="ident">QueueError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">110</span>),
-            <span class="ident">AppErrorKind</span>::<span class="ident">InvalidNotificationType</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">111</span>),
-            <span class="ident">AppErrorKind</span>::<span class="ident">MissingNotificationPayload</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">112</span>),
-
-            <span class="ident">AppErrorKind</span>::<span class="ident">MissingSqsMessageFields</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">113</span>),
-            <span class="ident">AppErrorKind</span>::<span class="ident">SqsMessageHashMismatch</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">114</span>),
-            <span class="ident">AppErrorKind</span>::<span class="ident">SqsMessageParsingError</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">115</span>),
-
-            <span class="ident">AppErrorKind</span>::<span class="ident">DurationError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">116</span>),
-            <span class="ident">AppErrorKind</span>::<span class="ident">DbError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">117</span>),
-
-            <span class="ident">AppErrorKind</span>::<span class="ident">NotImplemented</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">118</span>),
-
-            <span class="ident">AppErrorKind</span>::<span class="ident">HmacError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">119</span>),
-
-            <span class="ident">AppErrorKind</span>::<span class="ident">JsonError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">120</span>),
-
-            <span class="ident">AppErrorKind</span>::<span class="ident">BadRequest</span>
-            <span class="op">|</span> <span class="ident">AppErrorKind</span>::<span class="ident">NotFound</span>
-            <span class="op">|</span> <span class="ident">AppErrorKind</span>::<span class="ident">MethodNotAllowed</span>
-            <span class="op">|</span> <span class="ident">AppErrorKind</span>::<span class="ident">UnprocessableEntity</span>
-            <span class="op">|</span> <span class="ident">AppErrorKind</span>::<span class="ident">TooManyRequests</span>
-            <span class="op">|</span> <span class="ident">AppErrorKind</span>::<span class="ident">InternalServerError</span> <span class="op">=&gt;</span> <span class="prelude-val">None</span>,
+            <span class="ident">AppErrorKind</span>::<span class="ident">Internal</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">100</span>),
+            <span class="ident">AppErrorKind</span>::<span class="ident">NotImplemented</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">101</span>),
+            <span class="ident">AppErrorKind</span>::<span class="ident">InvalidPayload</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">102</span>),
+            <span class="ident">AppErrorKind</span>::<span class="ident">InvalidNotification</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">103</span>),
+            <span class="ident">AppErrorKind</span>::<span class="ident">QueueError</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">104</span>),
+            <span class="ident">AppErrorKind</span>::<span class="ident">InvalidDuration</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">105</span>),
+            <span class="ident">AppErrorKind</span>::<span class="ident">Complaint</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">106</span>),
+            <span class="ident">AppErrorKind</span>::<span class="ident">SoftBounce</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">107</span>),
+            <span class="ident">AppErrorKind</span>::<span class="ident">HardBounce</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">108</span>),
         }
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">additional_fields</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Map</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Value</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fields</span> <span class="op">=</span> <span class="ident">Map</span>::<span class="ident">new</span>();
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">AppErrorKind</span>::<span class="ident">ProviderError</span> { <span class="kw-2">ref</span> <span class="ident">name</span>, .. } <span class="op">=&gt;</span> {
-                <span class="ident">fields</span>.<span class="ident">insert</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;name&quot;</span>), <span class="ident">Value</span>::<span class="ident">String</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">name</span>)));
-            }
-
-            <span class="ident">AppErrorKind</span>::<span class="ident">ComplaintError</span> {
+            <span class="ident">AppErrorKind</span>::<span class="ident">Complaint</span> {
                 <span class="kw-2">ref</span> <span class="ident">address</span>,
                 <span class="kw-2">ref</span> <span class="ident">time</span>,
                 <span class="kw-2">ref</span> <span class="ident">problem</span>,
             }
-            <span class="op">|</span> <span class="ident">AppErrorKind</span>::<span class="ident">BounceSoftError</span> {
+            <span class="op">|</span> <span class="ident">AppErrorKind</span>::<span class="ident">SoftBounce</span> {
                 <span class="kw-2">ref</span> <span class="ident">address</span>,
                 <span class="kw-2">ref</span> <span class="ident">time</span>,
                 <span class="kw-2">ref</span> <span class="ident">problem</span>,
             }
-            <span class="op">|</span> <span class="ident">AppErrorKind</span>::<span class="ident">BounceHardError</span> {
+            <span class="op">|</span> <span class="ident">AppErrorKind</span>::<span class="ident">HardBounce</span> {
                 <span class="kw-2">ref</span> <span class="ident">address</span>,
                 <span class="kw-2">ref</span> <span class="ident">time</span>,
                 <span class="kw-2">ref</span> <span class="ident">problem</span>,
@@ -754,68 +500,32 @@
                 );
             }
 
-            <span class="ident">AppErrorKind</span>::<span class="ident">MissingSqsMessageFields</span> {
-                <span class="kw-2">ref</span> <span class="ident">queue</span>,
-                <span class="kw-2">ref</span> <span class="ident">field</span>,
-            } <span class="op">=&gt;</span> {
-                <span class="ident">fields</span>.<span class="ident">insert</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;queue&quot;</span>), <span class="ident">Value</span>::<span class="ident">String</span>(<span class="ident">queue</span>.<span class="ident">to_owned</span>()));
-                <span class="ident">fields</span>.<span class="ident">insert</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;field&quot;</span>), <span class="ident">Value</span>::<span class="ident">String</span>(<span class="ident">field</span>.<span class="ident">to_owned</span>()));
-            }
-
-            <span class="ident">AppErrorKind</span>::<span class="ident">SqsMessageHashMismatch</span> {
-                <span class="kw-2">ref</span> <span class="ident">queue</span>,
-                <span class="kw-2">ref</span> <span class="ident">hash</span>,
-                <span class="kw-2">ref</span> <span class="ident">body</span>,
-            } <span class="op">=&gt;</span> {
-                <span class="ident">fields</span>.<span class="ident">insert</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;queue&quot;</span>), <span class="ident">Value</span>::<span class="ident">String</span>(<span class="ident">queue</span>.<span class="ident">to_owned</span>()));
-                <span class="ident">fields</span>.<span class="ident">insert</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;hash&quot;</span>), <span class="ident">Value</span>::<span class="ident">String</span>(<span class="ident">hash</span>.<span class="ident">to_owned</span>()));
-                <span class="ident">fields</span>.<span class="ident">insert</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;body&quot;</span>), <span class="ident">Value</span>::<span class="ident">String</span>(<span class="ident">body</span>.<span class="ident">to_owned</span>()));
-            }
-
-            <span class="ident">AppErrorKind</span>::<span class="ident">SqsMessageParsingError</span> {
-                <span class="kw-2">ref</span> <span class="ident">queue</span>,
-                <span class="kw-2">ref</span> <span class="ident">message</span>,
-                <span class="kw-2">ref</span> <span class="ident">body</span>,
-            } <span class="op">=&gt;</span> {
-                <span class="ident">fields</span>.<span class="ident">insert</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;queue&quot;</span>), <span class="ident">Value</span>::<span class="ident">String</span>(<span class="ident">queue</span>.<span class="ident">to_owned</span>()));
-                <span class="ident">fields</span>.<span class="ident">insert</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;message&quot;</span>), <span class="ident">Value</span>::<span class="ident">String</span>(<span class="ident">message</span>.<span class="ident">to_owned</span>()));
-                <span class="ident">fields</span>.<span class="ident">insert</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;body&quot;</span>), <span class="ident">Value</span>::<span class="ident">String</span>(<span class="ident">body</span>.<span class="ident">to_owned</span>()));
-            }
-
             <span class="kw">_</span> <span class="op">=&gt;</span> (),
         }
         <span class="ident">fields</span>
     }
 }
 
-<span class="attribute">#[<span class="ident">catch</span>(<span class="number">400</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bad_request</span>() <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">BadRequest</span>)<span class="question-mark">?</span>
+<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">to_internal_error</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">from</span>:<span class="ident">ty</span>) <span class="op">=&gt;</span> {
+        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">from</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">AppError</span> {
+            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">error</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">from</span>) <span class="op">-&gt;</span> <span class="ident">AppError</span> {
+                <span class="ident">AppErrorKind</span>::<span class="ident">Internal</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">error</span>)).<span class="ident">into</span>()
+            }
+        }
+    };
 }
 
-<span class="attribute">#[<span class="ident">catch</span>(<span class="number">404</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">not_found</span>() <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">NotFound</span>)<span class="question-mark">?</span>
-}
-
-<span class="attribute">#[<span class="ident">catch</span>(<span class="number">405</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">method_not_allowed</span>() <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">MethodNotAllowed</span>)<span class="question-mark">?</span>
-}
-
-<span class="attribute">#[<span class="ident">catch</span>(<span class="number">422</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unprocessable_entity</span>() <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">UnprocessableEntity</span>)<span class="question-mark">?</span>
-}
-
-<span class="attribute">#[<span class="ident">catch</span>(<span class="number">429</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">too_many_requests</span>() <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">TooManyRequests</span>)<span class="question-mark">?</span>
-}
-
-<span class="attribute">#[<span class="ident">catch</span>(<span class="number">500</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">internal_server_error</span>() <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">InternalServerError</span>)<span class="question-mark">?</span>
-}
+<span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">EmailError</span>);
+<span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">InvalidKeyLength</span>);
+<span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">JsonError</span>);
+<span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">RedisError</span>);
+<span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">RequestError</span>);
+<span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">SendgridError</span>);
+<span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">SendRawEmailError</span>);
+<span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">SmtpError</span>);
+<span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">SocketLabsError</span>);
+<span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">UrlError</span>);
+<span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">Utf8Error</span>);
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../../../../";window.currentCrate = "fxa_email_service";</script><script src="../../../../aliases.js"></script><script src="../../../../main.js"></script><script defer src="../../../../search-index.js"></script></body></html>

@@ -36,10 +36,6 @@
 <span id="36">36</span>
 <span id="37">37</span>
 <span id="38">38</span>
-<span id="39">39</span>
-<span id="40">40</span>
-<span id="41">41</span>
-<span id="42">42</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -57,7 +53,7 @@
 <span class="kw">use</span> <span class="ident">serde_json</span>;
 
 <span class="kw">use</span> <span class="ident">settings</span>::<span class="ident">Settings</span>;
-<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">error</span>::{<span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
+<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">error</span>::<span class="ident">AppResult</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">test</span>;
@@ -74,14 +70,10 @@
 
 <span class="attribute">#[<span class="ident">get</span>(<span class="string">&quot;/__heartbeat__&quot;</span>)]</span>
 <span class="kw">fn</span> <span class="ident">heartbeat</span>(<span class="ident">settings</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">Settings</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span><span class="ident">Json</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">db</span> <span class="op">=</span> <span class="ident">RequestClient</span>::<span class="ident">new</span>()
+    <span class="ident">RequestClient</span>::<span class="ident">new</span>()
         .<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}__heartbeat__&quot;</span>, <span class="ident">settings</span>.<span class="ident">authdb</span>.<span class="ident">baseuri</span>))
-        .<span class="ident">send</span>();
-
-    <span class="kw">match</span> <span class="ident">db</span> {
-        <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Json</span>(<span class="macro">json</span><span class="macro">!</span>({}))),
-        <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">AppErrorKind</span>::<span class="ident">AuthDbError</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">err</span>)).<span class="ident">into</span>()),
-    }
+        .<span class="ident">send</span>()
+        .<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(<span class="ident">Json</span>(<span class="macro">json</span><span class="macro">!</span>({}))))<span class="question-mark">?</span>
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g. <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g. <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g. <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../../../../";window.currentCrate = "fxa_email_service";</script><script src="../../../../aliases.js"></script><script src="../../../../main.js"></script><script defer src="../../../../search-index.js"></script></body></html>
