@@ -105,12 +105,6 @@
 <span id="105">105</span>
 <span id="106">106</span>
 <span id="107">107</span>
-<span id="108">108</span>
-<span id="109">109</span>
-<span id="110">110</span>
-<span id="111">111</span>
-<span id="112">112</span>
-<span id="113">113</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -146,7 +140,6 @@
     <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">HOST_FORMAT</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;^[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*$&quot;</span>).<span class="ident">unwrap</span>();
     <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">LOGGING_LEVEL</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;^(?:normal|debug|critical|off)$&quot;</span>).<span class="ident">unwrap</span>();
     <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">LOGGING_FORMAT</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;^(?:mozlog|pretty|null)$&quot;</span>).<span class="ident">unwrap</span>();
-    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">PROVIDER_FORMAT</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;^(?:mock|sendgrid|ses|smtp|socketlabs)$&quot;</span>).<span class="ident">unwrap</span>();
     <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">SENDER_NAME_FORMAT</span>: <span class="ident">Regex</span> <span class="op">=</span>
         <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;^[A-Za-z0-9-]+(?: [A-Za-z0-9-]+)*$&quot;</span>).<span class="ident">unwrap</span>();
     <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">SENDGRID_API_KEY_FORMAT</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;^[A-Za-z0-9._-]+$&quot;</span>).<span class="ident">unwrap</span>();
@@ -199,11 +192,6 @@
 <span class="doccomment">/// Validate logging format.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">logging_format</span>(<span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
     <span class="ident">LOGGING_FORMAT</span>.<span class="ident">is_match</span>(<span class="ident">value</span>)
-}
-
-<span class="doccomment">/// Validate an email provider.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">provider</span>(<span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-    <span class="ident">PROVIDER_FORMAT</span>.<span class="ident">is_match</span>(<span class="ident">value</span>)
 }
 
 <span class="doccomment">/// Validate a sender name.</span>

@@ -193,6 +193,9 @@
 <span id="193">193</span>
 <span id="194">194</span>
 <span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -200,7 +203,7 @@
 
 <span class="doccomment">//! Generic abstraction of specific email providers.</span>
 
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">boxed</span>::<span class="ident">Box</span>, <span class="ident">collections</span>::<span class="ident">HashMap</span>};
+<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">boxed</span>::<span class="ident">Box</span>, <span class="ident">collections</span>::<span class="ident">HashMap</span>, <span class="ident">convert</span>::<span class="ident">TryFrom</span>};
 
 <span class="kw">use</span> <span class="ident">emailmessage</span>::{<span class="ident">header</span>::<span class="ident">ContentType</span>, <span class="ident">Message</span>, <span class="ident">MessageBuilder</span>, <span class="ident">MultiPart</span>, <span class="ident">SinglePart</span>};
 
@@ -208,10 +211,11 @@
     <span class="ident">mock</span>::<span class="ident">MockProvider</span> <span class="kw">as</span> <span class="ident">Mock</span>, <span class="ident">sendgrid</span>::<span class="ident">SendgridProvider</span> <span class="kw">as</span> <span class="ident">Sendgrid</span>, <span class="ident">ses</span>::<span class="ident">SesProvider</span> <span class="kw">as</span> <span class="ident">Ses</span>,
     <span class="ident">smtp</span>::<span class="ident">SmtpProvider</span> <span class="kw">as</span> <span class="ident">Smtp</span>, <span class="ident">socketlabs</span>::<span class="ident">SocketLabsProvider</span> <span class="kw">as</span> <span class="ident">SocketLabs</span>,
 };
-<span class="kw">use</span> <span class="ident">settings</span>::{<span class="ident">DefaultProvider</span>, <span class="ident">Settings</span>};
+<span class="kw">use</span> <span class="ident">settings</span>::<span class="ident">Settings</span>;
 <span class="kw">use</span> <span class="ident">types</span>::{
     <span class="ident">error</span>::{<span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>},
     <span class="ident">headers</span>::<span class="kw-2">*</span>,
+    <span class="ident">provider</span>::<span class="ident">Provider</span> <span class="kw">as</span> <span class="ident">ProviderType</span>,
 };
 
 <span class="kw">mod</span> <span class="ident">mock</span>;
@@ -316,40 +320,38 @@
 
 <span class="doccomment">/// Generic provider wrapper.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Providers</span> {
-    <span class="ident">default_provider</span>: <span class="ident">String</span>,
+    <span class="ident">default_provider</span>: <span class="ident">ProviderType</span>,
     <span class="ident">force_default_provider</span>: <span class="ident">bool</span>,
-    <span class="ident">providers</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Provider</span><span class="op">&gt;&gt;</span>,
+    <span class="ident">providers</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ProviderType</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Provider</span><span class="op">&gt;&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Providers</span> {
     <span class="doccomment">/// Instantiate the provider clients.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">settings</span>: <span class="kw-2">&amp;</span><span class="ident">Settings</span>) <span class="op">-&gt;</span> <span class="ident">Providers</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">providers</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Provider</span><span class="op">&gt;&gt;</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">new</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">providers</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ProviderType</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Provider</span><span class="op">&gt;&gt;</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">new</span>();
 
         <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">set_provider</span> {
-            (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">constructor</span>:<span class="ident">expr</span>) <span class="op">=&gt;</span> {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">settings</span>.<span class="ident">provider</span>.<span class="ident">forcedefault</span>
-                    <span class="op">||</span> <span class="ident">settings</span>.<span class="ident">provider</span>.<span class="ident">default</span> <span class="op">==</span> <span class="ident">DefaultProvider</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span>))
-                {
-                    <span class="ident">providers</span>.<span class="ident">insert</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">id</span>), <span class="ident">Box</span>::<span class="ident">new</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">constructor</span>));
+            (<span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">constructor</span>:<span class="ident">expr</span>) <span class="op">=&gt;</span> {
+                <span class="kw">if</span> <span class="op">!</span><span class="ident">settings</span>.<span class="ident">provider</span>.<span class="ident">forcedefault</span> <span class="op">||</span> <span class="ident">settings</span>.<span class="ident">provider</span>.<span class="ident">default</span> <span class="op">==</span> <span class="macro-nonterminal">$</span><span class="kw">type</span> {
+                    <span class="macro-nonterminal">providers</span>.<span class="ident">insert</span>(<span class="macro-nonterminal">$</span><span class="kw">type</span>, <span class="macro-nonterminal">Box</span>::<span class="ident">new</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">constructor</span>));
                 }
             };
         }
 
-        <span class="macro">set_provider</span><span class="macro">!</span>(<span class="string">&quot;mock&quot;</span>, <span class="ident">Mock</span>);
-        <span class="macro">set_provider</span><span class="macro">!</span>(<span class="string">&quot;ses&quot;</span>, <span class="ident">Ses</span>::<span class="ident">new</span>(<span class="ident">settings</span>));
-        <span class="macro">set_provider</span><span class="macro">!</span>(<span class="string">&quot;smtp&quot;</span>, <span class="ident">Smtp</span>::<span class="ident">new</span>(<span class="ident">settings</span>));
+        <span class="macro">set_provider</span><span class="macro">!</span>(<span class="ident">ProviderType</span>::<span class="ident">Mock</span>, <span class="ident">Mock</span>);
+        <span class="macro">set_provider</span><span class="macro">!</span>(<span class="ident">ProviderType</span>::<span class="ident">Ses</span>, <span class="ident">Ses</span>::<span class="ident">new</span>(<span class="ident">settings</span>));
+        <span class="macro">set_provider</span><span class="macro">!</span>(<span class="ident">ProviderType</span>::<span class="ident">Smtp</span>, <span class="ident">Smtp</span>::<span class="ident">new</span>(<span class="ident">settings</span>));
 
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">sendgrid</span>) <span class="op">=</span> <span class="ident">settings</span>.<span class="ident">sendgrid</span> {
-            <span class="macro">set_provider</span><span class="macro">!</span>(<span class="string">&quot;sendgrid&quot;</span>, <span class="ident">Sendgrid</span>::<span class="ident">new</span>(<span class="ident">sendgrid</span>, <span class="ident">settings</span>));
+            <span class="macro">set_provider</span><span class="macro">!</span>(<span class="ident">ProviderType</span>::<span class="ident">Sendgrid</span>, <span class="ident">Sendgrid</span>::<span class="ident">new</span>(<span class="ident">sendgrid</span>, <span class="ident">settings</span>));
         }
 
         <span class="kw">if</span> <span class="ident">settings</span>.<span class="ident">socketlabs</span>.<span class="ident">is_some</span>() {
-            <span class="macro">set_provider</span><span class="macro">!</span>(<span class="string">&quot;socketlabs&quot;</span>, <span class="ident">SocketLabs</span>::<span class="ident">new</span>(<span class="ident">settings</span>));
+            <span class="macro">set_provider</span><span class="macro">!</span>(<span class="ident">ProviderType</span>::<span class="ident">SocketLabs</span>, <span class="ident">SocketLabs</span>::<span class="ident">new</span>(<span class="ident">settings</span>));
         }
 
         <span class="ident">Providers</span> {
-            <span class="ident">default_provider</span>: <span class="ident">settings</span>.<span class="ident">provider</span>.<span class="ident">default</span>.<span class="ident">to_string</span>(),
+            <span class="ident">default_provider</span>: <span class="ident">settings</span>.<span class="ident">provider</span>.<span class="ident">default</span>,
             <span class="ident">force_default_provider</span>: <span class="ident">settings</span>.<span class="ident">provider</span>.<span class="ident">forcedefault</span>,
             <span class="ident">providers</span>,
         }
@@ -367,13 +369,17 @@
         <span class="ident">provider_id</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>,
     ) <span class="op">-&gt;</span> <span class="ident">AppResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">resolved_provider_id</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">force_default_provider</span> {
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">default_provider</span>
+            <span class="self">self</span>.<span class="ident">default_provider</span>
         } <span class="kw">else</span> {
-            <span class="ident">provider_id</span>.<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">default_provider</span>)
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">provider_id</span>) <span class="op">=</span> <span class="ident">provider_id</span> {
+                <span class="ident">ProviderType</span>::<span class="ident">try_from</span>(<span class="ident">provider_id</span>)<span class="question-mark">?</span>
+            } <span class="kw">else</span> {
+                <span class="self">self</span>.<span class="ident">default_provider</span>
+            }
         };
 
         <span class="self">self</span>.<span class="ident">providers</span>
-            .<span class="ident">get</span>(<span class="ident">resolved_provider_id</span>)
+            .<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">resolved_provider_id</span>)
             .<span class="ident">ok_or_else</span>(<span class="op">||</span> {
                 <span class="ident">AppErrorKind</span>::<span class="ident">InvalidPayload</span>(<span class="macro">format</span><span class="macro">!</span>(
                     <span class="string">&quot;provider `{}` is not enabled&quot;</span>,
