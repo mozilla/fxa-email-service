@@ -262,6 +262,8 @@
 <span id="262">262</span>
 <span id="263">263</span>
 <span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -277,6 +279,7 @@
 
 <span class="kw">use</span> <span class="ident">failure</span>::{<span class="ident">Backtrace</span>, <span class="ident">Context</span>, <span class="ident">Fail</span>};
 <span class="kw">use</span> <span class="ident">hmac</span>::<span class="ident">crypto_mac</span>::<span class="ident">InvalidKeyLength</span>;
+<span class="kw">use</span> <span class="ident">hyperx</span>::<span class="ident">mime</span>::<span class="ident">FromStrError</span>;
 <span class="kw">use</span> <span class="ident">lettre</span>::<span class="ident">smtp</span>::<span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">SmtpError</span>;
 <span class="kw">use</span> <span class="ident">lettre_email</span>::<span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">EmailError</span>;
 <span class="kw">use</span> <span class="ident">redis</span>::<span class="ident">RedisError</span>;
@@ -517,6 +520,7 @@
 }
 
 <span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">EmailError</span>);
+<span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">FromStrError</span>);
 <span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">InvalidKeyLength</span>);
 <span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">JsonError</span>);
 <span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">RedisError</span>);
