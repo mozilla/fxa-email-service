@@ -6,7 +6,7 @@
 
 use std::{boxed::Box, collections::HashMap};
 
-use emailmessage::{header::ContentType, Message, MessageBuilder, MultiPart, SinglePart};
+use emailmessage::{header::ContentType, Mailbox, Message, MessageBuilder, MultiPart, SinglePart};
 
 use self::{
     mock::MockProvider as Mock, sendgrid::SendgridProvider as Sendgrid, ses::SesProvider as Ses,
@@ -39,8 +39,10 @@ fn build_multipart_mime<'a>(
     body_text: &'a str,
     body_html: Option<&'a str>,
 ) -> AppResult<Message<MultiPart<&'a str>>> {
+    let sender: Mailbox = sender.parse()?;
     let mut message = Message::builder()
-        .from(sender.parse()?)
+        .sender(sender.clone())
+        .from(sender)
         .to(to.parse()?)
         .subject(subject)
         .mime_1_0();
@@ -66,7 +68,7 @@ fn build_multipart_mime<'a>(
         body = body.multipart(
             MultiPart::related().singlepart(
                 SinglePart::base64()
-                    .header(ContentType::html())
+                    .header(ContentType("text/html; charset=utf-8".parse()?))
                     .body(body_html),
             ),
         );
@@ -78,6 +80,7 @@ fn build_multipart_mime<'a>(
 fn set_custom_header(message: MessageBuilder, name: &str, value: &str) -> MessageBuilder {
     let lowercase_name = name.to_lowercase();
     match lowercase_name.as_str() {
+        "content-language" => message.header(ContentLanguage::new(value.to_owned())),
         "x-device-id" => message.header(DeviceId::new(value.to_owned())),
         "x-email-sender" => message.header(EmailSender::new(value.to_owned())),
         "x-email-service" => message.header(EmailService::new(value.to_owned())),

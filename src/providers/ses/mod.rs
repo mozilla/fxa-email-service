@@ -5,6 +5,7 @@
 use std::boxed::Box;
 
 use base64;
+use hyperx::mime::FromStrError;
 use rusoto_core::{request::HttpClient, Region};
 use rusoto_credential::StaticProvider;
 use rusoto_ses::{RawMessage, SendRawEmailError, SendRawEmailRequest, Ses, SesClient};
@@ -89,6 +90,16 @@ impl From<SendRawEmailError> for AppError {
     fn from(error: SendRawEmailError) -> AppError {
         AppErrorKind::ProviderError {
             name: String::from("SES"),
+            description: format!("{:?}", error),
+        }
+        .into()
+    }
+}
+
+impl From<FromStrError> for AppError {
+    fn from(error: FromStrError) -> Self {
+        AppErrorKind::ProviderError {
+            name: "SES".to_owned(),
             description: format!("{:?}", error),
         }
         .into()
