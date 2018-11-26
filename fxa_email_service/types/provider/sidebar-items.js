@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Provider","Identifies the underlying email provider."]]});
+initSidebarItems({"enum":[["Provider",""]]});
