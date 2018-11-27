@@ -558,7 +558,7 @@
 
 <span class="doccomment">/// A definition object for a bounce/complaint limit.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BounceLimit</span> {
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DeliveryProblemLimit</span> {
     <span class="doccomment">/// The time period</span>
     <span class="doccomment">/// within which to limit bounces/complaints.</span>
     <span class="kw">pub</span> <span class="ident">period</span>: <span class="ident">Duration</span>,
@@ -571,21 +571,21 @@
 <span class="doccomment">/// Controls the thresholds and behaviour</span>
 <span class="doccomment">/// for bounce and complaint reports.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BounceLimits</span> {
-    <span class="doccomment">/// Controls whether to enable bounce limits.</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DeliveryProblemLimits</span> {
+    <span class="doccomment">/// Controls whether to enable delivery problem limits.</span>
     <span class="doccomment">/// If set to `false`,</span>
     <span class="doccomment">/// bounce and complaint records in the database</span>
     <span class="doccomment">/// are ignored.</span>
     <span class="kw">pub</span> <span class="ident">enabled</span>: <span class="ident">bool</span>,
 
     <span class="doccomment">/// Limits for complaints/spam reports.</span>
-    <span class="kw">pub</span> <span class="ident">complaint</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">BounceLimit</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">complaint</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">DeliveryProblemLimit</span><span class="op">&gt;</span>,
 
     <span class="doccomment">/// Limits for hard (permanent) bounces.</span>
-    <span class="kw">pub</span> <span class="ident">hard</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">BounceLimit</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">hard</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">DeliveryProblemLimit</span><span class="op">&gt;</span>,
 
     <span class="doccomment">/// Limits for soft (transient) bounces.</span>
-    <span class="kw">pub</span> <span class="ident">soft</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">BounceLimit</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">soft</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">DeliveryProblemLimit</span><span class="op">&gt;</span>,
 }
 
 <span class="doccomment">/// Settings for logging.</span>
@@ -737,10 +737,10 @@
 
     <span class="doccomment">/// Controls the thresholds and behaviour</span>
     <span class="doccomment">/// for bounce and complaint reports.</span>
-    <span class="doccomment">/// If bounce limits are enabled,</span>
+    <span class="doccomment">/// If delivery problem limits are enabled,</span>
     <span class="doccomment">/// emails sent to offending addresses</span>
     <span class="doccomment">/// will fail with a `429` error.</span>
-    <span class="kw">pub</span> <span class="ident">bouncelimits</span>: <span class="ident">BounceLimits</span>,
+    <span class="kw">pub</span> <span class="ident">deliveryproblemlimits</span>: <span class="ident">DeliveryProblemLimits</span>,
 
     <span class="doccomment">/// The env sets which environment we are in.</span>
     <span class="doccomment">/// It defaults to `dev` if not set.</span>
