@@ -73,6 +73,12 @@
 <span id="73">73</span>
 <span id="74">74</span>
 <span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -83,7 +89,7 @@
 <span class="doccomment">//! miscellaneous generally-used types.</span>
 
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">enum_boilerplate</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">description</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">error</span>:<span class="ident">ident</span>) {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">description</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">default</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">error</span>:<span class="ident">ident</span>) {
         $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">variant</span>:<span class="ident">ident</span> <span class="op">=&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">serialization</span>:<span class="ident">expr</span>,)<span class="op">+</span>
     }) <span class="op">=&gt;</span> {
         <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>)]</span>
@@ -98,6 +104,12 @@
                     $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">variant</span> <span class="op">=&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">serialization</span>,
                     )<span class="op">+</span>
                 }
+            }
+        }
+
+        <span class="kw">impl</span> <span class="ident">std</span>::<span class="ident">default</span>::<span class="ident">Default</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span> {
+            <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+                <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">default</span>
             }
         }
 
