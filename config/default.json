@@ -3,7 +3,7 @@
     "baseuri": "http://127.0.0.1:8000/"
   },
   "aws": {
-    "region": "us-west-2"
+    "region": ["us-west-2"]
   },
   "deliveryproblemlimits": {
     "enabled": true,

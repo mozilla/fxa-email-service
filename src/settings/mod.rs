@@ -19,6 +19,7 @@ use rocket::config::{
     Config as RocketConfig, ConfigError as RocketConfigError, Environment as RocketEnvironment,
     LoggingLevel as RocketLoggingLevel,
 };
+use rusoto_core::Region as AwsRegion;
 use serde::de::{Deserialize, Deserializer, Error, Unexpected};
 
 use logging::MozlogLogger;
@@ -69,8 +70,6 @@ macro_rules! deserialize_and_validate {
 deserialize_and_validate! {
     /// AWS access key type.
     (AwsAccess, aws_access, "AWS access key"),
-    /// AWS region type.
-    (AwsRegion, aws_region, "AWS region"),
     /// AWS secret key type.
     (AwsSecret, aws_secret, "AWS secret key"),
     /// Base URI type.

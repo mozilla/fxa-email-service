@@ -99,10 +99,10 @@ fn env_vars_take_precedence() {
                     secret: AwsSecret(String::from("s")),
                 }
             };
-            let aws_region = if settings.aws.region.0 == "us-east-1" {
-                "eu-west-1"
+            let aws_region = if settings.aws.region == AwsRegion::UsEast1 {
+                AwsRegion::EuWest1
             } else {
-                "us-east-1"
+                AwsRegion::UsEast1
             };
             let aws_sqs_urls = if let Some(ref urls) = settings.aws.sqsurls {
                 SqsUrls {
@@ -199,7 +199,7 @@ fn env_vars_take_precedence() {
             };
 
             env::set_var("FXA_EMAIL_AUTHDB_BASEURI", &auth_db_base_uri);
-            env::set_var("FXA_EMAIL_AWS_REGION", &aws_region);
+            env::set_var("FXA_EMAIL_AWS_REGION", aws_region.name());
             env::set_var("FXA_EMAIL_AWS_KEYS_ACCESS", &aws_keys.access.0);
             env::set_var("FXA_EMAIL_AWS_KEYS_SECRET", &aws_keys.secret.0);
             env::set_var("FXA_EMAIL_AWS_SQSURLS_BOUNCE", &aws_sqs_urls.bounce.0);
@@ -245,7 +245,7 @@ fn env_vars_take_precedence() {
             match Settings::new() {
                 Ok(env_settings) => {
                     assert_eq!(env_settings.authdb.baseuri, BaseUri(auth_db_base_uri));
-                    assert_eq!(env_settings.aws.region, AwsRegion(aws_region.to_string()));
+                    assert_eq!(env_settings.aws.region, aws_region);
                     assert_eq!(
                         env_settings.deliveryproblemlimits.enabled,
                         delivery_problem_limits_enabled

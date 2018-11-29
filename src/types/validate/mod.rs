@@ -14,7 +14,6 @@
 //! or wiring in request parameters.
 
 use regex::Regex;
-use rusoto_core::Region;
 
 #[cfg(test)]
 mod test;
@@ -36,11 +35,6 @@ lazy_static! {
         Regex::new(r"^https?://[A-Za-z0-9+/:=\.]+@[A-Za-z0-9+/:=\.]+/[0-9]+$").unwrap();
     static ref SQS_URL_FORMAT: Regex =
         Regex::new(r"^https://sqs\.[a-z0-9-]+\.amazonaws\.com/[0-9]+/[A-Za-z0-9-]+$").unwrap();
-}
-
-/// Validate an AWS region.
-pub fn aws_region(value: &str) -> bool {
-    value.parse::<Region>().is_ok()
 }
 
 /// Validate an AWS access key.

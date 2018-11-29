@@ -11,27 +11,6 @@ fn random_alphanum_string(len: usize) -> String {
 }
 
 #[test]
-fn aws_region() {
-    assert!(validate::aws_region("us-east-1"));
-    assert!(validate::aws_region("us-east-2"));
-    assert!(validate::aws_region("us-west-1"));
-    assert!(validate::aws_region("eu-west-1"));
-}
-
-#[test]
-fn invalid_aws_region() {
-    assert_eq!(validate::aws_region("us-east-1a"), false);
-    assert_eq!(validate::aws_region("us-east-1 "), false);
-    assert_eq!(validate::aws_region(" us-east-1"), false);
-    assert_eq!(validate::aws_region("xus-east-1"), false);
-    assert_eq!(validate::aws_region("us-east-10"), false);
-    assert_eq!(validate::aws_region("us-east-0"), false);
-    assert_eq!(validate::aws_region("us-east-3"), false);
-    assert_eq!(validate::aws_region("us-north-1"), false);
-    assert_eq!(validate::aws_region("eu-east-1"), false);
-}
-
-#[test]
 fn aws_access() {
     assert!(validate::aws_access("A0"));
     assert!(validate::aws_access("Z9"));

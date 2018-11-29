@@ -12,7 +12,7 @@ use std::{
 
 use futures::future::{self, Future};
 use md5;
-use rusoto_core::{request::HttpClient, Region};
+use rusoto_core::request::HttpClient;
 use rusoto_credential::StaticProvider;
 use rusoto_sqs::{
     DeleteMessageError, DeleteMessageRequest, Message as SqsMessage, ReceiveMessageError,
@@ -96,23 +96,16 @@ impl Queue {
 
 impl Factory for Queue {
     fn new(id: String, settings: &Settings) -> Queue {
-        let region = settings
-            .aws
-            .region
-            .as_ref()
-            .parse::<Region>()
-            .expect("invalid region");
-
         let client: Box<Sqs> = if let Some(ref keys) = settings.aws.keys {
             let creds =
                 StaticProvider::new(keys.access.to_string(), keys.secret.to_string(), None, None);
             Box::new(SqsClient::new_with(
                 HttpClient::new().expect("Couldn't start HTTP Client."),
                 creds,
-                region,
+                settings.aws.region.clone(),
             ))
         } else {
-            Box::new(SqsClient::new(region))
+            Box::new(SqsClient::new(settings.aws.region.clone()))
         };
 
         let mut receive_request = ReceiveMessageRequest::default();
