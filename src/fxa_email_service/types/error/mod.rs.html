@@ -274,6 +274,14 @@
 <span id="274">274</span>
 <span id="275">275</span>
 <span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -468,6 +476,12 @@
 
     <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Invalid environment: {}&quot;</span>, <span class="ident">_0</span>)]</span>
     <span class="ident">InvalidEnv</span>(<span class="ident">String</span>),
+
+    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Invalid log level: {}&quot;</span>, <span class="ident">_0</span>)]</span>
+    <span class="ident">InvalidLogLevel</span>(<span class="ident">String</span>),
+
+    <span class="attribute">#[<span class="ident">fail</span>(<span class="ident">display</span> <span class="op">=</span> <span class="string">&quot;Invalid log format: {}&quot;</span>, <span class="ident">_0</span>)]</span>
+    <span class="ident">InvalidLogFormat</span>(<span class="ident">String</span>),
 }
 
 <span class="kw">impl</span> <span class="ident">AppErrorKind</span> {
@@ -494,6 +508,8 @@
             <span class="ident">AppErrorKind</span>::<span class="ident">SoftBounce</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">107</span>),
             <span class="ident">AppErrorKind</span>::<span class="ident">HardBounce</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">108</span>),
             <span class="ident">AppErrorKind</span>::<span class="ident">InvalidEnv</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">109</span>),
+            <span class="ident">AppErrorKind</span>::<span class="ident">InvalidLogLevel</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">110</span>),
+            <span class="ident">AppErrorKind</span>::<span class="ident">InvalidLogFormat</span> { .. } <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="number">111</span>),
         }
     }
 
