@@ -39,6 +39,7 @@ extern crate failure;
 extern crate futures;
 extern crate hex;
 extern crate hmac;
+extern crate http;
 extern crate hyperx;
 #[macro_use]
 extern crate lazy_static;
@@ -53,6 +54,7 @@ extern crate reqwest;
 extern crate rocket;
 #[macro_use]
 extern crate rocket_contrib;
+extern crate roxmltree;
 extern crate rusoto_core;
 extern crate rusoto_credential;
 extern crate rusoto_ses;
