@@ -378,6 +378,8 @@
 <span id="378">378</span>
 <span id="379">379</span>
 <span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -400,11 +402,13 @@
     <span class="ident">auth_db</span>::<span class="ident">Db</span> <span class="kw">as</span> <span class="ident">AuthDb</span>,
     <span class="ident">core</span>::{<span class="ident">Client</span> <span class="kw">as</span> <span class="ident">DbClient</span>, <span class="ident">DataType</span>},
 };
-<span class="kw">use</span> <span class="ident">queues</span>::<span class="ident">notification</span>::{<span class="ident">BounceSubtype</span>, <span class="ident">BounceType</span>, <span class="ident">ComplaintFeedbackType</span>};
-<span class="kw">use</span> <span class="ident">settings</span>::{<span class="ident">DeliveryProblemLimit</span>, <span class="ident">DeliveryProblemLimits</span>, <span class="ident">Settings</span>};
-<span class="kw">use</span> <span class="ident">types</span>::{
-    <span class="ident">email_address</span>::<span class="ident">EmailAddress</span>,
-    <span class="ident">error</span>::{<span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>},
+<span class="kw">use</span> <span class="kw">crate</span>::{
+    <span class="ident">queues</span>::<span class="ident">notification</span>::{<span class="ident">BounceSubtype</span>, <span class="ident">BounceType</span>, <span class="ident">ComplaintFeedbackType</span>},
+    <span class="ident">settings</span>::{<span class="ident">DeliveryProblemLimit</span>, <span class="ident">DeliveryProblemLimits</span>, <span class="ident">Settings</span>},
+    <span class="ident">types</span>::{
+        <span class="ident">email_address</span>::<span class="ident">EmailAddress</span>,
+        <span class="ident">error</span>::{<span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>},
+    },
 };
 
 <span class="doccomment">/// Bounce/complaint registry.</span>

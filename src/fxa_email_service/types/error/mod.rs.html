@@ -283,7 +283,6 @@
 <span id="283">283</span>
 <span id="284">284</span>
 <span id="285">285</span>
-<span id="286">286</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -318,8 +317,7 @@
 <span class="kw">use</span> <span class="ident">socketlabs</span>::<span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">SocketLabsError</span>;
 
 <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">email_address</span>::<span class="ident">EmailAddress</span>;
-<span class="kw">use</span> <span class="ident">db</span>::<span class="ident">delivery_problems</span>::<span class="ident">DeliveryProblem</span>;
-<span class="kw">use</span> <span class="ident">logging</span>::<span class="ident">MozlogLogger</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">db</span>::<span class="ident">delivery_problems</span>::<span class="ident">DeliveryProblem</span>, <span class="ident">logging</span>::<span class="ident">MozlogLogger</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">test</span>;

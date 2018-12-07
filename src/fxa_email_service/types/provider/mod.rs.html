@@ -30,7 +30,7 @@
 
 <span class="kw">use</span> <span class="ident">serde</span>::<span class="ident">de</span>::<span class="ident">Error</span>;
 
-<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">error</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">types</span>::<span class="ident">error</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>};
 
 <span class="macro">enum_boilerplate</span><span class="macro">!</span>(<span class="ident">Provider</span> (<span class="string">&quot;env&quot;</span>, <span class="ident">Ses</span>, <span class="ident">InvalidPayload</span>) {
     <span class="ident">Mock</span> <span class="op">=&gt;</span> <span class="string">&quot;mock&quot;</span>,

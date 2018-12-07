@@ -115,7 +115,6 @@
 <span id="115">115</span>
 <span id="116">116</span>
 <span id="117">117</span>
-<span id="118">118</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -130,8 +129,7 @@
     },
     <span class="ident">DeleteFuture</span>, <span class="ident">Factory</span>, <span class="ident">Incoming</span>, <span class="ident">Message</span>, <span class="ident">Outgoing</span>, <span class="ident">ReceiveFuture</span>, <span class="ident">SendFuture</span>,
 };
-<span class="kw">use</span> <span class="ident">settings</span>::<span class="ident">Settings</span>;
-<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">error</span>::<span class="ident">AppErrorKind</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">settings</span>::<span class="ident">Settings</span>, <span class="ident">types</span>::<span class="ident">error</span>::<span class="ident">AppErrorKind</span>};
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Queue</span> {

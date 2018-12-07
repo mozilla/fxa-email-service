@@ -75,6 +75,8 @@
 <span id="75">75</span>
 <span id="76">76</span>
 <span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -84,8 +86,10 @@
 <span class="kw">use</span> <span class="ident">lettre_email</span>::{<span class="ident">EmailBuilder</span>, <span class="ident">Header</span> <span class="kw">as</span> <span class="ident">LettreHeader</span>};
 
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">Headers</span>, <span class="ident">Provider</span>};
-<span class="kw">use</span> <span class="ident">settings</span>::{<span class="ident">Settings</span>, <span class="ident">SmtpCredentials</span>};
-<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">error</span>::{<span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{
+    <span class="ident">settings</span>::{<span class="ident">Settings</span>, <span class="ident">SmtpCredentials</span>},
+    <span class="ident">types</span>::<span class="ident">error</span>::{<span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>},
+};
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SmtpProvider</span> {
     <span class="ident">host</span>: <span class="ident">String</span>,

@@ -44,7 +44,6 @@
 <span id="44">44</span>
 <span id="45">45</span>
 <span id="46">46</span>
-<span id="47">47</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -53,8 +52,7 @@
 <span class="doccomment">//! Storage for message metadata.</span>
 
 <span class="kw">use</span> <span class="kw">super</span>::<span class="ident">core</span>::{<span class="ident">Client</span> <span class="kw">as</span> <span class="ident">DbClient</span>, <span class="ident">DataType</span>};
-<span class="kw">use</span> <span class="ident">settings</span>::<span class="ident">Settings</span>;
-<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">error</span>::<span class="ident">AppResult</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">settings</span>::<span class="ident">Settings</span>, <span class="ident">types</span>::<span class="ident">error</span>::<span class="ident">AppResult</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">test</span>;

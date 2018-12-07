@@ -125,7 +125,6 @@
 <span id="125">125</span>
 <span id="126">126</span>
 <span id="127">127</span>
-<span id="128">128</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -152,8 +151,7 @@
 <span class="kw">use</span> <span class="ident">serde_json</span>;
 <span class="kw">use</span> <span class="ident">sha2</span>::<span class="ident">Sha256</span>;
 
-<span class="kw">use</span> <span class="ident">settings</span>::<span class="ident">Settings</span>;
-<span class="kw">use</span> <span class="ident">types</span>::<span class="ident">error</span>::<span class="ident">AppResult</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">settings</span>::<span class="ident">Settings</span>, <span class="ident">types</span>::<span class="ident">error</span>::<span class="ident">AppResult</span>};
 
 <span class="doccomment">/// Database client.</span>
 <span class="doccomment">///</span>

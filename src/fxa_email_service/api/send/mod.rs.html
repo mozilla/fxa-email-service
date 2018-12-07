@@ -102,6 +102,8 @@
 <span id="102">102</span>
 <span id="103">103</span>
 <span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -117,12 +119,14 @@
 };
 <span class="kw">use</span> <span class="ident">rocket_contrib</span>::<span class="ident">Json</span>;
 
-<span class="kw">use</span> <span class="ident">db</span>::{<span class="ident">auth_db</span>::<span class="ident">DbClient</span>, <span class="ident">delivery_problems</span>::<span class="ident">DeliveryProblems</span>, <span class="ident">message_data</span>::<span class="ident">MessageData</span>};
-<span class="kw">use</span> <span class="ident">logging</span>::<span class="ident">MozlogLogger</span>;
-<span class="kw">use</span> <span class="ident">providers</span>::{<span class="ident">Headers</span>, <span class="ident">Providers</span>};
-<span class="kw">use</span> <span class="ident">types</span>::{
-    <span class="ident">email_address</span>::<span class="ident">EmailAddress</span>,
-    <span class="ident">error</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>},
+<span class="kw">use</span> <span class="kw">crate</span>::{
+    <span class="ident">db</span>::{<span class="ident">auth_db</span>::<span class="ident">DbClient</span>, <span class="ident">delivery_problems</span>::<span class="ident">DeliveryProblems</span>, <span class="ident">message_data</span>::<span class="ident">MessageData</span>},
+    <span class="ident">logging</span>::<span class="ident">MozlogLogger</span>,
+    <span class="ident">providers</span>::{<span class="ident">Headers</span>, <span class="ident">Providers</span>},
+    <span class="ident">types</span>::{
+        <span class="ident">email_address</span>::<span class="ident">EmailAddress</span>,
+        <span class="ident">error</span>::{<span class="ident">AppError</span>, <span class="ident">AppErrorKind</span>, <span class="ident">AppResult</span>},
+    },
 };
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
