@@ -486,7 +486,7 @@ fn record_bounce() {
 
     test.assert_data(
         // created_at is probably a millisecond or two different between MySQL and Redis
-        bounce_records
+        &bounce_records
             .into_iter()
             .rev()
             .map(From::from)
@@ -530,7 +530,7 @@ fn record_complaint() {
 
     test.assert_data(
         // created_at is probably a millisecond or two different between MySQL and Redis
-        bounce_records
+        &bounce_records
             .into_iter()
             .map(From::from)
             .collect::<Vec<AssertFriendlyDeliveryProblem>>(),

@@ -17,7 +17,7 @@ fn set() {
     if let Err(error) = message_data.set(&key, "wibble") {
         assert!(false, format!("{:?}", error));
     } else {
-        test.assert_data(String::from("wibble"));
+        test.assert_data(&String::from("wibble"));
     }
 }
 

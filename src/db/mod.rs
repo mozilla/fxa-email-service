@@ -7,6 +7,7 @@
 //! the database layer.
 
 pub mod auth_db;
+pub mod config;
 mod core;
 pub mod delivery_problems;
 pub mod message_data;

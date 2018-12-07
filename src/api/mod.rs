@@ -6,5 +6,6 @@
 //! for modules pertaining to
 //! the API layer.
 
+pub mod config;
 pub mod healthcheck;
 pub mod send;

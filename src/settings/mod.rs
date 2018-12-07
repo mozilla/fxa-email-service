@@ -34,7 +34,7 @@ use types::{
 macro_rules! deserialize_and_validate {
     ($(#[$docs:meta] ($type:ident, $validator:ident, $expected:expr)),+) => ($(
         #[$docs]
-        #[derive(Clone, Debug, Default, Serialize, PartialEq)]
+        #[derive(Clone, Debug, Default, PartialEq, Serialize)]
         pub struct $type(pub String);
 
         impl AsRef<str> for $type {
@@ -123,7 +123,7 @@ pub struct AwsKeys {
 }
 
 /// A definition object for a bounce/complaint limit.
-#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct DeliveryProblemLimit {
     /// The time period
     /// within which to limit bounces/complaints.
@@ -136,7 +136,7 @@ pub struct DeliveryProblemLimit {
 
 /// Controls the thresholds and behaviour
 /// for bounce and complaint reports.
-#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct DeliveryProblemLimits {
     /// Controls whether to enable delivery problem limits.
     /// If set to `false`,
@@ -192,7 +192,7 @@ pub struct Redis {
 /// Controls the name and email address
 /// that are used for the `From` and `Sender`
 /// email headers.
-#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct Sender {
     /// The email address.
     pub address: EmailAddress,
