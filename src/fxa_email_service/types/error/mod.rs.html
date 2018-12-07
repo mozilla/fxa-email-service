@@ -282,6 +282,8 @@
 <span id="282">282</span>
 <span id="283">283</span>
 <span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// This Source Code Form is subject to the terms of the Mozilla Public</span>
 <span class="comment">// License, v. 2.0. If a copy of the MPL was not distributed with this</span>
@@ -297,6 +299,7 @@
 
 <span class="kw">use</span> <span class="ident">failure</span>::{<span class="ident">Backtrace</span>, <span class="ident">Context</span>, <span class="ident">Fail</span>};
 <span class="kw">use</span> <span class="ident">hmac</span>::<span class="ident">crypto_mac</span>::<span class="ident">InvalidKeyLength</span>;
+<span class="kw">use</span> <span class="ident">http</span>::<span class="ident">header</span>::<span class="ident">ToStrError</span>;
 <span class="kw">use</span> <span class="ident">hyperx</span>::<span class="ident">mime</span>::<span class="ident">FromStrError</span>;
 <span class="kw">use</span> <span class="ident">lettre</span>::<span class="ident">smtp</span>::<span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">SmtpError</span>;
 <span class="kw">use</span> <span class="ident">lettre_email</span>::<span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">EmailError</span>;
@@ -565,6 +568,7 @@
 <span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">SendRawEmailError</span>);
 <span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">SmtpError</span>);
 <span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">SocketLabsError</span>);
+<span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">ToStrError</span>);
 <span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">UrlError</span>);
 <span class="macro">to_internal_error</span><span class="macro">!</span>(<span class="ident">Utf8Error</span>);
 </pre></div>
