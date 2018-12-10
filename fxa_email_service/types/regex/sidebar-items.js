@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SerializableRegex","A regex wrapper that can be (de)serialized."]]});
