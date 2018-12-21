@@ -9,12 +9,8 @@ version: 2
 jobs:
   build:
     docker:
-      - image: docker:18.03.0-ce
-    working_directory: /dockerflow
+      - image: circleci/rust:latest
     steps:
-      - run:
-          name: Install Docker build dependencies
-          command: apk add --no-cache openssh-client git bash
       - checkout
       - setup_remote_docker
 
@@ -28,6 +24,20 @@ jobs:
             "$CIRCLE_PROJECT_USERNAME" \
             "$CIRCLE_PROJECT_REPONAME" \
             "$CIRCLE_BUILD_URL" > version.json
+
+      - run:
+          name: Build Release
+          shell: /bin/bash
+          command: |
+            cargo --version && \
+            rustc --version && \
+            mkdir -p -m 755 bin && \
+            mkdir -p -m 755 bin/config && \
+            cargo build --release && \
+            mkdir -p app/bin/config && \
+            cp -R config/* app/bin/config && \
+            cp target/release/fxa_email_send app/bin && \
+            cp target/release/fxa_email_queues app/bin
 
       - run:
           name: Build Docker image
@@ -72,8 +82,6 @@ workflows:
     jobs:
       - build:
           filters:
-            branches:
-              ignore: /.*/
 
             tags:
               only: /^v[0-9.]+$/
