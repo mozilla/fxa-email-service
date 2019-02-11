@@ -116,7 +116,7 @@
         <span class="string">r&quot;^https?://[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*(?::[0-9]+)?/(?:[A-Za-z0-9-]+/)*$&quot;</span>
     ).<span class="ident">unwrap</span>();
     <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">EMAIL_ADDRESS_FORMAT</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(
-        <span class="string">r&quot;^[a-zA-Z0-9.\pL\pN!#$%&amp;’*+/=?^_`{|}~-]{1,64}@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)+$&quot;</span>
+        <span class="string">r&quot;^[a-zA-Z0-9.\pL\pN!#$%&amp;&#39;*+/=?^_`{|}~-]{1,64}@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)+$&quot;</span>
     ).<span class="ident">unwrap</span>();
     <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">HOST_FORMAT</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;^[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*$&quot;</span>).<span class="ident">unwrap</span>();
     <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">SENDER_NAME_FORMAT</span>: <span class="ident">Regex</span> <span class="op">=</span>
